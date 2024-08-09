@@ -3,27 +3,212 @@
     <title>白衫如初</title>
     <link href="https://hxfcoy.github.io/xcll.github.io/feed.xml" rel="self" />
     <link href="https://hxfcoy.github.io/xcll.github.io" />
-    <updated>2024-08-09T21:44:15+08:00</updated>
+    <updated>2024-08-10T07:35:01+08:00</updated>
     <author>
         <name>fcoy</name>
     </author>
     <id>https://hxfcoy.github.io/xcll.github.io</id>
 
     <entry>
-        <title>Hello</title>
+        <title>Steam游戏</title>
         <author>
             <name>fcoy</name>
         </author>
-        <link href="https://hxfcoy.github.io/xcll.github.io/hello.html"/>
-        <id>https://hxfcoy.github.io/xcll.github.io/hello.html</id>
+        <link href="https://hxfcoy.github.io/xcll.github.io/steamyou-xi.html"/>
+        <id>https://hxfcoy.github.io/xcll.github.io/steamyou-xi.html</id>
+            <category term="游戏"/>
 
-        <updated>2024-08-09T21:01:08+08:00</updated>
+        <updated>2024-08-10T07:35:01+08:00</updated>
             <summary></summary>
         <content type="html">
             <![CDATA[
-                
-<p><em>😀欢迎来到我的个人博客！快来玩BA，<a href="https://bluearchive-cn.com/">启动</a></em></p>
-<p>光滑大笨蛋😁</p>
+                <p><a href="https://steamcommunity.com/profiles/76561199206989349/">我的steam😀</a></p>
+            ]]>
+        </content>
+    </entry>
+    <entry>
+        <title>3. 无重复字符的最长子串</title>
+        <author>
+            <name>fcoy</name>
+        </author>
+        <link href="https://hxfcoy.github.io/xcll.github.io/3-wu-chong-fu-zi-fu-de-zui-chang-zi-chuan.html"/>
+        <id>https://hxfcoy.github.io/xcll.github.io/3-wu-chong-fu-zi-fu-de-zui-chang-zi-chuan.html</id>
+            <category term="力扣"/>
+
+        <updated>2024-08-10T07:17:31+08:00</updated>
+            <summary></summary>
+        <content type="html">
+            <![CDATA[
+                <p>给定一个字符串 <code>s</code> ，请你找出其中不含有重复字符的 <strong>最长 </strong><span style="color: var(--text-primary-color); font-family: var(--editor-font-family); font-size: inherit; font-weight: var(--font-weight-normal);">子串</span><span style="color: var(--text-primary-color); font-family: var(--editor-font-family); font-size: inherit; font-weight: var(--font-weight-normal);">的长度。</span></p>
+<p> </p>
+<p><strong>示例 1:</strong></p>
+<pre><strong>输入: </strong>s = "abcabcbb"
+<strong>输出: </strong>3 
+<strong>解释:</strong> 因为无重复字符的最长子串是 <code>"abc"</code>，所以其长度为 3。</pre>
+<p><strong>示例 2:</strong></p>
+<pre><strong>输入: </strong>s = "bbbbb"
+<strong>输出: </strong>1
+<strong>解释: </strong>因为无重复字符的最长子串是 <code>"b"</code>，所以其长度为 1。</pre>
+<p><strong>示例 3:</strong></p>
+<pre><strong>输入: </strong>s = "pwwkew"
+<strong>输出: </strong>3
+<strong>解释: </strong>因为无重复字符的最长子串是 <code>"wke"</code>，所以其长度为 3。   请注意，你的答案必须是 <strong>子串 </strong>的长度，<code style="font-size: 0.790123em; font-weight: var(--font-weight-normal); font-family: var(--font-monospace); background-image: none;">"pwke"</code><span style="background-color: var(--gray-1); font-size: 0.790123em; color: var(--text-primary-color); font-family: var(--editor-font-family); font-weight: var(--font-weight-normal);"> 是一个</span><em style="font-size: 0.790123em; color: var(--text-primary-color); font-family: var(--editor-font-family); font-weight: var(--font-weight-normal);">子序列，</em><span style="background-color: var(--gray-1); font-size: 0.790123em; color: var(--text-primary-color); font-family: var(--editor-font-family); font-weight: var(--font-weight-normal);">不是子串。</span></pre>
+<pre class="language-c"><code>int lengthOfLongestSubstring(char* s) {
+    int n = strlen(s);
+    if (n == 0) return 0;
+    
+    int maxLength = 0;
+    int start = 0;
+    int charIndex[128];  // ASCII 字符总数为128
+    
+    // 初始化charIndex数组，-1表示未出现过
+    for (int i = 0; i &lt; 128; i++) {
+        charIndex[i] = -1;
+    }
+    
+    for (int end = 0; end &lt; n; end++) {
+        char currentChar = s[end];
+        // 如果当前字符之前已经在窗口中出现过，移动start指针
+        if (charIndex[currentChar] &gt;= start) {
+            start = charIndex[currentChar] + 1;
+        }
+        
+        // 更新字符的最新出现位置
+        charIndex[currentChar] = end;
+        
+        // 更新最大长度
+        int currentLength = end - start + 1;
+        if (currentLength &gt; maxLength) {
+            maxLength = currentLength;
+        }
+    }
+    
+    return maxLength;
+}</code></pre>
+            ]]>
+        </content>
+    </entry>
+    <entry>
+        <title>2. 两数相加</title>
+        <author>
+            <name>fcoy</name>
+        </author>
+        <link href="https://hxfcoy.github.io/xcll.github.io/2-liang-shu-xiang-jia.html"/>
+        <id>https://hxfcoy.github.io/xcll.github.io/2-liang-shu-xiang-jia.html</id>
+            <category term="力扣"/>
+
+        <updated>2024-08-10T07:14:36+08:00</updated>
+            <summary></summary>
+        <content type="html">
+            <![CDATA[
+                <p>给你两个 <strong>非空</strong> 的链表，表示两个非负的整数。它们每位数字都是按照 <strong>逆序</strong> 的方式存储的，并且每个节点只能存储 <strong>一位</strong> 数字。</p>
+<p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p>
+<p>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
+<p> </p>
+<p><strong class="example">示例 1：</strong></p>
+<p><img loading="lazy" src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2021/01/02/addtwonumber1.jpg" alt="" data-is-external-image="true"></p>
+<pre><strong>输入：</strong>l1 = [2,4,3], l2 = [5,6,4]
+<strong>输出：</strong>[7,0,8]
+<strong>解释：</strong>342 + 465 = 807.
+</pre>
+<p><strong class="example">示例 2：</strong></p>
+<pre><strong>输入：</strong>l1 = [0], l2 = [0]
+<strong>输出：</strong>[0]
+</pre>
+<p><strong class="example">示例 3：</strong></p>
+<pre><strong>输入：</strong>l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
+<strong>输出：</strong>[8,9,9,9,0,0,0,1]</pre>
+<p> </p>
+<pre class="language-c"><code>struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
+    struct ListNode dummy;
+    dummy.next = NULL;
+    struct ListNode* current = &amp;dummy;
+    int carry = 0;
+
+    // 遍历两个链表，直到所有的节点处理完毕
+    while (l1 != NULL || l2 != NULL) {
+        // 获取当前节点的值，如果当前链表结束则用0代替
+        int val1 = (l1 != NULL) ? l1-&gt;val : 0;
+        int val2 = (l2 != NULL) ? l2-&gt;val : 0;
+        
+        // 计算当前位的和以及进位
+        int total = val1 + val2 + carry;
+        carry = total / 10;
+        int currentSum = total % 10;
+        
+        // 将计算的当前位加入结果链表
+        current-&gt;next = (struct ListNode*)malloc(sizeof(struct ListNode));
+        current-&gt;next-&gt;val = currentSum;
+        current-&gt;next-&gt;next = NULL;
+        current = current-&gt;next;
+        
+        // 移动指针
+        if (l1 != NULL) l1 = l1-&gt;next;
+        if (l2 != NULL) l2 = l2-&gt;next;
+    }
+    
+    // 如果最后有进位，添加一个新的节点
+    if (carry &gt; 0) {
+        current-&gt;next = (struct ListNode*)malloc(sizeof(struct ListNode));
+        current-&gt;next-&gt;val = carry;
+        current-&gt;next-&gt;next = NULL;
+    }
+    
+    // 返回结果链表的头结点
+    return dummy.next;
+}</code></pre>
+            ]]>
+        </content>
+    </entry>
+    <entry>
+        <title>1. 两数之和</title>
+        <author>
+            <name>fcoy</name>
+        </author>
+        <link href="https://hxfcoy.github.io/xcll.github.io/1-liang-shu-zhi-he.html"/>
+        <id>https://hxfcoy.github.io/xcll.github.io/1-liang-shu-zhi-he.html</id>
+            <category term="力扣"/>
+
+        <updated>2024-08-10T07:10:58+08:00</updated>
+            <summary></summary>
+        <content type="html">
+            <![CDATA[
+                <p>给定一个整数数组 <code>nums</code> 和一个整数目标值 <code>target</code>，请你在该数组中找出 <strong>和为目标值 </strong><em><code>target</code></em>  的那 <strong>两个</strong> 整数，并返回它们的数组下标。</p>
+<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
+<p>你可以按任意顺序返回答案。</p>
+<p> </p>
+<p><strong class="example">示例 1：</strong></p>
+<pre><strong>输入：</strong>nums = [2,7,11,15], target = 9
+<strong>输出：</strong>[0,1]
+<strong>解释：</strong>因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。
+</pre>
+<p><strong class="example">示例 2：</strong></p>
+<pre><strong>输入：</strong>nums = [3,2,4], target = 6
+<strong>输出：</strong>[1,2]
+</pre>
+<p><strong class="example">示例 3：</strong></p>
+<pre><strong>输入：</strong>nums = [3,3], target = 6
+<strong>输出：</strong>[0,1]<code style="font-weight: var(--font-weight-normal);"></code><code></code></pre>
+<pre class="language-c"><code>int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
+
+    // 用于存储结果的数组
+    int *result = (int *)malloc(2 * sizeof(int));
+    *returnSize = 2; // 结果数组的大小是2
+    // 遍历数组，寻找和为target的两个数
+    for (int i = 0; i &lt; numsSize; i++) {
+        for (int j = i + 1; j &lt; numsSize; j++) {
+            // 如果找到，返回它们的下标
+            if (nums[i] + nums[j] == target) {
+                result[0] = i;
+                result[1] = j;
+                return result;
+            }
+        }
+    }
+    // 如果未找到，返回NULL
+    *returnSize = 0;
+    return NULL;
+}</code></pre>
             ]]>
         </content>
     </entry>
