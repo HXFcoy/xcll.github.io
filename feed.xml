@@ -3,12 +3,33 @@
     <title>白衫如初</title>
     <link href="https://hxfcoy.github.io/xcll.github.io/feed.xml" rel="self" />
     <link href="https://hxfcoy.github.io/xcll.github.io" />
-    <updated>2024-08-10T07:35:01+08:00</updated>
+    <updated>2024-08-10T08:00:21+08:00</updated>
     <author>
         <name>fcoy</name>
     </author>
     <id>https://hxfcoy.github.io/xcll.github.io</id>
 
+    <entry>
+        <title>软件</title>
+        <author>
+            <name>fcoy</name>
+        </author>
+        <link href="https://hxfcoy.github.io/xcll.github.io/ruan-jian.html"/>
+        <id>https://hxfcoy.github.io/xcll.github.io/ruan-jian.html</id>
+
+        <updated>2024-08-10T08:00:21+08:00</updated>
+            <summary></summary>
+        <content type="html">
+            <![CDATA[
+                <p>QQNT 插件加载器<a href="https://github.com/LiteLoaderQQNT/LiteLoaderQQNT">LiteLoaderQQNT</a></p>
+<p>基于QQ的全自动签到模块<a href="https://github.com/LuckyPray/XAutoDaily">XAutoDaily</a></p>
+<p>QQXposed 模块<a href="https://github.com/cinit/QAuxiliary">QAuxiliary</a></p>
+<p><a href="https://github.com/clash-verge-rev/clash-verge-rev">clash-verge-rev</a></p>
+<p>蔚蓝档案自动化<a href="https://github.com/pur1fying/blue_archive_auto_script">baas</a></p>
+<p>Bili动态抽奖助手<a href="https://github.com/shanmiteko/LotteryAutoScript">LotteryAutoScript</a></p>
+            ]]>
+        </content>
+    </entry>
     <entry>
         <title>Steam游戏</title>
         <author>
