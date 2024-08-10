@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="zh-cn"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LCR 166. 珠宝的最高价值 - xcll’s blog</title><meta name="robots" content="noindex,nofollow"><meta name="generator" content="Publii Open-Source CMS for Static Site"><link rel="alternate" type="application/atom+xml" href="https://hxfcoy.github.io/xcll.github.io/feed.xml"><link rel="alternate" type="application/json" href="https://hxfcoy.github.io/xcll.github.io/feed.json"><link rel="stylesheet" href="https://hxfcoy.github.io/xcll.github.io/assets/css/style.css?v=48ae57c9831f7efa1e623ac4eb92d438"><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://hxfcoy.github.io/xcll.github.io/lcr-166-zhu-bao-de-zui-gao-jie-zhi.html"},"headline":"LCR 166. 珠宝的最高价值","datePublished":"2024-08-10T08:49","dateModified":"2024-08-10T08:49","image":{"@type":"ImageObject","url":"https://hxfcoy.github.io/xcll.github.io/media/website/LOGO.4a06cdd2.png","height":117,"width":225},"description":"","author":{"@type":"Person","name":"fcoy","url":"https://hxfcoy.github.io/xcll.github.io/authors/fcoy/"},"publisher":{"@type":"Organization","name":"fcoy","logo":{"@type":"ImageObject","url":"https://hxfcoy.github.io/xcll.github.io/media/website/LOGO.4a06cdd2.png","height":117,"width":225}}}</script><noscript><style>img[loading] {
+                    opacity: 1;
+                }</style></noscript></head><body><div class="site-container"><header class="top" id="js-header"><a class="logo" href="https://hxfcoy.github.io/xcll.github.io/"><img src="https://hxfcoy.github.io/xcll.github.io/media/website/LOGO.4a06cdd2.png" alt="xcll’s blog" width="225" height="117"></a><nav class="navbar js-navbar"><button class="navbar__toggle js-toggle" aria-label="Menu" aria-haspopup="true" aria-expanded="false"><span class="navbar__toggle-box"><span class="navbar__toggle-inner">Menu</span></span></button><ul class="navbar__menu"><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/li-kou/" target="_self">力扣</a></li><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/you-xi/" target="_self">游戏</a></li><li><a href="https://hxfcoy.github.io/xcll.github.io/ruan-jian.html" target="_self">软件</a></li></ul></nav></header><main><article class="post"><div class="hero"><figure class="hero__image hero__image--overlay"><img src="https://hxfcoy.github.io/xcll.github.io/media/website/BA2.jpg" srcset="https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-xs.jpg 300w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-sm.jpg 480w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-md.jpg 768w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-lg.jpg 1024w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-xl.jpg 1360w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-2xl.jpg 1600w" sizes="100vw" loading="eager" alt=""></figure><header class="hero__content"><div class="wrapper"><div class="post__meta"><time datetime="2024-08-10T08:49">八月 10, 2024</time></div><h1>LCR 166. 珠宝的最高价值</h1><div class="post__meta post__meta--author"><a href="https://hxfcoy.github.io/xcll.github.io/authors/fcoy/" class="feed__author">fcoy</a></div></div></header></div><div class="wrapper post__entry"><p>现有一个记作二维矩阵 <code>frame</code> 的珠宝架，其中 <code>frame[i][j]</code> 为该位置珠宝的价值。拿取珠宝的规则为：</p><ul><li>只能从架子的左上角开始拿珠宝</li><li>每次可以移动到右侧或下侧的相邻位置</li><li>到达珠宝架子的右下角时，停止拿取</li></ul><p>注意：珠宝的价值都是大于 0 的。除非这个架子上没有任何珠宝，比如 <code>frame = [[0]]</code>。</p><p> </p><p><strong>示例 1:</strong></p><pre><strong>输入:</strong> frame = [[1,3,1],[1,5,1],[4,2,1]]
+<strong>输出:</strong> <code>12
+</code><strong>解释:</strong> 路径 1→3→5→2→1 可以拿到最高价值的珠宝</pre><pre class="language-apacheconf"><code>int jewelleryValue(int** frame, int frameSize, int* frameColSize) {
+    if (frameSize == 0 || frameColSize[0] == 0) {
+        return 0; // 处理空架子的情况
+    }
+
+    int dp[frameSize][frameColSize[0]];
+
+    // 初始化 dp 数组
+    dp[0][0] = frame[0][0];
+
+    // 初始化第一列
+    for (int i = 1; i &lt; frameSize; i++) {
+        dp[i][0] = dp[i-1][0] + frame[i][0];
+    }
+
+    // 初始化第一行
+    for (int j = 1; j &lt; frameColSize[0]; j++) {
+        dp[0][j] = dp[0][j-1] + frame[0][j];
+    }
+
+    // 填充剩余的 dp 表格
+    for (int i = 1; i &lt; frameSize; i++) {
+        for (int j = 1; j &lt; frameColSize[0]; j++) {
+            dp[i][j] = frame[i][j] + (dp[i-1][j] &gt; dp[i][j-1] ? dp[i-1][j] : dp[i][j-1]);
+        }
+    }
+
+    // 返回右下角的最大值
+    return dp[frameSize-1][frameColSize[0]-1];
+}
+</code></pre><h3>动态规划思想</h3><p>动态规划的核心思想是通过记录子问题的解来避免重复计算。我们用一个二维数组 <code>dp</code> 来存储从左上角到某个位置的最大珠宝总价值。</p><h4>1. <strong>定义状态</strong>：</h4><ul><li>设 <code>dp[i][j]</code> 表示从左上角 <code>(0, 0)</code> 到位置 <code>(i, j)</code> 的最大珠宝价值。</li></ul><h4>2. <strong>状态转移方程</strong>：</h4><ul><li>由于只能向右或向下移动，所以 <code>dp[i][j]</code> 可以从左侧的 <code>dp[i][j-1]</code> 或上方的 <code>dp[i-1][j]</code> 位置到达。因此，状态转移方程为： <img loading="lazy" src="file:///C:\Users\22501\AppData\Local\Temp\QQ_1723250937888.png" data-is-external-image="true"><ul><li>这表示从 <code>(i-1, j)</code> 或 <code>(i, j-1)</code> 位置中选择一个较大的珠宝总价值，加上当前位置的珠宝价值 <code>frame[i][j]</code>，得到 <code>dp[i][j]</code> 的值。</li></ul></li></ul><h4>3. <strong>边界条件</strong>：</h4><ul><li><strong>第一行</strong>：只能从左边过来，所以 <code>dp[0][j]</code> 只能通过加上前一列的值得到： <img loading="lazy" src="file:///C:\Users\22501\AppData\Local\Temp\QQ_1723250945377.png" data-is-external-image="true"></li><li><strong>第一列</strong>：只能从上边过来，所以 <code>dp[i][0]</code> 只能通过加上前一行的值得到： <span class="katex-display"><span class="katex"><span class="katex-mathml">dp[i]<img loading="lazy" src="file:///C:\Users\22501\AppData\Local\Temp\QQ_1723250957613.png" data-is-external-image="true"></span></span></span></li><li><strong>起点</strong>：<code>dp[0][0]</code> 就是起点的珠宝价值 <code>frame[0][0]</code>。</li></ul><h4>4. <strong>求解最终结果</strong>：</h4><ul><li>当我们填满整个 <code>dp</code> 矩阵后，右下角的 <code>dp[m-1][n-1]</code> 就是从左上角到右下角的最大珠宝价值。</li></ul><h3>例子解析</h3><p>假设 <code>frame</code> 为：</p><table style="border-collapse: collapse; width: 40.7412%; height: 150.508px;" border="1"><tbody><tr style="height: 50.1693px;"><td style="width: 33.5074%; height: 50.1693px;">1</td><td style="width: 33.5074%; height: 50.1693px;">3</td><td style="width: 33.2234%; height: 50.1693px;">1</td></tr><tr style="height: 50.1693px;"><td style="width: 33.5074%; height: 50.1693px;">1</td><td style="width: 33.5074%; height: 50.1693px;">5</td><td style="width: 33.2234%; height: 50.1693px;">1</td></tr><tr style="height: 50.1693px;"><td style="width: 33.5074%; height: 50.1693px;">4</td><td style="width: 33.5074%; height: 50.1693px;">2</td><td style="width: 33.2234%; height: 50.1693px;">1</td></tr></tbody></table><p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist-s">​​​</span></span></span></span></span></span></span></span></span></span></p><ul><li><strong>初始状态</strong>：<ul><li><code>dp[0][0] = 1</code> （起点值为1）</li></ul></li><li><strong>第一行</strong>：<ul><li><code>dp[0][1] = dp[0][0] + 3 = 4</code></li><li><code>dp[0][2] = dp[0][1] + 1 = 5</code></li></ul></li><li><strong>第一列</strong>：<ul><li><code>dp[1][0] = dp[0][0] + 1 = 2</code></li><li><code>dp[2][0] = dp[1][0] + 4 = 6</code></li></ul></li><li><strong>填充剩余表格</strong>：<ul><li><code>dp[1][1] = frame[1][1] + max(dp[0][1], dp[1][0]) = 5 + max(4, 2) = 9</code></li><li><code>dp[1][2] = frame[1][2] + max(dp[0][2], dp[1][1]) = 1 + max(5, 9) = 10</code></li><li><code>dp[2][1] = frame[2][1] + max(dp[1][1], dp[2][0]) = 2 + max(9, 6) = 11</code></li><li><code>dp[2][2] = frame[2][2] + max(dp[1][2], dp[2][1]) = 1 + max(10, 11) = 12</code></li></ul></li></ul><p>最终得到 <code>dp[2][2] = 12</code>，即从左上角到右下角路径上的最大珠宝价值是 12。</p><h3>总结</h3><p>通过这种方法，我们能有效计算出在给定规则下能拿到的最大珠宝价值，时间复杂度为 <code>O(m * n)</code>。</p></div><footer class="wrapper post__footer"><p class="post__last-updated">This article was updated on 八月 10, 2024</p><ul class="post__tag"><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/li-kou/">力扣</a></li></ul><div class="post__share"></div><div class="post__bio bio"><div><h3 class="bio__name"><a href="https://hxfcoy.github.io/xcll.github.io/authors/fcoy/" rel="author">fcoy</a></h3></div></div></footer></article><nav class="post__nav"><div class="post__nav-inner"><div class="post__nav-prev"><svg width="1.041em" height="0.416em" aria-hidden="true"><use xlink:href="https://hxfcoy.github.io/xcll.github.io/assets/svg/svg-map.svg#arrow-prev"/></svg> <a href="https://hxfcoy.github.io/xcll.github.io/ruan-jian.html" class="post__nav-link" rel="prev"><span>Previous</span> 软件</a></div></div></nav></main><footer class="footer"><div class="footer__copyright"><p class="align-center">浮云一别后，流水十年间。</p></div><button onclick="backToTopFunction()" id="backToTop" class="footer__bttop" aria-label="Back to top" title="Back to top"><svg><use xlink:href="https://hxfcoy.github.io/xcll.github.io/assets/svg/svg-map.svg#toparrow"/></svg></button></footer></div><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/assets/js/scripts.min.js?v=f47c11534595205f20935f0db2a62a85"></script><script>window.publiiThemeMenuConfig={mobileMenuMode:'sidebar',animationSpeed:300,submenuWidth: 'auto',doubleClickTime:500,mobileMenuExpandableSubmenus:true,relatedContainerForOverlayMenuSelector:'.top'};</script><script>var images = document.querySelectorAll('img[loading]');
+        for (var i = 0; i < images.length; i++) {
+            if (images[i].complete) {
+                images[i].classList.add('is-loaded');
+            } else {
+                images[i].addEventListener('load', function () {
+                    this.classList.add('is-loaded');
+                }, false);
+            }
+        }</script><script src="https://hxfcoy.github.io/xcll.github.io/media/plugins/pageprefetching/quicklink.umd.js"></script><script>window.addEventListener('load', () => {
+					quicklink.listen({
+						prerender: false,
+						el: document.querySelector('body'),
+						delay: 0,
+						limit: Infinity,
+						throttle: Infinity,
+						timeout: 2000
+					});
+				});</script></body></html>
