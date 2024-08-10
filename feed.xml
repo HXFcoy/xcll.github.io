@@ -3,7 +3,7 @@
     <title>白衫如初</title>
     <link href="https://hxfcoy.github.io/xcll.github.io/feed.xml" rel="self" />
     <link href="https://hxfcoy.github.io/xcll.github.io" />
-    <updated>2024-08-10T21:47:50+08:00</updated>
+    <updated>2024-08-10T21:49:47+08:00</updated>
     <author>
         <name>fcoy</name>
     </author>
@@ -25,6 +25,7 @@
                 <div class="post__toc">
 <h3>目录</h3>
 <ul>
+<li><a href="#mcetoc_1i4u8qoul21">实现代码</a></li>
 <li><a href="#mcetoc_1i4u8jjga1r">解释</a>
 <ul>
 <li><a href="#mcetoc_1i4u8jjga1s">时间复杂度</a></li>
@@ -61,6 +62,7 @@ nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
 <pre><strong>输入：</strong>nums = [0,0,0]
 <strong>输出：</strong>[[0,0,0]]
 <strong>解释：</strong>唯一可能的三元组和为 0 。</pre>
+<h3 id="mcetoc_1i4u8qoul21">实现代码</h3>
 <pre class="language-c"><code>int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes) {
     int cmp(const void* a, const void* b) {
     return *(int*)a - *(int*)b;
