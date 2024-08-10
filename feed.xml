@@ -3,12 +3,254 @@
     <title>白衫如初</title>
     <link href="https://hxfcoy.github.io/xcll.github.io/feed.xml" rel="self" />
     <link href="https://hxfcoy.github.io/xcll.github.io" />
-    <updated>2024-08-10T21:49:47+08:00</updated>
+    <updated>2024-08-11T07:54:42+08:00</updated>
     <author>
         <name>fcoy</name>
     </author>
     <id>https://hxfcoy.github.io/xcll.github.io</id>
 
+    <entry>
+        <title>234. 回文链表</title>
+        <author>
+            <name>fcoy</name>
+        </author>
+        <link href="https://hxfcoy.github.io/xcll.github.io/234-hui-wen-lian-biao.html"/>
+        <id>https://hxfcoy.github.io/xcll.github.io/234-hui-wen-lian-biao.html</id>
+            <category term="力扣"/>
+
+        <updated>2024-08-11T07:51:41+08:00</updated>
+            <summary></summary>
+        <content type="html">
+            <![CDATA[
+                <div class="post__toc">
+<h3>目录</h3>
+<ul>
+<li><a href="#mcetoc_1i4vbdq181">题目</a></li>
+<li><a href="#mcetoc_1i4vb84nj2h">代码</a></li>
+<li><a href="#mcetoc_1i4vb84nj2i">解释</a></li>
+<li><a href="#mcetoc_1i4vb8mh82k">复杂度</a></li>
+</ul>
+</div>
+<h3 id="mcetoc_1i4vbdq181">题目</h3>
+<p>给你一个单链表的头节点 <code>head</code> ，请你判断该链表是否为</p>
+<div class="popover-wrapper inline-block" data-headlessui-state="">
+<div>
+<div id="headlessui-popover-button-:rah:" aria-expanded="false" data-headlessui-state="">
+<div>回文链表</div>
+</div>
+<div> </div>
+</div>
+</div>
+<p>。如果是，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
+<p> </p>
+<p><strong>示例 1：</strong></p>
+<p><img loading="lazy" src="https://assets.leetcode.com/uploads/2021/03/03/pal1linked-list.jpg" alt="" data-is-external-image="true"></p>
+<pre><strong>输入：</strong>head = [1,2,2,1]
+<strong>输出：</strong>true
+</pre>
+<p><strong>示例 2：</strong></p>
+<p><img loading="lazy" src="https://assets.leetcode.com/uploads/2021/03/03/pal2linked-list.jpg" alt="" data-is-external-image="true"></p>
+<pre><strong>输入：</strong>head = [1,2]
+<strong>输出：</strong>falsed</pre>
+<h3 id="mcetoc_1i4vb84nj2h">代码</h3>
+<pre class="language-c line-numbers"><code>struct ListNode* middle_find(struct ListNode* head) {
+    struct ListNode* slow = head;
+    struct ListNode* fast = head-&gt;next;
+
+    while (fast != NULL &amp;&amp; fast-&gt;next != NULL) {
+        slow = slow-&gt;next;
+        fast = fast-&gt;next-&gt;next;
+    }
+    return slow;
+}
+
+struct ListNode* reverse(struct ListNode* right_head) {
+    struct ListNode* new_head = NULL;
+    while (right_head != NULL) {
+        struct ListNode* next = right_head-&gt;next;
+        right_head-&gt;next = new_head;
+        new_head = right_head;
+        right_head = next;
+    }
+    return new_head;
+}
+
+bool isPalindrome(struct ListNode* head) {
+    if (head == NULL) {
+        return NULL;
+    }
+
+    struct ListNode* middle = middle_find(head);
+    struct ListNode* right = reverse(middle-&gt;next);
+    struct ListNode* right_copy = right;
+    struct ListNode* tmp = head;
+
+    while (tmp != NULL &amp;&amp; right_copy != NULL) {
+        if (tmp-&gt;val != right_copy-&gt;val) {
+            return false;
+        }
+        tmp = tmp-&gt;next;
+        right_copy = right_copy-&gt;next;
+    }
+
+    middle-&gt;next = reverse(right);
+    return true;
+}</code></pre>
+<h3 id="mcetoc_1i4vb84nj2i">解释</h3>
+<ul>
+<li>
+<p><strong><code>middle_find</code> 函数</strong>:</p>
+<ul>
+<li>这个函数的目的是找到链表的中间节点。</li>
+<li>使用了<strong>快慢指针</strong>技术：
+<ul>
+<li><code>slow</code> 指针每次移动一步。</li>
+<li><code>fast</code> 指针每次移动两步。</li>
+</ul>
+</li>
+<li>当 <code>fast</code> 指针到达链表的末尾时，<code>slow</code> 指针正好位于链表的中间。</li>
+<li>返回的 <code>slow</code> 指针指向链表的中间节点。</li>
+</ul>
+</li>
+<li>
+<p><strong><code>reverse</code> 函数</strong>:</p>
+<ul>
+<li>这个函数的目的是反转从 <code>right_head</code> 开始的链表。</li>
+<li>使用了三个指针来反转链表：
+<ul>
+<li><code>new_head</code> 用来指向反转后的链表的头部（最初为 <code>NULL</code>）。</li>
+<li><code>right_head</code> 用来遍历链表，逐个反转节点。</li>
+<li><code>next</code> 用来临时保存当前节点的下一个节点，以便在反转后继续遍历。</li>
+</ul>
+</li>
+<li>函数返回反转后的链表头节点 <code>new_head</code>。</li>
+</ul>
+</li>
+<li>
+<p><strong><code>isPalindrome</code> 函数</strong>:</p>
+<ul>
+<li>这是主函数，用来判断给定链表是否为回文链表。</li>
+<li>如果链表为空（即 <code>head</code> 为 <code>NULL</code>），直接返回 <code>NULL</code>（应返回 <code>false</code>，可能是个小错误）。</li>
+<li>通过 <code>middle_find</code> 函数找到链表的中间节点。</li>
+<li>反转中间节点后的右半部分链表，并将新头节点赋值给 <code>right</code>。</li>
+<li>创建两个指针 <code>right_copy</code> 和 <code>tmp</code>，分别用于遍历反转后的右半部分链表和原始链表的左半部分。</li>
+<li>通过遍历比较左半部分链表和右半部分反转链表的对应节点的值。</li>
+<li>如果发现任何一对节点的值不相等，立即返回 <code>false</code>。</li>
+<li>如果比较通过，链表是回文的，最后将反转的右半部分链表再次反转回来，恢复原链表的结构。</li>
+</ul>
+</li>
+</ul>
+<h3 id="mcetoc_1i4vb8mh82k">复杂度</h3>
+<ul>
+<li><strong>时间复杂度</strong>：<code>O(n)</code>，其中 <code>n</code> 是链表的长度，因为我们只对链表进行了一次遍历和一次反转。</li>
+<li><strong>空间复杂度</strong>：<code>O(1)</code>，除了几个指针变量外，没有使用额外的空间。</li>
+</ul>
+            ]]>
+        </content>
+    </entry>
+    <entry>
+        <title>20. 有效的括号</title>
+        <author>
+            <name>fcoy</name>
+        </author>
+        <link href="https://hxfcoy.github.io/xcll.github.io/20-you-xiao-de-gua-hao.html"/>
+        <id>https://hxfcoy.github.io/xcll.github.io/20-you-xiao-de-gua-hao.html</id>
+            <category term="力扣"/>
+
+        <updated>2024-08-11T07:12:12+08:00</updated>
+            <summary></summary>
+        <content type="html">
+            <![CDATA[
+                <div class="post__toc">
+<h3>目录</h3>
+<ul>
+<li><a href="#mcetoc_1i4vbe4li3">题目</a></li>
+<li><a href="#mcetoc_1i4v90abed">代码实现</a></li>
+<li><a href="#mcetoc_1i4v90abee">代码解析</a></li>
+<li><a href="#mcetoc_1i4v90abef">时间复杂度</a></li>
+</ul>
+</div>
+<h3 id="mcetoc_1i4vbe4li3">题目</h3>
+<p>给定一个只包括 <code>'('</code>，<code>')'</code>，<code>'{'</code>，<code>'}'</code>，<code>'['</code>，<code>']'</code> 的字符串 <code>s</code> ，判断字符串是否有效。</p>
+<p>有效字符串需满足：</p>
+<ol>
+<li>左括号必须用相同类型的右括号闭合。</li>
+<li>左括号必须以正确的顺序闭合。</li>
+<li>每个右括号都有一个对应的相同类型的左括号。</li>
+</ol>
+<p> </p>
+<p><strong>示例 1：</strong></p>
+<pre><strong>输入：</strong>s = "()"
+<strong>输出：</strong>true
+</pre>
+<p><strong>示例 2：</strong></p>
+<pre><strong>输入：</strong>s = "()[]{}"
+<strong>输出：</strong>true
+</pre>
+<p><strong>示例 3：</strong></p>
+<pre><strong>输入：</strong>s = "(]"
+<strong>输出：</strong>false</pre>
+<h3 id="mcetoc_1i4v90abed">代码实现</h3>
+<pre class="language-c line-numbers"><code>bool isValid(char* s) {
+    int n = strlen(s);
+    // 如果字符串长度是奇数，直接返回 false
+    if (n % 2 != 0) {
+        return false;
+    }
+
+    // 用一个数组模拟栈
+    char stack[n];
+    int top = -1;
+
+    for (int i = 0; i &lt; n; i++) {
+        char c = s[i];
+        if (c == '(' || c == '{' || c == '[') {
+            // 将左括号压入栈中
+            stack[++top] = c;
+        } else {
+            // 遇到右括号时，检查栈顶元素是否匹配
+            if (top == -1) {
+                return false;
+            }
+            char topChar = stack[top];
+            if ((c == ')' &amp;&amp; topChar != '(') ||
+                (c == '}' &amp;&amp; topChar != '{') ||
+                (c == ']' &amp;&amp; topChar != '[')) {
+                return false;
+            }
+            // 弹出栈顶元素
+            top--;
+        }
+    }
+
+    // 如果栈为空，所有括号都匹配
+    return top == -1;
+}</code></pre>
+<h3 id="mcetoc_1i4v90abee">代码解析</h3>
+<ol>
+<li>
+<p><strong>栈的模拟</strong>：我们用一个数组 <code>stack</code> 来模拟栈，并用 <code>top</code> 指针表示栈顶。</p>
+<ul>
+<li>当遇到左括号时，将其压入栈中。</li>
+<li>当遇到右括号时，检查栈顶是否有匹配的左括号。</li>
+<li>如果匹配，弹出栈顶的元素；否则返回 <code>false</code>。</li>
+</ul>
+</li>
+<li>
+<p><strong>字符串长度检查</strong>：如果字符串长度是奇数，则直接返回 <code>false</code>，因为不可能存在配对的括号。</p>
+</li>
+<li>
+<p><strong>最终检查</strong>：在遍历完字符串后，检查栈是否为空。如果栈为空，说明所有的括号都成功匹配，否则返回 <code>false</code>。</p>
+</li>
+</ol>
+<h3 id="mcetoc_1i4v90abef">时间复杂度</h3>
+<ul>
+<li><strong>时间复杂度</strong>: 每个字符都要入栈或出栈，时间复杂度是 <code>O(n)</code>，其中 <code>n</code> 是字符串的长度。</li>
+<li><strong>空间复杂度</strong>: 最坏情况下栈的大小为 <code>n/2</code>，因此空间复杂度也是 <code>O(n)</code>。</li>
+</ul>
+            ]]>
+        </content>
+    </entry>
     <entry>
         <title>15. 三数之和</title>
         <author>
@@ -39,6 +281,7 @@
 </li>
 </ul>
 </div>
+<h3>题目</h3>
 <p>给你一个整数数组 <code>nums</code> ，判断是否存在三元组 <code>[nums[i], nums[j], nums[k]]</code> 满足 <code>i != j</code>、<code>i != k</code> 且 <code>j != k</code> ，同时还满足 <code>nums[i] + nums[j] + nums[k] == 0</code> 。请你返回所有和为 <code>0</code> 且不重复的三元组。</p>
 <p><strong>注意：</strong>答案中不可以包含重复的三元组。</p>
 <p> </p>
@@ -63,7 +306,7 @@ nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
 <strong>输出：</strong>[[0,0,0]]
 <strong>解释：</strong>唯一可能的三元组和为 0 。</pre>
 <h3 id="mcetoc_1i4u8qoul21">实现代码</h3>
-<pre class="language-c"><code>int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes) {
+<pre class="language-c line-numbers"><code>int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes) {
     int cmp(const void* a, const void* b) {
     return *(int*)a - *(int*)b;
 }
@@ -149,7 +392,7 @@ nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
 <li>主要用于存储结果的二维数组，最坏情况下需要 <code>O(n^2)</code> 的空间。</li>
 </ul>
 <h3 id="mcetoc_1i4u8jjga1u">cmp解释</h3>
-<pre class="language-c"><code>int cmp(const void* a, const void* b) {
+<pre class="language-c line-numbers"><code>int cmp(const void* a, const void* b) {
     return *(int*)a - *(int*)b;
 }</code></pre>
 <ul>
@@ -202,7 +445,7 @@ nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
 <strong>输出：</strong>3
 <strong>解释：</strong>队伍中枕头的传递情况为：1 -&gt; 2 -&gt; 3 。
 2 秒后，枕头传递到第 3 个人手中。</pre>
-<pre class="language-c"><code>int passThePillow(int n, int time) {
+<pre class="language-c line-numbers"><code>int passThePillow(int n, int time) {
     // 如果time对(n-1)取模，则time % (n-1) 表示经过几个完整的正向传递后的余数
     // 通过方向(正向或反向)计算最终位置
     int cycle = time / (n - 1);
@@ -263,7 +506,7 @@ nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
 <pre><strong>输入:</strong> frame = [[1,3,1],[1,5,1],[4,2,1]]
 <strong>输出:</strong> <code>12
 </code><strong>解释:</strong> 路径 1→3→5→2→1 可以拿到最高价值的珠宝</pre>
-<pre class="language-apacheconf"><code>int jewelleryValue(int** frame, int frameSize, int* frameColSize) {
+<pre class="language-apacheconf line-numbers"><code>int jewelleryValue(int** frame, int frameSize, int* frameColSize) {
     if (frameSize == 0 || frameColSize[0] == 0) {
         return 0; // 处理空架子的情况
     }
@@ -440,7 +683,7 @@ nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
 <pre><strong>输入: </strong>s = "pwwkew"
 <strong>输出: </strong>3
 <strong>解释: </strong>因为无重复字符的最长子串是 <code>"wke"</code>，所以其长度为 3。   请注意，你的答案必须是 <strong>子串 </strong>的长度，<code style="font-size: 0.790123em; font-weight: var(--font-weight-normal); font-family: var(--font-monospace); background-image: none;">"pwke"</code><span style="background-color: var(--gray-1); font-size: 0.790123em; color: var(--text-primary-color); font-family: var(--editor-font-family); font-weight: var(--font-weight-normal);"> 是一个</span><em style="font-size: 0.790123em; color: var(--text-primary-color); font-family: var(--editor-font-family); font-weight: var(--font-weight-normal);">子序列，</em><span style="background-color: var(--gray-1); font-size: 0.790123em; color: var(--text-primary-color); font-family: var(--editor-font-family); font-weight: var(--font-weight-normal);">不是子串。</span></pre>
-<pre class="language-c"><code>int lengthOfLongestSubstring(char* s) {
+<pre class="language-c line-numbers"><code>int lengthOfLongestSubstring(char* s) {
     int n = strlen(s);
     if (n == 0) return 0;
     
@@ -506,7 +749,7 @@ nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
 <pre><strong>输入：</strong>l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
 <strong>输出：</strong>[8,9,9,9,0,0,0,1]</pre>
 <p> </p>
-<pre class="language-c"><code>struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
+<pre class="language-c line-numbers"><code>struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
     struct ListNode dummy;
     dummy.next = NULL;
     struct ListNode* current = &amp;dummy;
@@ -576,7 +819,7 @@ nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
 <p><strong class="example">示例 3：</strong></p>
 <pre><strong>输入：</strong>nums = [3,3], target = 6
 <strong>输出：</strong>[0,1]<code style="font-weight: var(--font-weight-normal);"></code><code></code></pre>
-<pre class="language-c"><code>int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
+<pre class="language-c line-numbers"><code>int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
 
     // 用于存储结果的数组
     int *result = (int *)malloc(2 * sizeof(int));
