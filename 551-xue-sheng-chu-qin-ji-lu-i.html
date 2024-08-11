@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="zh-cn"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>551. 学生出勤记录 I - xcll’s blog</title><meta name="robots" content="noindex,nofollow"><meta name="generator" content="Publii Open-Source CMS for Static Site"><link rel="stylesheet" href="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-beige.css"><link rel="alternate" type="application/atom+xml" href="https://hxfcoy.github.io/xcll.github.io/feed.xml"><link rel="alternate" type="application/json" href="https://hxfcoy.github.io/xcll.github.io/feed.json"><link rel="stylesheet" href="https://hxfcoy.github.io/xcll.github.io/assets/css/style.css?v=48ae57c9831f7efa1e623ac4eb92d438"><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://hxfcoy.github.io/xcll.github.io/551-xue-sheng-chu-qin-ji-lu-i.html"},"headline":"551. 学生出勤记录 I","datePublished":"2024-08-11T08:03","dateModified":"2024-08-11T08:03","image":{"@type":"ImageObject","url":"https://hxfcoy.github.io/xcll.github.io/media/website/LOGO.4a06cdd2.png","height":117,"width":225},"description":"","author":{"@type":"Person","name":"fcoy","url":"https://hxfcoy.github.io/xcll.github.io/authors/fcoy/"},"publisher":{"@type":"Organization","name":"fcoy","logo":{"@type":"ImageObject","url":"https://hxfcoy.github.io/xcll.github.io/media/website/LOGO.4a06cdd2.png","height":117,"width":225}}}</script><noscript><style>img[loading] {
+                    opacity: 1;
+                }</style></noscript></head><body><div class="site-container"><header class="top" id="js-header"><a class="logo" href="https://hxfcoy.github.io/xcll.github.io/"><img src="https://hxfcoy.github.io/xcll.github.io/media/website/LOGO.4a06cdd2.png" alt="xcll’s blog" width="225" height="117"></a><nav class="navbar js-navbar"><button class="navbar__toggle js-toggle" aria-label="Menu" aria-haspopup="true" aria-expanded="false"><span class="navbar__toggle-box"><span class="navbar__toggle-inner">Menu</span></span></button><ul class="navbar__menu"><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/li-kou/" target="_self">力扣</a></li><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/you-xi/" target="_self">游戏</a></li><li><a href="https://hxfcoy.github.io/xcll.github.io/ruan-jian.html" target="_self">资源</a></li></ul></nav></header><main><article class="post"><div class="hero"><figure class="hero__image hero__image--overlay"><img src="https://hxfcoy.github.io/xcll.github.io/media/website/BA2.jpg" srcset="https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-xs.jpg 300w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-sm.jpg 480w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-md.jpg 768w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-lg.jpg 1024w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-xl.jpg 1360w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-2xl.jpg 1600w" sizes="100vw" loading="eager" alt=""></figure><header class="hero__content"><div class="wrapper"><div class="post__meta"><time datetime="2024-08-11T08:03">八月 11, 2024</time></div><h1>551. 学生出勤记录 I</h1><div class="post__meta post__meta--author"><a href="https://hxfcoy.github.io/xcll.github.io/authors/fcoy/" class="feed__author">fcoy</a></div></div></header></div><div class="wrapper post__entry"><div class="post__toc"><h3>目录</h3><ul><li><a href="#mcetoc_1i4vbu31bv">题目</a></li><li><a href="#mcetoc_1i4vbu31b10">代码</a></li><li><a href="#mcetoc_1i4vbu31b11">代码解析</a></li><li><a href="#mcetoc_1i4vbu31b12">复杂度</a></li></ul></div><h3 id="mcetoc_1i4vbu31bv">题目</h3><p>给你一个字符串 <code>s</code> 表示一个学生的出勤记录，其中的每个字符用来标记当天的出勤情况（缺勤、迟到、到场）。记录中只含下面三种字符：</p><ul><li><code>'A'</code>：Absent，缺勤</li><li><code>'L'</code>：Late，迟到</li><li><code>'P'</code>：Present，到场</li></ul><p>如果学生能够 <strong>同时</strong> 满足下面两个条件，则可以获得出勤奖励：</p><ul><li>按 <strong>总出勤</strong> 计，学生缺勤（<code>'A'</code>）<strong>严格</strong> 少于两天。</li><li>学生 <strong>不会</strong> 存在 <strong>连续</strong> 3 天或 <strong>连续</strong> 3 天以上的迟到（<code>'L'</code>）记录。</li></ul><p>如果学生可以获得出勤奖励，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p><p> </p><p><strong>示例 1：</strong></p><pre><strong>输入：</strong>s = "PPALLP"
+<strong>输出：</strong>true
+<strong>解释：</strong>学生缺勤次数少于 2 次，且不存在 3 天或以上的连续迟到记录。
+</pre><p><strong>示例 2：</strong></p><pre><strong>输入：</strong>s = "PPALLL"
+<strong>输出：</strong>false
+<strong>解释：</strong>学生最后三天连续迟到，所以不满足出勤奖励的条件。</pre><h3 id="mcetoc_1i4vbu31b10">代码</h3><pre class="language-c line-numbers"><code>bool checkRecord(char* s) {
+    int countA = 0;       // 用来统计 'A' 的数量
+    int consecutiveL = 0; // 用来统计连续 'L' 的数量
+
+    for (int i = 0; s[i] != '\0'; i++) {
+        if (s[i] == 'A') {
+            countA++;
+            if (countA &gt;= 2) { // 如果 'A' 的数量达到 2，直接返回 false
+                return false;
+            }
+        }
+
+        if (s[i] == 'L') {
+            consecutiveL++;
+            if (consecutiveL &gt;=
+                3) { // 如果连续 'L' 的数量达到 3，直接返回 false
+                return false;
+            }
+        } else {
+            consecutiveL = 0; // 如果当前字符不是 'L'，重置连续 'L' 计数
+        }
+    }
+
+    return true; // 如果两个条件都未触发，则返回 true
+}</code></pre><h3 id="mcetoc_1i4vbu31b11">代码解析</h3><ol><li><p><strong>计数缺勤天数 <code>countA</code></strong>：</p><ul><li>每次遇到字符 <code>'A'</code>，<code>countA</code> 自增。</li><li>如果 <code>countA</code> 达到或超过 2，说明缺勤天数不满足要求，直接返回 <code>false</code>。</li></ul></li><li><p><strong>统计连续迟到天数 <code>consecutiveL</code></strong>：</p><ul><li>每次遇到字符 <code>'L'</code>，<code>consecutiveL</code> 自增。</li><li>如果 <code>consecutiveL</code> 达到或超过 3，说明存在连续 3 天或以上的迟到，直接返回 <code>false</code>。</li><li>一旦遇到非 <code>'L'</code> 字符，<code>consecutiveL</code> 归零，重新开始统计。</li></ul></li><li><p><strong>返回结果</strong>：</p><ul><li>如果遍历结束后没有触发以上两个条件，则返回 <code>true</code>，表示可以获得出勤奖励。</li></ul></li></ol><h3 id="mcetoc_1i4vbu31b12">复杂度</h3><ul><li><strong>时间复杂度</strong>：<code>O(n)</code>，其中 <code>n</code> 是字符串的长度。只需遍历字符串一次即可。</li><li><strong>空间复杂度</strong>：<code>O(1)</code>，只使用了几个固定大小的变量来记录状态。</li></ul></div><footer class="wrapper post__footer"><p class="post__last-updated">This article was updated on 八月 11, 2024</p><ul class="post__tag"><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/li-kou/">力扣</a></li></ul><div class="post__share"></div><div class="post__bio bio"><div><h3 class="bio__name"><a href="https://hxfcoy.github.io/xcll.github.io/authors/fcoy/" rel="author">fcoy</a></h3></div></div></footer></article><nav class="post__nav"><div class="post__nav-inner"><div class="post__nav-prev"><svg width="1.041em" height="0.416em" aria-hidden="true"><use xlink:href="https://hxfcoy.github.io/xcll.github.io/assets/svg/svg-map.svg#arrow-prev"/></svg> <a href="https://hxfcoy.github.io/xcll.github.io/234-hui-wen-lian-biao.html" class="post__nav-link" rel="prev"><span>Previous</span> 234. 回文链表</a></div></div></nav></main><footer class="footer"><div class="footer__copyright"><p class="align-center">浮云一别后，流水十年间。</p></div><button onclick="backToTopFunction()" id="backToTop" class="footer__bttop" aria-label="Back to top" title="Back to top"><svg><use xlink:href="https://hxfcoy.github.io/xcll.github.io/assets/svg/svg-map.svg#toparrow"/></svg></button></footer></div><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/assets/js/scripts.min.js?v=f47c11534595205f20935f0db2a62a85"></script><script>window.publiiThemeMenuConfig={mobileMenuMode:'sidebar',animationSpeed:300,submenuWidth: 'auto',doubleClickTime:500,mobileMenuExpandableSubmenus:true,relatedContainerForOverlayMenuSelector:'.top'};</script><script>var images = document.querySelectorAll('img[loading]');
+        for (var i = 0; i < images.length; i++) {
+            if (images[i].complete) {
+                images[i].classList.add('is-loaded');
+            } else {
+                images[i].addEventListener('load', function () {
+                    this.classList.add('is-loaded');
+                }, false);
+            }
+        }</script><script src="https://hxfcoy.github.io/xcll.github.io/media/plugins/pageprefetching/quicklink.umd.js"></script><script>window.addEventListener('load', () => {
+					quicklink.listen({
+						prerender: true,
+						el: document.querySelector('body'),
+						delay: 0,
+						limit: Infinity,
+						throttle: Infinity,
+						timeout: 2000
+					});
+				});</script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-line-numbers.min.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/clipboard.min.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-copy-to-clipboard.min.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-show-invisibles.min.js"></script></body></html>

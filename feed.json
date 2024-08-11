@@ -11,6 +11,20 @@
     },
     "items": [
         {
+            "id": "https://hxfcoy.github.io/xcll.github.io/551-xue-sheng-chu-qin-ji-lu-i.html",
+            "url": "https://hxfcoy.github.io/xcll.github.io/551-xue-sheng-chu-qin-ji-lu-i.html",
+            "title": "551. 学生出勤记录 I",
+            "content_html": "<div class=\"post__toc\">\n<h3>目录</h3>\n<ul>\n<li><a href=\"#mcetoc_1i4vbu31bv\">题目</a></li>\n<li><a href=\"#mcetoc_1i4vbu31b10\">代码</a></li>\n<li><a href=\"#mcetoc_1i4vbu31b11\">代码解析</a></li>\n<li><a href=\"#mcetoc_1i4vbu31b12\">复杂度</a></li>\n</ul>\n</div>\n<h3 id=\"mcetoc_1i4vbu31bv\">题目</h3>\n<p>给你一个字符串 <code>s</code> 表示一个学生的出勤记录，其中的每个字符用来标记当天的出勤情况（缺勤、迟到、到场）。记录中只含下面三种字符：</p>\n<ul>\n<li><code>'A'</code>：Absent，缺勤</li>\n<li><code>'L'</code>：Late，迟到</li>\n<li><code>'P'</code>：Present，到场</li>\n</ul>\n<p>如果学生能够 <strong>同时</strong> 满足下面两个条件，则可以获得出勤奖励：</p>\n<ul>\n<li>按 <strong>总出勤</strong> 计，学生缺勤（<code>'A'</code>）<strong>严格</strong> 少于两天。</li>\n<li>学生 <strong>不会</strong> 存在 <strong>连续</strong> 3 天或 <strong>连续</strong> 3 天以上的迟到（<code>'L'</code>）记录。</li>\n</ul>\n<p>如果学生可以获得出勤奖励，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>\n<p> </p>\n<p><strong>示例 1：</strong></p>\n<pre><strong>输入：</strong>s = \"PPALLP\"\n<strong>输出：</strong>true\n<strong>解释：</strong>学生缺勤次数少于 2 次，且不存在 3 天或以上的连续迟到记录。\n</pre>\n<p><strong>示例 2：</strong></p>\n<pre><strong>输入：</strong>s = \"PPALLL\"\n<strong>输出：</strong>false\n<strong>解释：</strong>学生最后三天连续迟到，所以不满足出勤奖励的条件。</pre>\n<h3 id=\"mcetoc_1i4vbu31b10\">代码</h3>\n<pre class=\"language-c line-numbers\"><code>bool checkRecord(char* s) {\n    int countA = 0;       // 用来统计 'A' 的数量\n    int consecutiveL = 0; // 用来统计连续 'L' 的数量\n\n    for (int i = 0; s[i] != '\\0'; i++) {\n        if (s[i] == 'A') {\n            countA++;\n            if (countA &gt;= 2) { // 如果 'A' 的数量达到 2，直接返回 false\n                return false;\n            }\n        }\n\n        if (s[i] == 'L') {\n            consecutiveL++;\n            if (consecutiveL &gt;=\n                3) { // 如果连续 'L' 的数量达到 3，直接返回 false\n                return false;\n            }\n        } else {\n            consecutiveL = 0; // 如果当前字符不是 'L'，重置连续 'L' 计数\n        }\n    }\n\n    return true; // 如果两个条件都未触发，则返回 true\n}</code></pre>\n<h3 id=\"mcetoc_1i4vbu31b11\">代码解析</h3>\n<ol>\n<li>\n<p><strong>计数缺勤天数 <code>countA</code></strong>：</p>\n<ul>\n<li>每次遇到字符 <code>'A'</code>，<code>countA</code> 自增。</li>\n<li>如果 <code>countA</code> 达到或超过 2，说明缺勤天数不满足要求，直接返回 <code>false</code>。</li>\n</ul>\n</li>\n<li>\n<p><strong>统计连续迟到天数 <code>consecutiveL</code></strong>：</p>\n<ul>\n<li>每次遇到字符 <code>'L'</code>，<code>consecutiveL</code> 自增。</li>\n<li>如果 <code>consecutiveL</code> 达到或超过 3，说明存在连续 3 天或以上的迟到，直接返回 <code>false</code>。</li>\n<li>一旦遇到非 <code>'L'</code> 字符，<code>consecutiveL</code> 归零，重新开始统计。</li>\n</ul>\n</li>\n<li>\n<p><strong>返回结果</strong>：</p>\n<ul>\n<li>如果遍历结束后没有触发以上两个条件，则返回 <code>true</code>，表示可以获得出勤奖励。</li>\n</ul>\n</li>\n</ol>\n<h3 id=\"mcetoc_1i4vbu31b12\">复杂度</h3>\n<ul>\n<li><strong>时间复杂度</strong>：<code>O(n)</code>，其中 <code>n</code> 是字符串的长度。只需遍历字符串一次即可。</li>\n<li><strong>空间复杂度</strong>：<code>O(1)</code>，只使用了几个固定大小的变量来记录状态。</li>\n</ul>",
+            "author": {
+                "name": "fcoy"
+            },
+            "tags": [
+                   "力扣"
+            ],
+            "date_published": "2024-08-11T08:03:28+08:00",
+            "date_modified": "2024-08-11T08:03:28+08:00"
+        },
+        {
             "id": "https://hxfcoy.github.io/xcll.github.io/234-hui-wen-lian-biao.html",
             "url": "https://hxfcoy.github.io/xcll.github.io/234-hui-wen-lian-biao.html",
             "title": "234. 回文链表",
@@ -134,20 +148,6 @@
             ],
             "date_published": "2024-08-10T07:14:36+08:00",
             "date_modified": "2024-08-10T07:14:36+08:00"
-        },
-        {
-            "id": "https://hxfcoy.github.io/xcll.github.io/1-liang-shu-zhi-he.html",
-            "url": "https://hxfcoy.github.io/xcll.github.io/1-liang-shu-zhi-he.html",
-            "title": "1. 两数之和",
-            "content_html": "<p>给定一个整数数组 <code>nums</code> 和一个整数目标值 <code>target</code>，请你在该数组中找出 <strong>和为目标值 </strong><em><code>target</code></em>  的那 <strong>两个</strong> 整数，并返回它们的数组下标。</p>\n<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>\n<p>你可以按任意顺序返回答案。</p>\n<p> </p>\n<p><strong class=\"example\">示例 1：</strong></p>\n<pre><strong>输入：</strong>nums = [2,7,11,15], target = 9\n<strong>输出：</strong>[0,1]\n<strong>解释：</strong>因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。\n</pre>\n<p><strong class=\"example\">示例 2：</strong></p>\n<pre><strong>输入：</strong>nums = [3,2,4], target = 6\n<strong>输出：</strong>[1,2]\n</pre>\n<p><strong class=\"example\">示例 3：</strong></p>\n<pre><strong>输入：</strong>nums = [3,3], target = 6\n<strong>输出：</strong>[0,1]<code style=\"font-weight: var(--font-weight-normal);\"></code><code></code></pre>\n<pre class=\"language-c line-numbers\"><code>int* twoSum(int* nums, int numsSize, int target, int* returnSize) {\n\n    // 用于存储结果的数组\n    int *result = (int *)malloc(2 * sizeof(int));\n    *returnSize = 2; // 结果数组的大小是2\n    // 遍历数组，寻找和为target的两个数\n    for (int i = 0; i &lt; numsSize; i++) {\n        for (int j = i + 1; j &lt; numsSize; j++) {\n            // 如果找到，返回它们的下标\n            if (nums[i] + nums[j] == target) {\n                result[0] = i;\n                result[1] = j;\n                return result;\n            }\n        }\n    }\n    // 如果未找到，返回NULL\n    *returnSize = 0;\n    return NULL;\n}</code></pre>",
-            "author": {
-                "name": "fcoy"
-            },
-            "tags": [
-                   "力扣"
-            ],
-            "date_published": "2024-08-10T07:10:58+08:00",
-            "date_modified": "2024-08-10T07:15:36+08:00"
         }
     ]
 }
