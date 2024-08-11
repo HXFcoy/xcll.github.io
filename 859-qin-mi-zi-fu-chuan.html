@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="zh-cn"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>859. 亲密字符串 - xcll’s blog</title><meta name="robots" content="noindex,nofollow"><meta name="generator" content="Publii Open-Source CMS for Static Site"><link rel="stylesheet" href="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-beige.css"><link rel="alternate" type="application/atom+xml" href="https://hxfcoy.github.io/xcll.github.io/feed.xml"><link rel="alternate" type="application/json" href="https://hxfcoy.github.io/xcll.github.io/feed.json"><link rel="stylesheet" href="https://hxfcoy.github.io/xcll.github.io/assets/css/style.css?v=48ae57c9831f7efa1e623ac4eb92d438"><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://hxfcoy.github.io/xcll.github.io/859-qin-mi-zi-fu-chuan.html"},"headline":"859. 亲密字符串","datePublished":"2024-08-12T07:53","dateModified":"2024-08-12T07:53","image":{"@type":"ImageObject","url":"https://hxfcoy.github.io/xcll.github.io/media/website/LOGO.4a06cdd2.png","height":117,"width":225},"description":"","author":{"@type":"Person","name":"fcoy","url":"https://hxfcoy.github.io/xcll.github.io/authors/fcoy/"},"publisher":{"@type":"Organization","name":"fcoy","logo":{"@type":"ImageObject","url":"https://hxfcoy.github.io/xcll.github.io/media/website/LOGO.4a06cdd2.png","height":117,"width":225}}}</script><noscript><style>img[loading] {
+                    opacity: 1;
+                }</style></noscript></head><body><div class="site-container"><header class="top" id="js-header"><a class="logo" href="https://hxfcoy.github.io/xcll.github.io/"><img src="https://hxfcoy.github.io/xcll.github.io/media/website/LOGO.4a06cdd2.png" alt="xcll’s blog" width="225" height="117"></a><nav class="navbar js-navbar"><button class="navbar__toggle js-toggle" aria-label="Menu" aria-haspopup="true" aria-expanded="false"><span class="navbar__toggle-box"><span class="navbar__toggle-inner">Menu</span></span></button><ul class="navbar__menu"><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/li-kou/" target="_self">力扣</a></li><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/you-xi/" target="_self">游戏</a></li><li><a href="https://hxfcoy.github.io/xcll.github.io/ruan-jian.html" target="_self">资源</a></li></ul></nav></header><main><article class="post"><div class="hero"><figure class="hero__image hero__image--overlay"><img src="https://hxfcoy.github.io/xcll.github.io/media/website/BA2.jpg" srcset="https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-xs.jpg 300w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-sm.jpg 480w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-md.jpg 768w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-lg.jpg 1024w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-xl.jpg 1360w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-2xl.jpg 1600w" sizes="100vw" loading="eager" alt=""></figure><header class="hero__content"><div class="wrapper"><div class="post__meta"><time datetime="2024-08-12T07:53">八月 12, 2024</time></div><h1>859. 亲密字符串</h1><div class="post__meta post__meta--author"><a href="https://hxfcoy.github.io/xcll.github.io/authors/fcoy/" class="feed__author">fcoy</a></div></div></header></div><div class="wrapper post__entry"><div class="post__toc"><h3>目录</h3><ul><li><a href="#mcetoc_1i51tpgc019">题目</a></li><li><a href="#mcetoc_1i51tpgc01a">代码</a></li><li><a href="#mcetoc_1i51tpgc01b">解释</a></li><li><a href="#mcetoc_1i51tpgc01c">复杂度</a></li></ul></div><h3 id="mcetoc_1i51tpgc019">题目</h3><p>给你两个字符串 <code>s</code> 和 <code>goal</code> ，只要我们可以通过交换 <code>s</code> 中的两个字母得到与 <code>goal</code> 相等的结果，就返回 <code>true</code> ；否则返回 <code>false</code> 。</p><p>交换字母的定义是：取两个下标 <code>i</code> 和 <code>j</code> （下标从 <code>0</code> 开始）且满足 <code>i != j</code> ，接着交换 <code>s[i]</code> 和 <code>s[j]</code> 处的字符。</p><ul><li>例如，在 <code>"abcd"</code> 中交换下标 <code>0</code> 和下标 <code>2</code> 的元素可以生成 <code>"cbad"</code> 。</li></ul><p> </p><p><strong>示例 1：</strong></p><pre><strong>输入：</strong>s = "ab", goal = "ba"
+<strong>输出：</strong>true
+<strong>解释：</strong>你可以交换 s[0] = 'a' 和 s[1] = 'b' 生成 "ba"，此时 s 和 goal 相等。</pre><p><strong>示例 2：</strong></p><pre><strong>输入：</strong>s = "ab", goal = "ab"
+<strong>输出：</strong>false
+<strong>解释：</strong>你只能交换 s[0] = 'a' 和 s[1] = 'b' 生成 "ba"，此时 s 和 goal 不相等。</pre><p><strong>示例 3：</strong></p><pre><strong>输入：</strong>s = "aa", goal = "aa"
+<strong>输出：</strong>true
+<strong>解释：</strong>你可以交换 s[0] = 'a' 和 s[1] = 'a' 生成 "aa"，此时 s 和 goal 相等。</pre><h3 id="mcetoc_1i51tpgc01a">代码</h3><pre class="language-c line-numbers"><code>bool buddyStrings(char * s, char * goal) {
+    int len_s = strlen(s);
+    int len_goal = strlen(goal);
+
+    // 长度不同的情况
+    if (len_s != len_goal) {
+        return false;
+    }
+
+    // 如果字符串相同
+    if (strcmp(s, goal) == 0) {
+        // 检查是否有重复字符
+        int count[26] = {0};
+        for (int i = 0; i &lt; len_s; i++) {
+            count[s[i] - 'a']++;
+            if (count[s[i] - 'a'] &gt; 1) {
+                return true;
+            }
+        }
+        return false; // 没有重复字符，无法通过交换变为相同字符串
+    } else {
+        // 字符串不同的情况
+        int first = -1, second = -1;
+        for (int i = 0; i &lt; len_s; i++) {
+            if (s[i] != goal[i]) {
+                if (first == -1) {
+                    first = i;
+                } else if (second == -1) {
+                    second = i;
+                } else {
+                    return false; // 超过两个字符不同
+                }
+            }
+        }
+
+        // 确保只有两个字符不同且交换后相等
+        return (second != -1 &amp;&amp; s[first] == goal[second] &amp;&amp; s[second] == goal[first]);
+    }
+}</code></pre><h3 id="mcetoc_1i51tpgc01b">解释</h3><ol><li><p><strong>长度检查</strong>：</p><ul><li>如果 <code>s</code> 和 <code>goal</code> 的长度不同，直接返回 <code>false</code>，因为无法通过任何交换使它们相等。</li></ul></li><li><p><strong>相等的字符串</strong>：</p><ul><li>如果 <code>s</code> 和 <code>goal</code> 完全相等，我们检查 <code>s</code> 中是否有重复字符。</li><li>如果存在重复字符，返回 <code>true</code>，否则返回 <code>false</code>。</li></ul></li><li><p><strong>不相等的字符串</strong>：</p><ul><li>我们需要找出 <code>s</code> 和 <code>goal</code> 中不同的两个字符的位置，并检查这两个字符是否可以通过交换使 <code>s</code> 和 <code>goal</code> 相等。</li><li>如果有两个不同的字符且交换后相等，返回 <code>true</code>，否则返回 <code>false</code>。</li></ul></li></ol><h3 id="mcetoc_1i51tpgc01c">复杂度</h3><ul><li><strong>时间复杂度</strong>：<code>O(n)</code>，其中 <code>n</code> 是字符串 <code>s</code> 的长度。我们只需要一次遍历来完成检查。</li><li><strong>空间复杂度</strong>：<code>O(1)</code>，仅使用了几个额外的变量用于计数和索引。</li></ul></div><footer class="wrapper post__footer"><p class="post__last-updated">This article was updated on 八月 12, 2024</p><ul class="post__tag"><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/li-kou/">力扣</a></li></ul><div class="post__share"></div><div class="post__bio bio"><div><h3 class="bio__name"><a href="https://hxfcoy.github.io/xcll.github.io/authors/fcoy/" rel="author">fcoy</a></h3></div></div></footer></article><nav class="post__nav"><div class="post__nav-inner"><div class="post__nav-prev"><svg width="1.041em" height="0.416em" aria-hidden="true"><use xlink:href="https://hxfcoy.github.io/xcll.github.io/assets/svg/svg-map.svg#arrow-prev"/></svg> <a href="https://hxfcoy.github.io/xcll.github.io/551-xue-sheng-chu-qin-ji-lu-i.html" class="post__nav-link" rel="prev"><span>Previous</span> 551. 学生出勤记录 I</a></div></div></nav></main><footer class="footer"><div class="footer__copyright"><p class="align-center">浮云一别后，流水十年间。</p></div><button onclick="backToTopFunction()" id="backToTop" class="footer__bttop" aria-label="Back to top" title="Back to top"><svg><use xlink:href="https://hxfcoy.github.io/xcll.github.io/assets/svg/svg-map.svg#toparrow"/></svg></button></footer></div><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/assets/js/scripts.min.js?v=f47c11534595205f20935f0db2a62a85"></script><script>window.publiiThemeMenuConfig={mobileMenuMode:'sidebar',animationSpeed:300,submenuWidth: 'auto',doubleClickTime:500,mobileMenuExpandableSubmenus:true,relatedContainerForOverlayMenuSelector:'.top'};</script><script>var images = document.querySelectorAll('img[loading]');
+        for (var i = 0; i < images.length; i++) {
+            if (images[i].complete) {
+                images[i].classList.add('is-loaded');
+            } else {
+                images[i].addEventListener('load', function () {
+                    this.classList.add('is-loaded');
+                }, false);
+            }
+        }</script><script src="https://hxfcoy.github.io/xcll.github.io/media/plugins/pageprefetching/quicklink.umd.js"></script><script>window.addEventListener('load', () => {
+					quicklink.listen({
+						prerender: true,
+						el: document.querySelector('body'),
+						delay: 0,
+						limit: Infinity,
+						throttle: Infinity,
+						timeout: 2000
+					});
+				});</script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-line-numbers.min.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/clipboard.min.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-copy-to-clipboard.min.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-show-invisibles.min.js"></script></body></html>
