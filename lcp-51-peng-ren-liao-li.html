@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="zh-cn"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LCP 51. 烹饪料理 - xcll’s blog</title><meta name="robots" content="noindex,nofollow"><meta name="generator" content="Publii Open-Source CMS for Static Site"><link rel="stylesheet" href="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-beige.css"><link rel="alternate" type="application/atom+xml" href="https://hxfcoy.github.io/xcll.github.io/feed.xml"><link rel="alternate" type="application/json" href="https://hxfcoy.github.io/xcll.github.io/feed.json"><link rel="stylesheet" href="https://hxfcoy.github.io/xcll.github.io/assets/css/style.css?v=48ae57c9831f7efa1e623ac4eb92d438"><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://hxfcoy.github.io/xcll.github.io/lcp-51-peng-ren-liao-li.html"},"headline":"LCP 51. 烹饪料理","datePublished":"2024-08-13T07:47","dateModified":"2024-08-13T07:47","image":{"@type":"ImageObject","url":"https://hxfcoy.github.io/xcll.github.io/media/website/LOGO.4a06cdd2.png","height":117,"width":225},"description":"","author":{"@type":"Person","name":"fcoy","url":"https://hxfcoy.github.io/xcll.github.io/authors/fcoy/"},"publisher":{"@type":"Organization","name":"fcoy","logo":{"@type":"ImageObject","url":"https://hxfcoy.github.io/xcll.github.io/media/website/LOGO.4a06cdd2.png","height":117,"width":225}}}</script><noscript><style>img[loading] {
+                    opacity: 1;
+                }</style></noscript></head><body><div class="site-container"><header class="top" id="js-header"><a class="logo" href="https://hxfcoy.github.io/xcll.github.io/"><img src="https://hxfcoy.github.io/xcll.github.io/media/website/LOGO.4a06cdd2.png" alt="xcll’s blog" width="225" height="117"></a><nav class="navbar js-navbar"><button class="navbar__toggle js-toggle" aria-label="Menu" aria-haspopup="true" aria-expanded="false"><span class="navbar__toggle-box"><span class="navbar__toggle-inner">Menu</span></span></button><ul class="navbar__menu"><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/li-kou/" target="_self">力扣</a></li><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/you-xi/" target="_self">游戏</a></li><li><a href="https://hxfcoy.github.io/xcll.github.io/ruan-jian.html" target="_self">资源</a></li></ul></nav></header><main><article class="post"><div class="hero"><figure class="hero__image hero__image--overlay"><img src="https://hxfcoy.github.io/xcll.github.io/media/website/BA2.jpg" srcset="https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-xs.jpg 300w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-sm.jpg 480w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-md.jpg 768w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-lg.jpg 1024w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-xl.jpg 1360w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-2xl.jpg 1600w" sizes="100vw" loading="eager" alt=""></figure><header class="hero__content"><div class="wrapper"><div class="post__meta"><time datetime="2024-08-13T07:47">八月 13, 2024</time></div><h1>LCP 51. 烹饪料理</h1><div class="post__meta post__meta--author"><a href="https://hxfcoy.github.io/xcll.github.io/authors/fcoy/" class="feed__author">fcoy</a></div></div></header></div><div class="wrapper post__entry"><div class="post__toc"><h3>目录</h3><ul><li><a href="#mcetoc_1i54fqr0a3m">题目</a></li><li><a href="#mcetoc_1i54fqr0a3n">代码</a></li><li><a href="#mcetoc_1i54fqr0a3o">解释</a><ul><li><a href="#mcetoc_1i54fqr0a3p">关键思路</a></li><li><a href="#mcetoc_1i54fqr0a3q">具体流程</a></li><li><a href="#mcetoc_1i54fqr0a3r">为什么不用动态规划？</a></li></ul></li></ul></div><h3 id="mcetoc_1i54fqr0a3m">题目</h3><p>勇者背包内共有编号为 <code>0 ~ 4</code> 的五种食材，其中 <code>materials[j]</code> 表示第 <code>j</code> 种食材的数量。通过这些食材可以制作若干料理，<code>cookbooks[i][j]</code> 表示制作第 <code>i</code> 种料理需要第 <code>j</code> 种食材的数量，而 <code>attribute[i] = [x,y]</code> 表示第 <code>i</code> 道料理的美味度 <code>x</code> 和饱腹感 <code>y</code>。</p><p>在饱腹感不小于 <code>limit</code> 的情况下，请返回勇者可获得的最大美味度。如果无法满足饱腹感要求，则返回 <code>-1</code>。</p><p><strong>注意：</strong></p><ul><li>每种料理只能制作一次。</li></ul><p><strong>示例 1：</strong></p><blockquote><p>输入：<code>materials = [3,2,4,1,2]</code> <code>cookbooks = [[1,1,0,1,2],[2,1,4,0,0],[3,2,4,1,0]]</code> <code>attribute = [[3,2],[2,4],[7,6]]</code> <code>limit = 5</code></p><p>输出：<code>7</code></p><p>解释： 食材数量可以满足以下两种方案： 方案一：制作料理 0 和料理 1，可获得饱腹感 2+4、美味度 3+2 方案二：仅制作料理 2， 可饱腹感为 6、美味度为 7 因此在满足饱腹感的要求下，可获得最高美味度 7</p></blockquote><p><strong>示例 2：</strong></p><blockquote><p>输入：<code>materials = [10,10,10,10,10]</code> <code>cookbooks = [[1,1,1,1,1],[3,3,3,3,3],[10,10,10,10,10]]</code> <code>attribute = [[5,5],[6,6],[10,10]]</code> <code>limit = 1</code></p><p>输出：<code>11</code></p><p>解释：通过制作料理 0 和 1，可满足饱腹感，并获得最高美味度 11</p></blockquote><h3 id="mcetoc_1i54fqr0a3n">代码</h3><pre class="language-c line-numbers"><code>#include &lt;stdio.h&gt;
+
+int max(int a, int b) {
+    return a &gt; b ? a : b;
+}
+
+void dfs(int* materials, int materialsSize, int** cookbooks, int cookbooksSize, int** attribute, int limit, int index, int currentDelicious, int currentFullness, int* maxDelicious) {
+    // 如果当前饱腹感已经大于等于 limit
+    if (currentFullness &gt;= limit) {
+        *maxDelicious = max(*maxDelicious, currentDelicious);
+    }
+
+    // 遍历每一种料理
+    for (int i = index; i &lt; cookbooksSize; i++) {
+        int canCook = 1;
+
+        // 检查是否有足够的食材来制作这道料理
+        for (int j = 0; j &lt; materialsSize; j++) {
+            if (materials[j] &lt; cookbooks[i][j]) {
+                canCook = 0;
+                break;
+            }
+        }
+
+        if (canCook) {
+            // 做这道料理，更新材料剩余数量
+            for (int j = 0; j &lt; materialsSize; j++) {
+                materials[j] -= cookbooks[i][j];
+            }
+
+            // 递归调用，继续尝试制作下一道料理
+            dfs(materials, materialsSize, cookbooks, cookbooksSize, attribute, limit, i + 1, currentDelicious + attribute[i][0], currentFullness + attribute[i][1], maxDelicious);
+
+            // 回溯，恢复材料剩余数量
+            for (int j = 0; j &lt; materialsSize; j++) {
+                materials[j] += cookbooks[i][j];
+            }
+        }
+    }
+}
+
+int perfectMenu(int* materials, int materialsSize, int** cookbooks, int cookbooksSize, int* cookbooksColSize, int** attribute, int attributeSize, int* attributeColSize, int limit) {
+    int maxDelicious = -1;
+
+    dfs(materials, materialsSize, cookbooks, cookbooksSize, attribute, limit, 0, 0, 0, &amp;maxDelicious);
+
+    return maxDelicious;
+}
+</code></pre><h3 id="mcetoc_1i54fqr0a3o">解释</h3><p>这道题的核心在于如何选择一组料理，使得在满足饱腹感的前提下，获得最大的美味度。这实际上是一个经典的「0-1 背包问题」的变种，只不过背包的容量和价值都多维化了，因此不能直接使用动态规划来解决，而是使用深度优先搜索（DFS）进行组合的枚举。</p><h4 id="mcetoc_1i54fqr0a3p">关键思路</h4><ol><li><p><strong>深度优先搜索 (DFS)</strong>：DFS 是一种遍历或搜索树或图的算法。在这里，DFS 用来遍历所有可能的料理组合。通过递归的方法，我们从头到尾尝试每一种料理的组合。</p></li><li><p><strong>剪枝（提前停止不必要的计算）</strong>：在递归过程中，首先检查当前的食材是否足够制作某个料理。如果某个料理需要的食材超出了勇者的拥有量，我们就不再继续下去，这样可以减少无效的搜索。</p></li><li><p><strong>回溯</strong>：回溯是一种通过撤销某些选择来恢复原状的技术。在这道题中，当我们尝试制作某个料理时，会减少相应的食材数量；如果在接下来的搜索中发现这条路不合适，我们就会恢复食材的数量，然后尝试其他的组合。</p></li><li><p><strong>终止条件</strong>：当我们遍历完所有可能的料理组合后，检查当前组合的饱腹感是否满足要求，如果满足，就更新最大美味度。</p></li><li><p><strong>返回结果</strong>：最后，我们会返回遍历中找到的最大美味度值。如果遍历完所有组合后，没有任何一个组合能满足饱腹感要求，就返回 <code>-1</code>。</p></li></ol><h4 id="mcetoc_1i54fqr0a3q">具体流程</h4><p>假设你有 5 种食材，可以制作若干种料理，每种料理都有特定的美味度和饱腹感。目标是在至少达到某个饱腹感的前提下，最大化获得的美味度。</p><ul><li><p><strong>初始化</strong>：从第一个料理开始，初始的美味度和饱腹感为 <code>0</code>。</p></li><li><p><strong>递归搜索</strong>：对于每个料理，我们有两种选择：要么制作它，要么不制作它。如果制作它，就更新当前的美味度和饱腹感，并减少相应的食材数量；然后递归地进行下一道料理的选择。</p></li><li><p><strong>更新结果</strong>：每当发现一个新的组合能满足饱腹感要求时，比较其美味度是否超过当前已知的最大值。如果超过，则更新最大美味度。</p></li><li><p><strong>回溯</strong>：在返回上一层递归之前，恢复之前减少的食材数量，确保其他组合的尝试不会受到影响。</p></li></ul><h4 id="mcetoc_1i54fqr0a3r">为什么不用动态规划？</h4><p>动态规划通常用于处理「0-1 背包问题」，但这道题的复杂性在于：</p><ul><li>每种料理需要的食材种类不同，无法简单地用一个二维表来表示状态。</li><li>需要对每种料理的组合进行判断，处理多个维度（美味度和饱腹感）的问题。</li></ul></div><footer class="wrapper post__footer"><p class="post__last-updated">This article was updated on 八月 13, 2024</p><ul class="post__tag"><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/li-kou/">力扣</a></li></ul><div class="post__share"></div><div class="post__bio bio"><div><h3 class="bio__name"><a href="https://hxfcoy.github.io/xcll.github.io/authors/fcoy/" rel="author">fcoy</a></h3></div></div></footer></article><nav class="post__nav"><div class="post__nav-inner"><div class="post__nav-prev"><svg width="1.041em" height="0.416em" aria-hidden="true"><use xlink:href="https://hxfcoy.github.io/xcll.github.io/assets/svg/svg-map.svg#arrow-prev"/></svg> <a href="https://hxfcoy.github.io/xcll.github.io/859-qin-mi-zi-fu-chuan.html" class="post__nav-link" rel="prev"><span>Previous</span> 859. 亲密字符串</a></div></div></nav></main><footer class="footer"><div class="footer__copyright"><p class="align-center">浮云一别后，流水十年间。</p></div><button onclick="backToTopFunction()" id="backToTop" class="footer__bttop" aria-label="Back to top" title="Back to top"><svg><use xlink:href="https://hxfcoy.github.io/xcll.github.io/assets/svg/svg-map.svg#toparrow"/></svg></button></footer></div><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/assets/js/scripts.min.js?v=f47c11534595205f20935f0db2a62a85"></script><script>window.publiiThemeMenuConfig={mobileMenuMode:'sidebar',animationSpeed:300,submenuWidth: 'auto',doubleClickTime:500,mobileMenuExpandableSubmenus:true,relatedContainerForOverlayMenuSelector:'.top'};</script><script>var images = document.querySelectorAll('img[loading]');
+        for (var i = 0; i < images.length; i++) {
+            if (images[i].complete) {
+                images[i].classList.add('is-loaded');
+            } else {
+                images[i].addEventListener('load', function () {
+                    this.classList.add('is-loaded');
+                }, false);
+            }
+        }</script><script src="https://hxfcoy.github.io/xcll.github.io/media/plugins/pageprefetching/quicklink.umd.js"></script><script>window.addEventListener('load', () => {
+					quicklink.listen({
+						prerender: true,
+						el: document.querySelector('body'),
+						delay: 0,
+						limit: Infinity,
+						throttle: Infinity,
+						timeout: 2000
+					});
+				});</script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-line-numbers.min.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/clipboard.min.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-copy-to-clipboard.min.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-show-invisibles.min.js"></script></body></html>
