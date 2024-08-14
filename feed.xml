@@ -3,12 +3,75 @@
     <title>白衫如初</title>
     <link href="https://hxfcoy.github.io/xcll.github.io/feed.xml" rel="self" />
     <link href="https://hxfcoy.github.io/xcll.github.io" />
-    <updated>2024-08-14T07:57:01+08:00</updated>
+    <updated>2024-08-15T07:43:20+08:00</updated>
     <author>
         <name>fcoy</name>
     </author>
     <id>https://hxfcoy.github.io/xcll.github.io</id>
 
+    <entry>
+        <title>2525. 根据规则将箱子分类</title>
+        <author>
+            <name>fcoy</name>
+        </author>
+        <link href="https://hxfcoy.github.io/xcll.github.io/2525-gen-ju-gui-ze-jiang-xiang-zi-fen-lei.html"/>
+        <id>https://hxfcoy.github.io/xcll.github.io/2525-gen-ju-gui-ze-jiang-xiang-zi-fen-lei.html</id>
+            <category term="力扣"/>
+
+        <updated>2024-08-15T07:43:20+08:00</updated>
+            <summary></summary>
+        <content type="html">
+            <![CDATA[
+                <div class="post__toc">
+<h3>目录</h3>
+<ul>
+<li><a href="#mcetoc_1i59kcaatr">题目</a></li>
+<li><a href="#mcetoc_1i59kcaats">代码</a></li>
+<li><a href="#mcetoc_1i59kcaatt">解释</a></li>
+</ul>
+</div>
+<h3 id="mcetoc_1i59kcaatr">题目</h3>
+<p>给你四个整数 <code>length</code> ，<code>width</code> ，<code>height</code> 和 <code>mass</code> ，分别表示一个箱子的三个维度和质量，请你返回一个表示箱子 <strong>类别</strong> 的字符串。</p>
+<ul>
+<li>如果满足以下条件，那么箱子是 <code>"Bulky"</code> 的：
+<ul>
+<li>箱子 <strong>至少有一个</strong> 维度大于等于 <code>10<sup>4</sup></code> 。</li>
+<li>或者箱子的 <strong>体积</strong> 大于等于 <code>10<sup>9</sup></code> 。</li>
+</ul>
+</li>
+<li>如果箱子的质量大于等于 <code>100</code> ，那么箱子是 <code>"Heavy"</code> 的。</li>
+<li>如果箱子同时是 <code>"Bulky"</code> 和 <code>"Heavy"</code> ，那么返回类别为 <code>"Both"</code> 。</li>
+<li>如果箱子既不是 <code>"Bulky"</code> ，也不是 <code>"Heavy"</code> ，那么返回类别为 <code>"Neither"</code> 。</li>
+<li>如果箱子是 <code>"Bulky"</code> 但不是 <code>"Heavy"</code> ，那么返回类别为 <code>"Bulky"</code> 。</li>
+<li>如果箱子是 <code>"Heavy"</code> 但不是 <code>"Bulky"</code> ，那么返回类别为 <code>"Heavy"</code> 。</li>
+</ul>
+<p><strong>注意</strong>，箱子的体积等于箱子的长度、宽度和高度的乘积。</p>
+<h3 id="mcetoc_1i59kcaats">代码</h3>
+<pre class="language-c line-numbers"><code>char* categorizeBox(int length, int width, int height, int mass) {
+    long long volume = (long long)length * width * height;
+    int isBulky = length &gt;= 10000 || width &gt;= 10000 || height &gt;= 10000 || volume &gt;= 1000000000;
+    int isHeavy = mass &gt;= 100;
+
+    if (isBulky &amp;&amp; isHeavy) {
+        return "Both";
+    } else if (isBulky) {
+        return "Bulky";
+    } else if (isHeavy) {
+        return "Heavy";
+    } else {
+        return "Neither";
+    }
+}</code></pre>
+<h3 id="mcetoc_1i59kcaatt">解释</h3>
+<ol>
+<li>计算体积 <code>volume</code>。</li>
+<li>检查是否为“Bulky”：如果任一维度大于等于 10,000 或者体积大于等于 10^9，则标记为 Bulky。</li>
+<li>检查是否为“Heavy”：如果质量大于等于 100，则标记为 Heavy。</li>
+<li>根据条件返回相应的类别：<code>Both</code>、<code>Bulky</code>、<code>Heavy</code> 或 <code>Neither</code>。</li>
+</ol>
+            ]]>
+        </content>
+    </entry>
     <entry>
         <title>1880. 检查某单词是否等于两单词之和</title>
         <author>
@@ -1056,29 +1119,6 @@ nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
 <p>最终得到 <code>dp[2][2] = 12</code>，即从左上角到右下角路径上的最大珠宝价值是 12。</p>
 <h3>总结</h3>
 <p>通过这种方法，我们能有效计算出在给定规则下能拿到的最大珠宝价值，时间复杂度为 <code>O(m * n)</code>。</p>
-            ]]>
-        </content>
-    </entry>
-    <entry>
-        <title>资源</title>
-        <author>
-            <name>fcoy</name>
-        </author>
-        <link href="https://hxfcoy.github.io/xcll.github.io/ruan-jian.html"/>
-        <id>https://hxfcoy.github.io/xcll.github.io/ruan-jian.html</id>
-
-        <updated>2024-08-10T08:00:21+08:00</updated>
-            <summary></summary>
-        <content type="html">
-            <![CDATA[
-                <p>QQNT 插件加载器<a href="https://github.com/LiteLoaderQQNT/LiteLoaderQQNT">LiteLoaderQQNT</a></p>
-<p>基于QQ的全自动签到模块<a href="https://github.com/LuckyPray/XAutoDaily">XAutoDaily</a></p>
-<p>QQXposed 模块<a href="https://github.com/cinit/QAuxiliary">QAuxiliary</a></p>
-<p><a href="https://github.com/clash-verge-rev/clash-verge-rev">clash-verge-rev</a></p>
-<p>蔚蓝档案自动化<a href="https://github.com/pur1fying/blue_archive_auto_script">baas</a></p>
-<p>Bili动态抽奖助手<a href="https://github.com/shanmiteko/LotteryAutoScript">LotteryAutoScript</a></p>
-<p><a href="https://www.cycanime.com/">次元城动漫</a>（有弹幕，没啥广告，挺好用的）</p>
-<p><a href="https://www.touchgal.co/">TouchGAL</a>-一站式Galgame文化社区！</p>
             ]]>
         </content>
     </entry>
