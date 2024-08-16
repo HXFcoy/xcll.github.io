@@ -11,6 +11,20 @@
     },
     "items": [
         {
+            "id": "https://hxfcoy.github.io/xcll.github.io/819-zui-chang-jian-de-dan-ci.html",
+            "url": "https://hxfcoy.github.io/xcll.github.io/819-zui-chang-jian-de-dan-ci.html",
+            "title": "819. 最常见的单词",
+            "content_html": "<div class=\"post__toc\">\n<h3>目录</h3>\n<ul>\n<li><a href=\"#mcetoc_1i5eoag1i11\">题目</a></li>\n<li><a href=\"#mcetoc_1i5eoag1i12\">代码</a></li>\n<li><a href=\"#mcetoc_1i5eoag1i13\">解释</a></li>\n</ul>\n</div>\n<h3 id=\"mcetoc_1i5eoag1i11\">题目</h3>\n<p>给你一个字符串 <code>paragraph</code> 和一个表示禁用词的字符串数组 <code>banned</code> ，返回出现频率最高的非禁用词。题目数据 <strong>保证 </strong>至少存在一个非禁用词，且答案<strong> 唯一 </strong>。</p>\n<p><code>paragraph</code> 中的单词 <strong>不区分大小写</strong> ，答案应以 <strong>小写 </strong>形式返回。</p>\n<p> </p>\n<p><strong class=\"example\">示例 1：</strong></p>\n<pre><strong>输入：</strong>paragraph = \"Bob hit a ball, the hit BALL flew far after it was hit.\", banned = [\"hit\"]\n<strong>输出：</strong>\"ball\"\n<strong>解释：</strong>\n\"hit\" 出现了 3 次，但它是禁用词。\n\"ball\" 出现了两次（没有其他单词出现这么多次），因此它是段落中出现频率最高的非禁用词。\n请注意，段落中的单词不区分大小写，\n标点符号会被忽略（即使它们紧挨着单词，如 \"ball,\"），\n并且尽管 \"hit\" 出现的次数更多，但它不能作为答案，因为它是禁用词。\n</pre>\n<p><strong class=\"example\">示例 2：</strong></p>\n<pre><strong>输入：</strong>paragraph = \"a.\", banned = []\n<strong>输出：</strong>\"a\"</pre>\n<h3 id=\"mcetoc_1i5eoag1i12\">代码</h3>\n<pre class=\"language-c line-numbers\"><code>#define MAX_WORD_LEN 100\n#define MAX_PARA_LEN 10000\n\n// 函数用于比较哈希表中存储的单词\ntypedef struct {\n    char word[MAX_WORD_LEN];\n    int count;\n} HashTableEntry;\n\n// 将字符串转换为小写\nvoid toLowerCase(char* str) {\n    while (*str) {\n        *str = tolower(*str);\n        str++;\n    }\n}\n\n// 检查单词是否在禁用词列表中\nint isBanned(char* word, char** banned, int bannedSize) {\n    for (int i = 0; i &lt; bannedSize; i++) {\n        if (strcmp(word, banned[i]) == 0) {\n            return 1;\n        }\n    }\n    return 0;\n}\n\n// 从段落中提取下一个单词\nchar* nextWord(char* paragraph, int* index) {\n    static char word[MAX_WORD_LEN];\n    int i = 0;\n\n    while (paragraph[*index]) {\n        char c = paragraph[*index];\n        if (isalpha(c)) {\n            word[i++] = tolower(c);\n        } else if (i &gt; 0) {\n            break;\n        }\n        (*index)++;\n    }\n\n    word[i] = '\\0';\n    while (paragraph[*index] &amp;&amp; !isalpha(paragraph[*index])) {\n        (*index)++;\n    }\n\n    return word[0] ? word : NULL;\n}\n\nchar* mostCommonWord(char* paragraph, char** banned, int bannedSize) {\n    HashTableEntry hashTable[MAX_PARA_LEN] = {0};\n    int index = 0;\n    int maxCount = 0;\n    char* mostCommon = NULL;\n\n    while (paragraph[index]) {\n        char* word = nextWord(paragraph, &amp;index);\n        if (!word || isBanned(word, banned, bannedSize)) {\n            continue;\n        }\n\n        int found = 0;\n        for (int i = 0; i &lt; MAX_PARA_LEN &amp;&amp; hashTable[i].word[0]; i++) {\n            if (strcmp(hashTable[i].word, word) == 0) {\n                hashTable[i].count++;\n                found = 1;\n                if (hashTable[i].count &gt; maxCount) {\n                    maxCount = hashTable[i].count;\n                    mostCommon = hashTable[i].word;\n                }\n                break;\n            }\n        }\n\n        if (!found) {\n            for (int i = 0; i &lt; MAX_PARA_LEN; i++) {\n                if (hashTable[i].word[0] == '\\0') {\n                    strcpy(hashTable[i].word, word);\n                    hashTable[i].count = 1;\n                    if (hashTable[i].count &gt; maxCount) {\n                        maxCount = 1;\n                        mostCommon = hashTable[i].word;\n                    }\n                    break;\n                }\n            }\n        }\n    }\n\n    return mostCommon;\n}</code></pre>\n<h3 id=\"mcetoc_1i5eoag1i13\">解释</h3>\n<ol>\n<li><strong>字符串转换为小写</strong>：在处理段落时，所有单词都会被转换为小写，以确保比较时不区分大小写。</li>\n<li><strong>提取单词</strong>：使用 <code>nextWord</code> 函数从段落中依次提取单词，并跳过标点符号和空格。</li>\n<li><strong>检查禁用词</strong>：每个提取的单词都会与禁用词列表进行比较，如果是禁用词则跳过。</li>\n<li><strong>计数与哈希表</strong>：通过哈希表存储每个单词及其出现次数，并更新频率最高的非禁用词。</li>\n<li><strong>返回结果</strong>：最终返回频率最高的非禁用词。</li>\n</ol>\n<p> </p>",
+            "author": {
+                "name": "fcoy"
+            },
+            "tags": [
+                   "力扣"
+            ],
+            "date_published": "2024-08-17T07:28:34+08:00",
+            "date_modified": "2024-08-17T07:28:34+08:00"
+        },
+        {
             "id": "https://hxfcoy.github.io/xcll.github.io/1295-tong-ji-wei-shu-wei-ou-shu-de-shu-zi.html",
             "url": "https://hxfcoy.github.io/xcll.github.io/1295-tong-ji-wei-shu-wei-ou-shu-de-shu-zi.html",
             "title": "1295. 统计位数为偶数的数字",
@@ -135,20 +149,6 @@
             ],
             "date_published": "2024-08-10T21:38:37+08:00",
             "date_modified": "2024-08-11T07:54:42+08:00"
-        },
-        {
-            "id": "https://hxfcoy.github.io/xcll.github.io/2582-di-zhen-tou.html",
-            "url": "https://hxfcoy.github.io/xcll.github.io/2582-di-zhen-tou.html",
-            "title": "2582. 递枕头",
-            "content_html": "<p><code>n</code> 个人站成一排，按从 <code>1</code> 到 <code>n</code> 编号。最初，排在队首的第一个人拿着一个枕头。每秒钟，拿着枕头的人会将枕头传递给队伍中的下一个人。一旦枕头到达队首或队尾，传递方向就会改变，队伍会继续沿相反方向传递枕头。</p>\n<ul>\n<li>例如，当枕头到达第 <code>n</code> 个人时，TA 会将枕头传递给第 <code>n - 1</code> 个人，然后传递给第 <code>n - 2</code> 个人，依此类推。</li>\n</ul>\n<p>给你两个正整数 <code>n</code> 和 <code>time</code> ，返回 <code>time</code> 秒后拿着枕头的人的编号。</p>\n<p> </p>\n<p><strong>示例 1：</strong></p>\n<pre><strong>输入：</strong>n = 4, time = 5\n<strong>输出：</strong>2\n<strong>解释：</strong>队伍中枕头的传递情况为：1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 3 -&gt; 2 。\n5 秒后，枕头传递到第 2 个人手中。\n</pre>\n<p><strong>示例 2：</strong></p>\n<pre><strong>输入：</strong>n = 3, time = 2\n<strong>输出：</strong>3\n<strong>解释：</strong>队伍中枕头的传递情况为：1 -&gt; 2 -&gt; 3 。\n2 秒后，枕头传递到第 3 个人手中。</pre>\n<pre class=\"language-c line-numbers\"><code>int passThePillow(int n, int time) {\n    // 如果time对(n-1)取模，则time % (n-1) 表示经过几个完整的正向传递后的余数\n    // 通过方向(正向或反向)计算最终位置\n    int cycle = time / (n - 1);\n    int remainder = time % (n - 1);\n\n    // 如果cycle是偶数，枕头在正向传递，位置为 1 + remainder\n    // 如果cycle是奇数，枕头在反向传递，位置为 n - remainder\n    if (cycle % 2 == 0) {\n        return 1 + remainder;\n    } else {\n        return n - remainder;\n    }\n}</code></pre>\n<ul>\n<li>\n<p><strong>循环次数</strong>：枕头传递方向的改变仅在到达队首或队尾时发生。如果将一个完整的往返（从第1个人传递到第n个人再回到第1个人）视为一个循环，枕头在经过一个完整的循环后又回到了初始位置。</p>\n</li>\n<li>\n<p><strong>方向和位置计算</strong>：</p>\n<ul>\n<li>假设当前方向为正向（从第1个人向第n个人传递），则枕头每秒传递到下一个人。</li>\n<li>一旦到达第n个人，方向就会反向，接下来每秒传递给前一个人。</li>\n</ul>\n</li>\n<li>\n<p><strong>计算逻辑</strong>：</p>\n<ul>\n<li>如果 <code>time</code> 的值加上初始位置是在第一个方向的范围内，则只需直接计算出具体位置。</li>\n<li>如果在反方向范围内，也能通过简单的计算得到。</li>\n</ul>\n</li>\n</ul>",
-            "author": {
-                "name": "fcoy"
-            },
-            "tags": [
-                   "力扣"
-            ],
-            "date_published": "2024-08-10T21:30:43+08:00",
-            "date_modified": "2024-08-10T21:30:43+08:00"
         }
     ]
 }
