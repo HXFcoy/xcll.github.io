@@ -1,14 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
-    <title>白衫如初</title>
+    <title>xcll’s blog</title>
     <link href="https://hxfcoy.github.io/xcll.github.io/feed.xml" rel="self" />
     <link href="https://hxfcoy.github.io/xcll.github.io" />
-    <updated>2024-08-15T07:43:20+08:00</updated>
+    <updated>2024-08-16T07:54:58+08:00</updated>
     <author>
         <name>fcoy</name>
     </author>
     <id>https://hxfcoy.github.io/xcll.github.io</id>
 
+    <entry>
+        <title>1295. 统计位数为偶数的数字</title>
+        <author>
+            <name>fcoy</name>
+        </author>
+        <link href="https://hxfcoy.github.io/xcll.github.io/1295-tong-ji-wei-shu-wei-ou-shu-de-shu-zi.html"/>
+        <id>https://hxfcoy.github.io/xcll.github.io/1295-tong-ji-wei-shu-wei-ou-shu-de-shu-zi.html</id>
+            <category term="力扣"/>
+
+        <updated>2024-08-16T07:54:58+08:00</updated>
+            <summary></summary>
+        <content type="html">
+            <![CDATA[
+                <h3>题目</h3>
+<p>给你一个整数数组 <code>nums</code>，请你返回其中位数为 <strong>偶数</strong> 的数字的个数。</p>
+<p> </p>
+<p><strong>示例 1：</strong></p>
+<pre><strong>输入：</strong>nums = [12,345,2,6,7896]
+<strong>输出：</strong>2
+<strong>解释：
+</strong>12 是 2 位数字（位数为偶数） 
+345 是 3 位数字（位数为奇数）  
+2 是 1 位数字（位数为奇数） 
+6 是 1 位数字 位数为奇数） 
+7896 是 4 位数字（位数为偶数）  
+因此只有 12 和 7896 是位数为偶数的数字
+</pre>
+<p><strong>示例 2：</strong></p>
+<pre><strong>输入：</strong>nums = [555,901,482,1771]
+<strong>输出：</strong>1 
+<strong>解释： </strong>
+只有 1771 是位数为偶数的数字。</pre>
+<h3>代码</h3>
+<pre class="language-c line-numbers"><code>int findNumbers(int* nums, int numsSize) {
+    int count = 0;
+    for (int i = 0; i &lt; numsSize; i++) {
+        int k = 0;
+        for (int j = nums[i]; j != 0; k++) {
+            j = j / 10;
+        }
+        if (k % 2 == 0) {
+            count++;
+        }
+    }
+    return count;
+}</code></pre>
+<p> </p>
+            ]]>
+        </content>
+    </entry>
     <entry>
         <title>2525. 根据规则将箱子分类</title>
         <author>
@@ -984,141 +1034,6 @@ nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
 </ul>
 </li>
 </ul>
-            ]]>
-        </content>
-    </entry>
-    <entry>
-        <title>LCR 166. 珠宝的最高价值</title>
-        <author>
-            <name>fcoy</name>
-        </author>
-        <link href="https://hxfcoy.github.io/xcll.github.io/lcr-166-zhu-bao-de-zui-gao-jie-zhi.html"/>
-        <id>https://hxfcoy.github.io/xcll.github.io/lcr-166-zhu-bao-de-zui-gao-jie-zhi.html</id>
-            <category term="力扣"/>
-
-        <updated>2024-08-10T08:49:40+08:00</updated>
-            <summary></summary>
-        <content type="html">
-            <![CDATA[
-                <p>现有一个记作二维矩阵 <code>frame</code> 的珠宝架，其中 <code>frame[i][j]</code> 为该位置珠宝的价值。拿取珠宝的规则为：</p>
-<ul>
-<li>只能从架子的左上角开始拿珠宝</li>
-<li>每次可以移动到右侧或下侧的相邻位置</li>
-<li>到达珠宝架子的右下角时，停止拿取</li>
-</ul>
-<p>注意：珠宝的价值都是大于 0 的。除非这个架子上没有任何珠宝，比如 <code>frame = [[0]]</code>。</p>
-<p> </p>
-<p><strong>示例 1:</strong></p>
-<pre><strong>输入:</strong> frame = [[1,3,1],[1,5,1],[4,2,1]]
-<strong>输出:</strong> <code>12
-</code><strong>解释:</strong> 路径 1→3→5→2→1 可以拿到最高价值的珠宝</pre>
-<pre class="language-apacheconf line-numbers"><code>int jewelleryValue(int** frame, int frameSize, int* frameColSize) {
-    if (frameSize == 0 || frameColSize[0] == 0) {
-        return 0; // 处理空架子的情况
-    }
-
-    int dp[frameSize][frameColSize[0]];
-
-    // 初始化 dp 数组
-    dp[0][0] = frame[0][0];
-
-    // 初始化第一列
-    for (int i = 1; i &lt; frameSize; i++) {
-        dp[i][0] = dp[i-1][0] + frame[i][0];
-    }
-
-    // 初始化第一行
-    for (int j = 1; j &lt; frameColSize[0]; j++) {
-        dp[0][j] = dp[0][j-1] + frame[0][j];
-    }
-
-    // 填充剩余的 dp 表格
-    for (int i = 1; i &lt; frameSize; i++) {
-        for (int j = 1; j &lt; frameColSize[0]; j++) {
-            dp[i][j] = frame[i][j] + (dp[i-1][j] &gt; dp[i][j-1] ? dp[i-1][j] : dp[i][j-1]);
-        }
-    }
-
-    // 返回右下角的最大值
-    return dp[frameSize-1][frameColSize[0]-1];
-}
-</code></pre>
-<h3>动态规划思想</h3>
-<p>动态规划的核心思想是通过记录子问题的解来避免重复计算。我们用一个二维数组 <code>dp</code> 来存储从左上角到某个位置的最大珠宝总价值。</p>
-<h4>1. <strong>定义状态</strong>：</h4>
-<ul>
-<li>设 <code>dp[i][j]</code> 表示从左上角 <code>(0, 0)</code> 到位置 <code>(i, j)</code> 的最大珠宝价值。</li>
-</ul>
-<h4>2. <strong>状态转移方程</strong>：</h4>
-<ul>
-<li>由于只能向右或向下移动，所以 <code>dp[i][j]</code> 可以从左侧的 <code>dp[i][j-1]</code> 或上方的 <code>dp[i-1][j]</code> 位置到达。因此，状态转移方程为： <img loading="lazy" src="file:///C:\Users\22501\AppData\Local\Temp\QQ_1723250937888.png" data-is-external-image="true">
-<ul>
-<li>这表示从 <code>(i-1, j)</code> 或 <code>(i, j-1)</code> 位置中选择一个较大的珠宝总价值，加上当前位置的珠宝价值 <code>frame[i][j]</code>，得到 <code>dp[i][j]</code> 的值。</li>
-</ul>
-</li>
-</ul>
-<h4>3. <strong>边界条件</strong>：</h4>
-<ul>
-<li><strong>第一行</strong>：只能从左边过来，所以 <code>dp[0][j]</code> 只能通过加上前一列的值得到： <img loading="lazy" src="file:///C:\Users\22501\AppData\Local\Temp\QQ_1723250945377.png" data-is-external-image="true"></li>
-<li><strong>第一列</strong>：只能从上边过来，所以 <code>dp[i][0]</code> 只能通过加上前一行的值得到： <span class="katex-display"><span class="katex"><span class="katex-mathml">dp[i]<img loading="lazy" src="file:///C:\Users\22501\AppData\Local\Temp\QQ_1723250957613.png" data-is-external-image="true"></span></span></span></li>
-<li><strong>起点</strong>：<code>dp[0][0]</code> 就是起点的珠宝价值 <code>frame[0][0]</code>。</li>
-</ul>
-<h4>4. <strong>求解最终结果</strong>：</h4>
-<ul>
-<li>当我们填满整个 <code>dp</code> 矩阵后，右下角的 <code>dp[m-1][n-1]</code> 就是从左上角到右下角的最大珠宝价值。</li>
-</ul>
-<h3>例子解析</h3>
-<p>假设 <code>frame</code> 为：</p>
-<table style="border-collapse: collapse; width: 40.7412%; height: 150.508px;" border="1">
-<tbody>
-<tr style="height: 50.1693px;">
-<td style="width: 33.5074%; height: 50.1693px;">1</td>
-<td style="width: 33.5074%; height: 50.1693px;">3</td>
-<td style="width: 33.2234%; height: 50.1693px;">1</td>
-</tr>
-<tr style="height: 50.1693px;">
-<td style="width: 33.5074%; height: 50.1693px;">1</td>
-<td style="width: 33.5074%; height: 50.1693px;">5</td>
-<td style="width: 33.2234%; height: 50.1693px;">1</td>
-</tr>
-<tr style="height: 50.1693px;">
-<td style="width: 33.5074%; height: 50.1693px;">4</td>
-<td style="width: 33.5074%; height: 50.1693px;">2</td>
-<td style="width: 33.2234%; height: 50.1693px;">1</td>
-</tr>
-</tbody>
-</table>
-<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist-s">​​​</span></span></span></span></span></span></span></span></span></span></p>
-<ul>
-<li><strong>初始状态</strong>：
-<ul>
-<li><code>dp[0][0] = 1</code> （起点值为1）</li>
-</ul>
-</li>
-<li><strong>第一行</strong>：
-<ul>
-<li><code>dp[0][1] = dp[0][0] + 3 = 4</code></li>
-<li><code>dp[0][2] = dp[0][1] + 1 = 5</code></li>
-</ul>
-</li>
-<li><strong>第一列</strong>：
-<ul>
-<li><code>dp[1][0] = dp[0][0] + 1 = 2</code></li>
-<li><code>dp[2][0] = dp[1][0] + 4 = 6</code></li>
-</ul>
-</li>
-<li><strong>填充剩余表格</strong>：
-<ul>
-<li><code>dp[1][1] = frame[1][1] + max(dp[0][1], dp[1][0]) = 5 + max(4, 2) = 9</code></li>
-<li><code>dp[1][2] = frame[1][2] + max(dp[0][2], dp[1][1]) = 1 + max(5, 9) = 10</code></li>
-<li><code>dp[2][1] = frame[2][1] + max(dp[1][1], dp[2][0]) = 2 + max(9, 6) = 11</code></li>
-<li><code>dp[2][2] = frame[2][2] + max(dp[1][2], dp[2][1]) = 1 + max(10, 11) = 12</code></li>
-</ul>
-</li>
-</ul>
-<p>最终得到 <code>dp[2][2] = 12</code>，即从左上角到右下角路径上的最大珠宝价值是 12。</p>
-<h3>总结</h3>
-<p>通过这种方法，我们能有效计算出在给定规则下能拿到的最大珠宝价值，时间复杂度为 <code>O(m * n)</code>。</p>
             ]]>
         </content>
     </entry>
