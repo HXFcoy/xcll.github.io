@@ -3,12 +3,229 @@
     <title>xcll’s blog</title>
     <link href="https://hxfcoy.github.io/xcll.github.io/feed.xml" rel="self" />
     <link href="https://hxfcoy.github.io/xcll.github.io" />
-    <updated>2024-08-18T07:57:58+08:00</updated>
+    <updated>2024-08-20T07:25:10+08:00</updated>
     <author>
         <name>fcoy</name>
     </author>
     <id>https://hxfcoy.github.io/xcll.github.io</id>
 
+    <entry>
+        <title>989. 数组形式的整数加法</title>
+        <author>
+            <name>fcoy</name>
+        </author>
+        <link href="https://hxfcoy.github.io/xcll.github.io/989-shu-zu-xing-shi-de-zheng-shu-jia-fa.html"/>
+        <id>https://hxfcoy.github.io/xcll.github.io/989-shu-zu-xing-shi-de-zheng-shu-jia-fa.html</id>
+            <category term="力扣"/>
+
+        <updated>2024-08-20T07:25:10+08:00</updated>
+            <summary></summary>
+        <content type="html">
+            <![CDATA[
+                <div class="post__toc">
+<h3>目录</h3>
+<ul>
+<li><a href="#mcetoc_1i5mfanpl15">题目</a></li>
+<li><a href="#mcetoc_1i5mfanpl16">代码</a></li>
+<li><a href="#mcetoc_1i5mfanpl17">解释</a></li>
+</ul>
+</div>
+<h3 id="mcetoc_1i5mfanpl15">题目</h3>
+<p>整数的 <strong>数组形式</strong>  <code>num</code> 是按照从左到右的顺序表示其数字的数组。</p>
+<ul>
+<li>例如，对于 <code>num = 1321</code> ，数组形式是 <code>[1,3,2,1]</code> 。</li>
+</ul>
+<p>给定 <code>num</code> ，整数的 <strong>数组形式</strong> ，和整数 <code>k</code> ，返回 <em>整数 <code>num + k</code> 的 <strong>数组形式</strong></em> 。</p>
+<p> </p>
+<p><strong>示例 1：</strong></p>
+<pre><strong>输入：</strong>num = [1,2,0,0], k = 34
+<strong>输出：</strong>[1,2,3,4]
+<strong>解释：</strong>1200 + 34 = 1234
+</pre>
+<p><strong>示例 2：</strong></p>
+<pre><strong>输入：</strong>num = [2,7,4], k = 181
+<strong>输出：</strong>[4,5,5]
+<strong>解释：</strong>274 + 181 = 455
+</pre>
+<p><strong>示例 3：</strong></p>
+<pre><strong>输入：</strong>num = [2,1,5], k = 806
+<strong>输出：</strong>[1,0,2,1]
+<strong>解释：</strong>215 + 806 = 1021</pre>
+<h3 id="mcetoc_1i5mfanpl16">代码</h3>
+<pre class="language-c line-numbers"><code>int* addToArrayForm(int* num, int numSize, int k, int* returnSize) {
+    // 分配足够大的空间存储结果数组
+    int* result = (int*)malloc(sizeof(int) * (numSize + 10)); // 预留足够的空间处理进位
+    int currentIndex = 0; // 用于存放结果数组的当前索引
+    int carry = k; // 初始进位为 k
+    int i;
+
+    // 从 num 数组的末尾向前遍历
+    for (i = numSize - 1; i &gt;= 0 || carry &gt; 0; i--) {
+        if (i &gt;= 0) {
+            carry += num[i]; // 将当前位的数字与进位相加
+        }
+        result[currentIndex++] = carry % 10; // 取个位作为当前结果位
+        carry /= 10; // 更新进位
+    }
+
+    // 结果数组是逆序存储的，需要翻转
+    for (i = 0; i &lt; currentIndex / 2; i++) {
+        int temp = result[i];
+        result[i] = result[currentIndex - i - 1];
+        result[currentIndex - i - 1] = temp;
+    }
+
+    *returnSize = currentIndex; // 更新结果数组的大小
+    return result; // 返回结果数组的指针
+}</code></pre>
+<h3 id="mcetoc_1i5mfanpl17">解释</h3>
+<ul>
+<li>
+<p><strong>分配足够大的空间</strong>：由于进位的原因，结果数组可能比 <code>num</code> 长，因此分配 <code>numSize + 10</code> 的空间来容纳可能的额外位数。</p>
+</li>
+<li>
+<p><strong>逐位相加</strong>：从 <code>num</code> 的最低位（数组末尾）开始，逐位将 <code>num</code> 的对应位与 <code>k</code> 的当前位相加，并处理进位。</p>
+</li>
+<li>
+<p><strong>处理剩余的进位</strong>：在 <code>num</code> 数组遍历完后，如果还有进位，继续将进位加到结果中。</p>
+</li>
+<li>
+<p><strong>翻转结果</strong>：由于结果是从最低位开始存储的，因此最后需要翻转数组才能得到正确的顺序。</p>
+</li>
+<li>
+<p><strong>返回结果</strong>：返回计算得到的结果数组以及其大小。</p>
+</li>
+</ul>
+            ]]>
+        </content>
+    </entry>
+    <entry>
+        <title>面试题 17.10. 主要元素</title>
+        <author>
+            <name>fcoy</name>
+        </author>
+        <link href="https://hxfcoy.github.io/xcll.github.io/mian-shi-ti-1710-zhu-yao-yuan-su.html"/>
+        <id>https://hxfcoy.github.io/xcll.github.io/mian-shi-ti-1710-zhu-yao-yuan-su.html</id>
+            <category term="力扣"/>
+
+        <updated>2024-08-19T07:19:08+08:00</updated>
+            <summary></summary>
+        <content type="html">
+            <![CDATA[
+                <div class="post__toc">
+<h3>目录</h3>
+<ul>
+<li><a href="#mcetoc_1i5jsiu2c11">题目</a></li>
+<li><a href="#mcetoc_1i5jsiu2c12">代码</a></li>
+<li><a href="#mcetoc_1i5jsiu2c13">Boyer-Moore 投票算法的详细解释</a>
+<ul>
+<li><a href="#mcetoc_1i5jsiu2c14">问题定义</a></li>
+<li><a href="#mcetoc_1i5jsiu2c15">算法思想</a></li>
+<li><a href="#mcetoc_1i5jsiu2c16">具体步骤</a></li>
+<li><a href="#mcetoc_1i5jsiu2c17">为什么这个算法有效？</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h3 id="mcetoc_1i5jsiu2c11">题目</h3>
+<p>数组中占比超过一半的元素称之为主要元素。给你一个<strong> 整数 </strong>数组，找出其中的主要元素。若没有，返回 <code>-1</code> 。请设计时间复杂度为 <code>O(N)</code> 、空间复杂度为 <code>O(1)</code> 的解决方案。</p>
+<p> </p>
+<p><strong>示例 1：</strong></p>
+<pre><strong>输入：</strong>[1,2,5,9,5,9,5,5,5]
+<strong>输出：</strong>5</pre>
+<p><strong>示例 2：</strong></p>
+<pre><strong>输入：</strong>[3,2]
+<strong>输出：</strong>-1</pre>
+<p><strong>示例 3：</strong></p>
+<pre><strong>输入：</strong>[2,2,1,1,1,2,2]
+<strong>输出：</strong>2</pre>
+<h3 id="mcetoc_1i5jsiu2c12">代码</h3>
+<pre class="language-c line-numbers"><code>int majorityElement(int* nums, int numsSize) {
+    int candidate = 0;
+    int count = 0;
+    
+    // 第一遍遍历，找到候选人
+    for (int i = 0; i &lt; numsSize; i++) {
+        if (count == 0) {
+            candidate = nums[i];
+            count = 1;
+        } else if (nums[i] == candidate) {
+            count++;
+        } else {
+            count--;
+        }
+    }
+    
+    // 第二遍遍历，验证候选人是否为主要元素
+    count = 0;
+    for (int i = 0; i &lt; numsSize; i++) {
+        if (nums[i] == candidate) {
+            count++;
+        }
+    }
+    
+    // 判断是否是主要元素
+    if (count &gt; numsSize / 2) {
+        return candidate;
+    } else {
+        return -1;
+    }
+}
+</code></pre>
+<h3 id="mcetoc_1i5jsiu2c13">Boyer-Moore 投票算法的详细解释</h3>
+<p>Boyer-Moore 投票算法是一种非常巧妙且高效的算法，用于在时间复杂度为 O(N) 且空间复杂度为 O(1) 的条件下找到数组中的主要元素。下面我们详细解释这个算法的工作原理和步骤。</p>
+<h4 id="mcetoc_1i5jsiu2c14">问题定义</h4>
+<p>主要元素是指在数组中出现次数超过一半的元素。给定一个大小为 <code>n</code> 的数组，主要元素出现的次数必须超过 <code>n/2</code>。</p>
+<h4 id="mcetoc_1i5jsiu2c15">算法思想</h4>
+<p>算法的核心思想是：</p>
+<ol>
+<li><strong>候选人筛选</strong>：我们需要找到一个“候选人”作为主要元素。通过一次遍历，我们可以确定一个候选人，这个候选人有可能是主要元素。</li>
+<li><strong>验证候选人</strong>：由于筛选出来的候选人不一定是主要元素，我们需要通过第二次遍历来验证这个候选人是否真的出现次数超过数组的一半。</li>
+</ol>
+<h4 id="mcetoc_1i5jsiu2c16">具体步骤</h4>
+<p><strong>第一步：候选人筛选</strong></p>
+<ol>
+<li>
+<p>初始化两个变量：</p>
+<ul>
+<li><code>candidate</code>：用于记录当前的候选元素。</li>
+<li><code>count</code>：用于记录当前候选元素的出现次数。</li>
+</ul>
+</li>
+<li>
+<p>遍历整个数组：</p>
+<ul>
+<li>如果 <code>count</code> 为 <code>0</code>，表示当前没有候选人或前一个候选人已经被“淘汰”。此时将当前元素设置为新的候选人，并将 <code>count</code> 设为 <code>1</code>。</li>
+<li>如果当前元素与 <code>candidate</code> 相同，则说明这个元素支持当前的候选人，增加 <code>count</code>。</li>
+<li>如果当前元素与 <code>candidate</code> 不同，则认为这是一个反对票，减少 <code>count</code>。</li>
+</ul>
+</li>
+</ol>
+<p>通过上述遍历，我们可以找到一个最终的候选人 <code>candidate</code>。这个候选人有可能是主要元素，但我们还需要验证。</p>
+<p><strong>第二步：验证候选人</strong></p>
+<ol>
+<li>初始化 <code>count</code> 为 <code>0</code>，然后再遍历数组。</li>
+<li>每遇到一个与 <code>candidate</code> 相同的元素，就增加 <code>count</code>。</li>
+<li>最后检查 <code>count</code> 是否大于 <code>n/2</code>：
+<ul>
+<li>如果是，说明 <code>candidate</code> 是主要元素，返回它。</li>
+<li>如果不是，说明数组中没有主要元素，返回 <code>-1</code>。</li>
+</ul>
+</li>
+</ol>
+<h4 id="mcetoc_1i5jsiu2c17">为什么这个算法有效？</h4>
+<p>要理解为什么这个算法有效，我们可以从以下角度来分析：</p>
+<ul>
+<li>
+<p><strong>筛选过程的有效性</strong>：当 <code>count</code> 变为 <code>0</code> 时，表示我们目前没有候选人或之前的候选人已经被完全抵消（即遇到了足够多的不同元素来平衡掉候选人）。此时，我们选择当前的元素作为新的候选人。由于主要元素的数量超过总数的一半，它不可能被完全抵消，因此最终得到的候选人要么是主要元素，要么是非主要元素。</p>
+</li>
+<li>
+<p><strong>验证过程的必要性</strong>：由于第一次筛选过程仅能保证筛选出一个潜在的候选人，因此我们需要第二次遍历来确认它是否真的出现次数超过一半。如果 <code>count</code> 大于 <code>n/2</code>，则它就是主要元素。</p>
+</li>
+</ul>
+            ]]>
+        </content>
+    </entry>
     <entry>
         <title>1252. 奇数值单元格的数目</title>
         <author>
@@ -799,248 +1016,6 @@ int perfectMenu(int* materials, int materialsSize, int** cookbooks, int cookbook
 <ul>
 <li><strong>时间复杂度</strong>：<code>O(n)</code>，其中 <code>n</code> 是字符串的长度。只需遍历字符串一次即可。</li>
 <li><strong>空间复杂度</strong>：<code>O(1)</code>，只使用了几个固定大小的变量来记录状态。</li>
-</ul>
-            ]]>
-        </content>
-    </entry>
-    <entry>
-        <title>234. 回文链表</title>
-        <author>
-            <name>fcoy</name>
-        </author>
-        <link href="https://hxfcoy.github.io/xcll.github.io/234-hui-wen-lian-biao.html"/>
-        <id>https://hxfcoy.github.io/xcll.github.io/234-hui-wen-lian-biao.html</id>
-            <category term="力扣"/>
-
-        <updated>2024-08-11T07:51:41+08:00</updated>
-            <summary></summary>
-        <content type="html">
-            <![CDATA[
-                <div class="post__toc">
-<h3>目录</h3>
-<ul>
-<li><a href="#mcetoc_1i4vbdq181">题目</a></li>
-<li><a href="#mcetoc_1i4vb84nj2h">代码</a></li>
-<li><a href="#mcetoc_1i4vb84nj2i">解释</a></li>
-<li><a href="#mcetoc_1i4vb8mh82k">复杂度</a></li>
-</ul>
-</div>
-<h3 id="mcetoc_1i4vbdq181">题目</h3>
-<p>给你一个单链表的头节点 <code>head</code> ，请你判断该链表是否为</p>
-<div class="popover-wrapper inline-block" data-headlessui-state="">
-<div>
-<div id="headlessui-popover-button-:rah:" aria-expanded="false" data-headlessui-state="">
-<div>回文链表</div>
-</div>
-<div> </div>
-</div>
-</div>
-<p>。如果是，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
-<p> </p>
-<p><strong>示例 1：</strong></p>
-<p><img loading="lazy" src="https://assets.leetcode.com/uploads/2021/03/03/pal1linked-list.jpg" alt="" data-is-external-image="true"></p>
-<pre><strong>输入：</strong>head = [1,2,2,1]
-<strong>输出：</strong>true
-</pre>
-<p><strong>示例 2：</strong></p>
-<p><img loading="lazy" src="https://assets.leetcode.com/uploads/2021/03/03/pal2linked-list.jpg" alt="" data-is-external-image="true"></p>
-<pre><strong>输入：</strong>head = [1,2]
-<strong>输出：</strong>falsed</pre>
-<h3 id="mcetoc_1i4vb84nj2h">代码</h3>
-<pre class="language-c line-numbers"><code>struct ListNode* middle_find(struct ListNode* head) {
-    struct ListNode* slow = head;
-    struct ListNode* fast = head-&gt;next;
-
-    while (fast != NULL &amp;&amp; fast-&gt;next != NULL) {
-        slow = slow-&gt;next;
-        fast = fast-&gt;next-&gt;next;
-    }
-    return slow;
-}
-
-struct ListNode* reverse(struct ListNode* right_head) {
-    struct ListNode* new_head = NULL;
-    while (right_head != NULL) {
-        struct ListNode* next = right_head-&gt;next;
-        right_head-&gt;next = new_head;
-        new_head = right_head;
-        right_head = next;
-    }
-    return new_head;
-}
-
-bool isPalindrome(struct ListNode* head) {
-    if (head == NULL) {
-        return NULL;
-    }
-
-    struct ListNode* middle = middle_find(head);
-    struct ListNode* right = reverse(middle-&gt;next);
-    struct ListNode* right_copy = right;
-    struct ListNode* tmp = head;
-
-    while (tmp != NULL &amp;&amp; right_copy != NULL) {
-        if (tmp-&gt;val != right_copy-&gt;val) {
-            return false;
-        }
-        tmp = tmp-&gt;next;
-        right_copy = right_copy-&gt;next;
-    }
-
-    middle-&gt;next = reverse(right);
-    return true;
-}</code></pre>
-<h3 id="mcetoc_1i4vb84nj2i">解释</h3>
-<ul>
-<li>
-<p><strong><code>middle_find</code> 函数</strong>:</p>
-<ul>
-<li>这个函数的目的是找到链表的中间节点。</li>
-<li>使用了<strong>快慢指针</strong>技术：
-<ul>
-<li><code>slow</code> 指针每次移动一步。</li>
-<li><code>fast</code> 指针每次移动两步。</li>
-</ul>
-</li>
-<li>当 <code>fast</code> 指针到达链表的末尾时，<code>slow</code> 指针正好位于链表的中间。</li>
-<li>返回的 <code>slow</code> 指针指向链表的中间节点。</li>
-</ul>
-</li>
-<li>
-<p><strong><code>reverse</code> 函数</strong>:</p>
-<ul>
-<li>这个函数的目的是反转从 <code>right_head</code> 开始的链表。</li>
-<li>使用了三个指针来反转链表：
-<ul>
-<li><code>new_head</code> 用来指向反转后的链表的头部（最初为 <code>NULL</code>）。</li>
-<li><code>right_head</code> 用来遍历链表，逐个反转节点。</li>
-<li><code>next</code> 用来临时保存当前节点的下一个节点，以便在反转后继续遍历。</li>
-</ul>
-</li>
-<li>函数返回反转后的链表头节点 <code>new_head</code>。</li>
-</ul>
-</li>
-<li>
-<p><strong><code>isPalindrome</code> 函数</strong>:</p>
-<ul>
-<li>这是主函数，用来判断给定链表是否为回文链表。</li>
-<li>如果链表为空（即 <code>head</code> 为 <code>NULL</code>），直接返回 <code>NULL</code>（应返回 <code>false</code>，可能是个小错误）。</li>
-<li>通过 <code>middle_find</code> 函数找到链表的中间节点。</li>
-<li>反转中间节点后的右半部分链表，并将新头节点赋值给 <code>right</code>。</li>
-<li>创建两个指针 <code>right_copy</code> 和 <code>tmp</code>，分别用于遍历反转后的右半部分链表和原始链表的左半部分。</li>
-<li>通过遍历比较左半部分链表和右半部分反转链表的对应节点的值。</li>
-<li>如果发现任何一对节点的值不相等，立即返回 <code>false</code>。</li>
-<li>如果比较通过，链表是回文的，最后将反转的右半部分链表再次反转回来，恢复原链表的结构。</li>
-</ul>
-</li>
-</ul>
-<h3 id="mcetoc_1i4vb8mh82k">复杂度</h3>
-<ul>
-<li><strong>时间复杂度</strong>：<code>O(n)</code>，其中 <code>n</code> 是链表的长度，因为我们只对链表进行了一次遍历和一次反转。</li>
-<li><strong>空间复杂度</strong>：<code>O(1)</code>，除了几个指针变量外，没有使用额外的空间。</li>
-</ul>
-            ]]>
-        </content>
-    </entry>
-    <entry>
-        <title>20. 有效的括号</title>
-        <author>
-            <name>fcoy</name>
-        </author>
-        <link href="https://hxfcoy.github.io/xcll.github.io/20-you-xiao-de-gua-hao.html"/>
-        <id>https://hxfcoy.github.io/xcll.github.io/20-you-xiao-de-gua-hao.html</id>
-            <category term="力扣"/>
-
-        <updated>2024-08-11T07:12:12+08:00</updated>
-            <summary></summary>
-        <content type="html">
-            <![CDATA[
-                <div class="post__toc">
-<h3>目录</h3>
-<ul>
-<li><a href="#mcetoc_1i4vbe4li3">题目</a></li>
-<li><a href="#mcetoc_1i4v90abed">代码实现</a></li>
-<li><a href="#mcetoc_1i4v90abee">代码解析</a></li>
-<li><a href="#mcetoc_1i4v90abef">时间复杂度</a></li>
-</ul>
-</div>
-<h3 id="mcetoc_1i4vbe4li3">题目</h3>
-<p>给定一个只包括 <code>'('</code>，<code>')'</code>，<code>'{'</code>，<code>'}'</code>，<code>'['</code>，<code>']'</code> 的字符串 <code>s</code> ，判断字符串是否有效。</p>
-<p>有效字符串需满足：</p>
-<ol>
-<li>左括号必须用相同类型的右括号闭合。</li>
-<li>左括号必须以正确的顺序闭合。</li>
-<li>每个右括号都有一个对应的相同类型的左括号。</li>
-</ol>
-<p> </p>
-<p><strong>示例 1：</strong></p>
-<pre><strong>输入：</strong>s = "()"
-<strong>输出：</strong>true
-</pre>
-<p><strong>示例 2：</strong></p>
-<pre><strong>输入：</strong>s = "()[]{}"
-<strong>输出：</strong>true
-</pre>
-<p><strong>示例 3：</strong></p>
-<pre><strong>输入：</strong>s = "(]"
-<strong>输出：</strong>false</pre>
-<h3 id="mcetoc_1i4v90abed">代码实现</h3>
-<pre class="language-c line-numbers"><code>bool isValid(char* s) {
-    int n = strlen(s);
-    // 如果字符串长度是奇数，直接返回 false
-    if (n % 2 != 0) {
-        return false;
-    }
-
-    // 用一个数组模拟栈
-    char stack[n];
-    int top = -1;
-
-    for (int i = 0; i &lt; n; i++) {
-        char c = s[i];
-        if (c == '(' || c == '{' || c == '[') {
-            // 将左括号压入栈中
-            stack[++top] = c;
-        } else {
-            // 遇到右括号时，检查栈顶元素是否匹配
-            if (top == -1) {
-                return false;
-            }
-            char topChar = stack[top];
-            if ((c == ')' &amp;&amp; topChar != '(') ||
-                (c == '}' &amp;&amp; topChar != '{') ||
-                (c == ']' &amp;&amp; topChar != '[')) {
-                return false;
-            }
-            // 弹出栈顶元素
-            top--;
-        }
-    }
-
-    // 如果栈为空，所有括号都匹配
-    return top == -1;
-}</code></pre>
-<h3 id="mcetoc_1i4v90abee">代码解析</h3>
-<ol>
-<li>
-<p><strong>栈的模拟</strong>：我们用一个数组 <code>stack</code> 来模拟栈，并用 <code>top</code> 指针表示栈顶。</p>
-<ul>
-<li>当遇到左括号时，将其压入栈中。</li>
-<li>当遇到右括号时，检查栈顶是否有匹配的左括号。</li>
-<li>如果匹配，弹出栈顶的元素；否则返回 <code>false</code>。</li>
-</ul>
-</li>
-<li>
-<p><strong>字符串长度检查</strong>：如果字符串长度是奇数，则直接返回 <code>false</code>，因为不可能存在配对的括号。</p>
-</li>
-<li>
-<p><strong>最终检查</strong>：在遍历完字符串后，检查栈是否为空。如果栈为空，说明所有的括号都成功匹配，否则返回 <code>false</code>。</p>
-</li>
-</ol>
-<h3 id="mcetoc_1i4v90abef">时间复杂度</h3>
-<ul>
-<li><strong>时间复杂度</strong>: 每个字符都要入栈或出栈，时间复杂度是 <code>O(n)</code>，其中 <code>n</code> 是字符串的长度。</li>
-<li><strong>空间复杂度</strong>: 最坏情况下栈的大小为 <code>n/2</code>，因此空间复杂度也是 <code>O(n)</code>。</li>
 </ul>
             ]]>
         </content>

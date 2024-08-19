@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="zh-cn"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>989. 数组形式的整数加法 - xcll’s blog</title><meta name="robots" content="noindex,nofollow"><meta name="generator" content="Publii Open-Source CMS for Static Site"><link rel="stylesheet" href="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-beige.css"><link rel="alternate" type="application/atom+xml" href="https://hxfcoy.github.io/xcll.github.io/feed.xml"><link rel="alternate" type="application/json" href="https://hxfcoy.github.io/xcll.github.io/feed.json"><link rel="stylesheet" href="https://hxfcoy.github.io/xcll.github.io/assets/css/style.css?v=48ae57c9831f7efa1e623ac4eb92d438"><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://hxfcoy.github.io/xcll.github.io/989-shu-zu-xing-shi-de-zheng-shu-jia-fa.html"},"headline":"989. 数组形式的整数加法","datePublished":"2024-08-20T07:25","dateModified":"2024-08-20T07:25","image":{"@type":"ImageObject","url":"https://hxfcoy.github.io/xcll.github.io/media/website/image-removebg-preview.png","height":167,"width":582},"description":"","author":{"@type":"Person","name":"fcoy","url":"https://hxfcoy.github.io/xcll.github.io/authors/fcoy/"},"publisher":{"@type":"Organization","name":"fcoy","logo":{"@type":"ImageObject","url":"https://hxfcoy.github.io/xcll.github.io/media/website/image-removebg-preview.png","height":167,"width":582}}}</script><noscript><style>img[loading] {
+                    opacity: 1;
+                }</style></noscript></head><body><div class="site-container"><header class="top" id="js-header"><a class="logo" href="https://hxfcoy.github.io/xcll.github.io/"><img src="https://hxfcoy.github.io/xcll.github.io/media/website/image-removebg-preview.png" alt="xcll’s blog" width="582" height="167"></a><nav class="navbar js-navbar"><button class="navbar__toggle js-toggle" aria-label="Menu" aria-haspopup="true" aria-expanded="false"><span class="navbar__toggle-box"><span class="navbar__toggle-inner">Menu</span></span></button><ul class="navbar__menu"><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/li-kou/" target="_self">力扣</a></li><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/you-xi/" target="_self">游戏</a></li><li><a href="https://hxfcoy.github.io/xcll.github.io/ruan-jian.html" target="_self">资源</a></li></ul></nav></header><main><article class="post"><div class="hero"><figure class="hero__image hero__image--overlay"><img src="https://hxfcoy.github.io/xcll.github.io/media/website/BA2.jpg" srcset="https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-xs.jpg 300w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-sm.jpg 480w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-md.jpg 768w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-lg.jpg 1024w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-xl.jpg 1360w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-2xl.jpg 1600w" sizes="100vw" loading="eager" alt=""></figure><header class="hero__content"><div class="wrapper"><div class="post__meta"><time datetime="2024-08-20T07:25">八月 20, 2024</time></div><h1>989. 数组形式的整数加法</h1><div class="post__meta post__meta--author"><a href="https://hxfcoy.github.io/xcll.github.io/authors/fcoy/" class="feed__author">fcoy</a></div></div></header></div><div class="wrapper post__entry"><div class="post__toc"><h3>目录</h3><ul><li><a href="#mcetoc_1i5mfanpl15">题目</a></li><li><a href="#mcetoc_1i5mfanpl16">代码</a></li><li><a href="#mcetoc_1i5mfanpl17">解释</a></li></ul></div><h3 id="mcetoc_1i5mfanpl15">题目</h3><p>整数的 <strong>数组形式</strong>  <code>num</code> 是按照从左到右的顺序表示其数字的数组。</p><ul><li>例如，对于 <code>num = 1321</code> ，数组形式是 <code>[1,3,2,1]</code> 。</li></ul><p>给定 <code>num</code> ，整数的 <strong>数组形式</strong> ，和整数 <code>k</code> ，返回 <em>整数 <code>num + k</code> 的 <strong>数组形式</strong></em> 。</p><p> </p><p><strong>示例 1：</strong></p><pre><strong>输入：</strong>num = [1,2,0,0], k = 34
+<strong>输出：</strong>[1,2,3,4]
+<strong>解释：</strong>1200 + 34 = 1234
+</pre><p><strong>示例 2：</strong></p><pre><strong>输入：</strong>num = [2,7,4], k = 181
+<strong>输出：</strong>[4,5,5]
+<strong>解释：</strong>274 + 181 = 455
+</pre><p><strong>示例 3：</strong></p><pre><strong>输入：</strong>num = [2,1,5], k = 806
+<strong>输出：</strong>[1,0,2,1]
+<strong>解释：</strong>215 + 806 = 1021</pre><h3 id="mcetoc_1i5mfanpl16">代码</h3><pre class="language-c line-numbers"><code>int* addToArrayForm(int* num, int numSize, int k, int* returnSize) {
+    // 分配足够大的空间存储结果数组
+    int* result = (int*)malloc(sizeof(int) * (numSize + 10)); // 预留足够的空间处理进位
+    int currentIndex = 0; // 用于存放结果数组的当前索引
+    int carry = k; // 初始进位为 k
+    int i;
+
+    // 从 num 数组的末尾向前遍历
+    for (i = numSize - 1; i &gt;= 0 || carry &gt; 0; i--) {
+        if (i &gt;= 0) {
+            carry += num[i]; // 将当前位的数字与进位相加
+        }
+        result[currentIndex++] = carry % 10; // 取个位作为当前结果位
+        carry /= 10; // 更新进位
+    }
+
+    // 结果数组是逆序存储的，需要翻转
+    for (i = 0; i &lt; currentIndex / 2; i++) {
+        int temp = result[i];
+        result[i] = result[currentIndex - i - 1];
+        result[currentIndex - i - 1] = temp;
+    }
+
+    *returnSize = currentIndex; // 更新结果数组的大小
+    return result; // 返回结果数组的指针
+}</code></pre><h3 id="mcetoc_1i5mfanpl17">解释</h3><ul><li><p><strong>分配足够大的空间</strong>：由于进位的原因，结果数组可能比 <code>num</code> 长，因此分配 <code>numSize + 10</code> 的空间来容纳可能的额外位数。</p></li><li><p><strong>逐位相加</strong>：从 <code>num</code> 的最低位（数组末尾）开始，逐位将 <code>num</code> 的对应位与 <code>k</code> 的当前位相加，并处理进位。</p></li><li><p><strong>处理剩余的进位</strong>：在 <code>num</code> 数组遍历完后，如果还有进位，继续将进位加到结果中。</p></li><li><p><strong>翻转结果</strong>：由于结果是从最低位开始存储的，因此最后需要翻转数组才能得到正确的顺序。</p></li><li><p><strong>返回结果</strong>：返回计算得到的结果数组以及其大小。</p></li></ul></div><footer class="wrapper post__footer"><p class="post__last-updated">This article was updated on 八月 20, 2024</p><ul class="post__tag"><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/li-kou/">力扣</a></li></ul><div class="post__share"></div><div class="post__bio bio"><div><h3 class="bio__name"><a href="https://hxfcoy.github.io/xcll.github.io/authors/fcoy/" rel="author">fcoy</a></h3></div></div></footer></article><nav class="post__nav"><div class="post__nav-inner"><div class="post__nav-prev"><svg width="1.041em" height="0.416em" aria-hidden="true"><use xlink:href="https://hxfcoy.github.io/xcll.github.io/assets/svg/svg-map.svg#arrow-prev"/></svg> <a href="https://hxfcoy.github.io/xcll.github.io/mian-shi-ti-1710-zhu-yao-yuan-su.html" class="post__nav-link" rel="prev"><span>Previous</span> 面试题 17.10. 主要元素</a></div></div></nav></main><footer class="footer"><div class="footer__copyright"><p class="align-center">浮云一别后，流水十年间。</p></div><button onclick="backToTopFunction()" id="backToTop" class="footer__bttop" aria-label="Back to top" title="Back to top"><svg><use xlink:href="https://hxfcoy.github.io/xcll.github.io/assets/svg/svg-map.svg#toparrow"/></svg></button></footer></div><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/assets/js/scripts.min.js?v=f47c11534595205f20935f0db2a62a85"></script><script>window.publiiThemeMenuConfig={mobileMenuMode:'sidebar',animationSpeed:300,submenuWidth: 'auto',doubleClickTime:500,mobileMenuExpandableSubmenus:true,relatedContainerForOverlayMenuSelector:'.top'};</script><script>var images = document.querySelectorAll('img[loading]');
+        for (var i = 0; i < images.length; i++) {
+            if (images[i].complete) {
+                images[i].classList.add('is-loaded');
+            } else {
+                images[i].addEventListener('load', function () {
+                    this.classList.add('is-loaded');
+                }, false);
+            }
+        }</script><script src="https://hxfcoy.github.io/xcll.github.io/media/plugins/pageprefetching/quicklink.umd.js"></script><script>window.addEventListener('load', () => {
+					quicklink.listen({
+						prerender: true,
+						el: document.querySelector('body'),
+						delay: 0,
+						limit: Infinity,
+						throttle: Infinity,
+						timeout: 2000
+					});
+				});</script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-line-numbers.min.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/clipboard.min.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-copy-to-clipboard.min.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-show-invisibles.min.js"></script></body></html>
