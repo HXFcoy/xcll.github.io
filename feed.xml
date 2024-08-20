@@ -3,12 +3,95 @@
     <title>xcll’s blog</title>
     <link href="https://hxfcoy.github.io/xcll.github.io/feed.xml" rel="self" />
     <link href="https://hxfcoy.github.io/xcll.github.io" />
-    <updated>2024-08-20T07:25:10+08:00</updated>
+    <updated>2024-08-21T07:20:03+08:00</updated>
     <author>
         <name>fcoy</name>
     </author>
     <id>https://hxfcoy.github.io/xcll.github.io</id>
 
+    <entry>
+        <title>2144. 打折购买糖果的最小开销</title>
+        <author>
+            <name>fcoy</name>
+        </author>
+        <link href="https://hxfcoy.github.io/xcll.github.io/2144-da-zhe-gou-mai-tang-guo-de-zui-xiao-kai-xiao.html"/>
+        <id>https://hxfcoy.github.io/xcll.github.io/2144-da-zhe-gou-mai-tang-guo-de-zui-xiao-kai-xiao.html</id>
+            <category term="力扣"/>
+
+        <updated>2024-08-21T07:20:03+08:00</updated>
+            <summary></summary>
+        <content type="html">
+            <![CDATA[
+                <div class="post__toc">
+<h3>目录</h3>
+<ul>
+<li><a href="#mcetoc_1i5p1e3qur">题目</a></li>
+<li><a href="#mcetoc_1i5p1e3qus">代码</a></li>
+<li><a href="#mcetoc_1i5p1e3qut">解释</a></li>
+</ul>
+</div>
+<h3 id="mcetoc_1i5p1e3qur">题目</h3>
+<p>一家商店正在打折销售糖果。每购买 <strong>两个</strong> 糖果，商店会 <strong>免费</strong> 送一个糖果。</p>
+<p>免费送的糖果唯一的限制是：它的价格需要小于等于购买的两个糖果价格的 <strong>较小值</strong> 。</p>
+<ul>
+<li>比方说，总共有 <code>4</code> 个糖果，价格分别为 <code>1</code> ，<code>2</code> ，<code>3</code> 和 <code>4</code> ，一位顾客买了价格为 <code>2</code> 和 <code>3</code> 的糖果，那么他可以免费获得价格为 <code>1</code> 的糖果，但不能获得价格为 <code>4</code> 的糖果。</li>
+</ul>
+<p>给你一个下标从 <strong>0</strong> 开始的整数数组 <code>cost</code> ，其中 <code>cost[i]</code> 表示第 <code>i</code> 个糖果的价格，请你返回获得 <strong>所有</strong> 糖果的 <strong>最小</strong> 总开销。</p>
+<p> </p>
+<p><strong>示例 1：</strong></p>
+<pre><strong>输入：</strong>cost = [1,2,3]
+<strong>输出：</strong>5
+<strong>解释：</strong>我们购买价格为 2 和 3 的糖果，然后免费获得价格为 1 的糖果。
+总开销为 2 + 3 = 5 。这是开销最小的 <strong>唯一</strong> 方案。
+注意，我们不能购买价格为 1 和 3 的糖果，并免费获得价格为 2 的糖果。
+这是因为免费糖果的价格必须小于等于购买的 2 个糖果价格的较小值。
+</pre>
+<p><strong>示例 2：</strong></p>
+<pre><strong>输入：</strong>cost = [6,5,7,9,2,2]
+<strong>输出：</strong>23
+<strong>解释：</strong>最小总开销购买糖果方案为：
+- 购买价格为 9 和 7 的糖果
+- 免费获得价格为 6 的糖果
+- 购买价格为 5 和 2 的糖果
+- 免费获得价格为 2 的最后一个糖果
+因此，最小总开销为 9 + 7 + 5 + 2 = 23 。
+</pre>
+<p><strong>示例 3：</strong></p>
+<pre><strong>输入：</strong>cost = [5,5]
+<strong>输出：</strong>10
+<strong>解释：</strong>由于只有 2 个糖果，我们需要将它们都购买，而且没有免费糖果。
+所以总最小开销为 5 + 5 = 10 。</pre>
+<h3 id="mcetoc_1i5p1e3qus">代码</h3>
+<pre class="language-c line-numbers"><code>// 比较函数，用于qsort排序
+int compare(const void* a, const void* b) {
+    return *(int*)b - *(int*)a; // 从大到小排序
+}
+
+int minimumCost(int* cost, int costSize) {
+    // 按价格从大到小排序
+    qsort(cost, costSize, sizeof(int), compare);
+    
+    int totalCost = 0;
+    
+    // 遍历所有糖果，每次取3个
+    for (int i = 0; i &lt; costSize; i++) {
+        // 只累加前两个糖果的价格，第三个糖果免费
+        if (i % 3 != 2) {
+            totalCost += cost[i];
+        }
+    }
+    
+    return totalCost;
+}</code></pre>
+<h3 id="mcetoc_1i5p1e3qut">解释</h3>
+<ol>
+<li><strong>排序</strong>：<code>qsort</code>函数将糖果价格从高到低排序。</li>
+<li><strong>遍历</strong>：在循环中，通过 <code>i % 3 != 2</code> 来判断是否是每组中的第三个糖果，若是，则跳过它（因为它是免费的）。</li>
+<li><strong>累加价格</strong>：每组前两个糖果的价格累加到 <code>totalCost</code> 中。</li>
+</ol>
+            ]]>
+        </content>
+    </entry>
     <entry>
         <title>989. 数组形式的整数加法</title>
         <author>
@@ -913,109 +996,6 @@ int perfectMenu(int* materials, int materialsSize, int** cookbooks, int cookbook
 <ul>
 <li><strong>时间复杂度</strong>：<code>O(n)</code>，其中 <code>n</code> 是字符串 <code>s</code> 的长度。我们只需要一次遍历来完成检查。</li>
 <li><strong>空间复杂度</strong>：<code>O(1)</code>，仅使用了几个额外的变量用于计数和索引。</li>
-</ul>
-            ]]>
-        </content>
-    </entry>
-    <entry>
-        <title>551. 学生出勤记录 I</title>
-        <author>
-            <name>fcoy</name>
-        </author>
-        <link href="https://hxfcoy.github.io/xcll.github.io/551-xue-sheng-chu-qin-ji-lu-i.html"/>
-        <id>https://hxfcoy.github.io/xcll.github.io/551-xue-sheng-chu-qin-ji-lu-i.html</id>
-            <category term="力扣"/>
-
-        <updated>2024-08-11T08:03:28+08:00</updated>
-            <summary></summary>
-        <content type="html">
-            <![CDATA[
-                <div class="post__toc">
-<h3>目录</h3>
-<ul>
-<li><a href="#mcetoc_1i4vbu31bv">题目</a></li>
-<li><a href="#mcetoc_1i4vbu31b10">代码</a></li>
-<li><a href="#mcetoc_1i4vbu31b11">代码解析</a></li>
-<li><a href="#mcetoc_1i4vbu31b12">复杂度</a></li>
-</ul>
-</div>
-<h3 id="mcetoc_1i4vbu31bv">题目</h3>
-<p>给你一个字符串 <code>s</code> 表示一个学生的出勤记录，其中的每个字符用来标记当天的出勤情况（缺勤、迟到、到场）。记录中只含下面三种字符：</p>
-<ul>
-<li><code>'A'</code>：Absent，缺勤</li>
-<li><code>'L'</code>：Late，迟到</li>
-<li><code>'P'</code>：Present，到场</li>
-</ul>
-<p>如果学生能够 <strong>同时</strong> 满足下面两个条件，则可以获得出勤奖励：</p>
-<ul>
-<li>按 <strong>总出勤</strong> 计，学生缺勤（<code>'A'</code>）<strong>严格</strong> 少于两天。</li>
-<li>学生 <strong>不会</strong> 存在 <strong>连续</strong> 3 天或 <strong>连续</strong> 3 天以上的迟到（<code>'L'</code>）记录。</li>
-</ul>
-<p>如果学生可以获得出勤奖励，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
-<p> </p>
-<p><strong>示例 1：</strong></p>
-<pre><strong>输入：</strong>s = "PPALLP"
-<strong>输出：</strong>true
-<strong>解释：</strong>学生缺勤次数少于 2 次，且不存在 3 天或以上的连续迟到记录。
-</pre>
-<p><strong>示例 2：</strong></p>
-<pre><strong>输入：</strong>s = "PPALLL"
-<strong>输出：</strong>false
-<strong>解释：</strong>学生最后三天连续迟到，所以不满足出勤奖励的条件。</pre>
-<h3 id="mcetoc_1i4vbu31b10">代码</h3>
-<pre class="language-c line-numbers"><code>bool checkRecord(char* s) {
-    int countA = 0;       // 用来统计 'A' 的数量
-    int consecutiveL = 0; // 用来统计连续 'L' 的数量
-
-    for (int i = 0; s[i] != '\0'; i++) {
-        if (s[i] == 'A') {
-            countA++;
-            if (countA &gt;= 2) { // 如果 'A' 的数量达到 2，直接返回 false
-                return false;
-            }
-        }
-
-        if (s[i] == 'L') {
-            consecutiveL++;
-            if (consecutiveL &gt;=
-                3) { // 如果连续 'L' 的数量达到 3，直接返回 false
-                return false;
-            }
-        } else {
-            consecutiveL = 0; // 如果当前字符不是 'L'，重置连续 'L' 计数
-        }
-    }
-
-    return true; // 如果两个条件都未触发，则返回 true
-}</code></pre>
-<h3 id="mcetoc_1i4vbu31b11">代码解析</h3>
-<ol>
-<li>
-<p><strong>计数缺勤天数 <code>countA</code></strong>：</p>
-<ul>
-<li>每次遇到字符 <code>'A'</code>，<code>countA</code> 自增。</li>
-<li>如果 <code>countA</code> 达到或超过 2，说明缺勤天数不满足要求，直接返回 <code>false</code>。</li>
-</ul>
-</li>
-<li>
-<p><strong>统计连续迟到天数 <code>consecutiveL</code></strong>：</p>
-<ul>
-<li>每次遇到字符 <code>'L'</code>，<code>consecutiveL</code> 自增。</li>
-<li>如果 <code>consecutiveL</code> 达到或超过 3，说明存在连续 3 天或以上的迟到，直接返回 <code>false</code>。</li>
-<li>一旦遇到非 <code>'L'</code> 字符，<code>consecutiveL</code> 归零，重新开始统计。</li>
-</ul>
-</li>
-<li>
-<p><strong>返回结果</strong>：</p>
-<ul>
-<li>如果遍历结束后没有触发以上两个条件，则返回 <code>true</code>，表示可以获得出勤奖励。</li>
-</ul>
-</li>
-</ol>
-<h3 id="mcetoc_1i4vbu31b12">复杂度</h3>
-<ul>
-<li><strong>时间复杂度</strong>：<code>O(n)</code>，其中 <code>n</code> 是字符串的长度。只需遍历字符串一次即可。</li>
-<li><strong>空间复杂度</strong>：<code>O(1)</code>，只使用了几个固定大小的变量来记录状态。</li>
 </ul>
             ]]>
         </content>
