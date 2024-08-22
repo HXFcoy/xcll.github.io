@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="zh-cn"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>2553. 分割数组中数字的数位 - xcll’s blog</title><meta name="robots" content="noindex,nofollow"><meta name="generator" content="Publii Open-Source CMS for Static Site"><link rel="stylesheet" href="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-beige.css"><link rel="alternate" type="application/atom+xml" href="https://hxfcoy.github.io/xcll.github.io/feed.xml"><link rel="alternate" type="application/json" href="https://hxfcoy.github.io/xcll.github.io/feed.json"><link rel="stylesheet" href="https://hxfcoy.github.io/xcll.github.io/assets/css/style.css?v=48ae57c9831f7efa1e623ac4eb92d438"><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://hxfcoy.github.io/xcll.github.io/2553-fen-ge-shu-zu-zhong-shu-zi-de-shu-wei.html"},"headline":"2553. 分割数组中数字的数位","datePublished":"2024-08-23T07:43","dateModified":"2024-08-23T07:43","image":{"@type":"ImageObject","url":"https://hxfcoy.github.io/xcll.github.io/media/website/image-removebg-preview.png","height":167,"width":582},"description":"","author":{"@type":"Person","name":"fcoy","url":"https://hxfcoy.github.io/xcll.github.io/authors/fcoy/"},"publisher":{"@type":"Organization","name":"fcoy","logo":{"@type":"ImageObject","url":"https://hxfcoy.github.io/xcll.github.io/media/website/image-removebg-preview.png","height":167,"width":582}}}</script><noscript><style>img[loading] {
+                    opacity: 1;
+                }</style></noscript></head><body><div class="site-container"><header class="top" id="js-header"><a class="logo" href="https://hxfcoy.github.io/xcll.github.io/"><img src="https://hxfcoy.github.io/xcll.github.io/media/website/image-removebg-preview.png" alt="xcll’s blog" width="582" height="167"></a><nav class="navbar js-navbar"><button class="navbar__toggle js-toggle" aria-label="Menu" aria-haspopup="true" aria-expanded="false"><span class="navbar__toggle-box"><span class="navbar__toggle-inner">Menu</span></span></button><ul class="navbar__menu"><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/li-kou/" target="_self">力扣</a></li><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/you-xi/" target="_self">游戏</a></li><li><a href="https://hxfcoy.github.io/xcll.github.io/ruan-jian.html" target="_self">资源</a></li></ul></nav></header><main><article class="post"><div class="hero"><figure class="hero__image hero__image--overlay"><img src="https://hxfcoy.github.io/xcll.github.io/media/website/BA2.jpg" srcset="https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-xs.jpg 300w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-sm.jpg 480w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-md.jpg 768w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-lg.jpg 1024w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-xl.jpg 1360w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-2xl.jpg 1600w" sizes="100vw" loading="eager" alt=""></figure><header class="hero__content"><div class="wrapper"><div class="post__meta"><time datetime="2024-08-23T07:43">八月 23, 2024</time></div><h1>2553. 分割数组中数字的数位</h1><div class="post__meta post__meta--author"><a href="https://hxfcoy.github.io/xcll.github.io/authors/fcoy/" class="feed__author">fcoy</a></div></div></header></div><div class="wrapper post__entry"><div class="post__toc"><h3>目录</h3><ul><li><a href="#mcetoc_1i5u7hhce7">题目</a></li><li><a href="#mcetoc_1i5u7hhce8">代码</a></li><li><a href="#mcetoc_1i5u7i7g9c">解释</a></li></ul></div><h3 id="mcetoc_1i5u7hhce7">题目</h3><p>给你一个正整数数组 <code>nums</code> ，请你返回一个数组<em> </em><code>answer</code> ，你需要将 <code>nums</code> 中每个整数进行数位分割后，按照 <code>nums</code> 中出现的 <strong>相同顺序</strong> 放入答案数组中。</p><p>对一个整数进行数位分割，指的是将整数各个数位按原本出现的顺序排列成数组。</p><ul><li>比方说，整数 <code>10921</code> ，分割它的各个数位得到 <code>[1,0,9,2,1]</code> 。</li></ul><p> </p><p><strong>示例 1：</strong></p><pre><strong>输入：</strong>nums = [13,25,83,77]
+<strong>输出：</strong>[1,3,2,5,8,3,7,7]
+<strong>解释：</strong>
+- 分割 13 得到 [1,3] 。
+- 分割 25 得到 [2,5] 。
+- 分割 83 得到 [8,3] 。
+- 分割 77 得到 [7,7] 。
+answer = [1,3,2,5,8,3,7,7] 。answer 中的数字分割结果按照原数字在数组中的相同顺序排列。
+</pre><p><strong>示例 2：</strong></p><pre><strong>输入：</strong>nums = [7,1,3,9]
+<strong>输出：</strong>[7,1,3,9]
+<strong>解释：</strong>nums 中每个整数的分割是它自己。
+answer = [7,1,3,9] 。</pre><h3 id="mcetoc_1i5u7hhce8">代码</h3><pre class="language-c line-numbers"><code>int countDigits(int num) {
+    int count = 0;
+    while (num != 0) {
+        num /= 10;
+        count++;
+    }
+    return count;
+}
+
+// 将整数 num 的各个数位分割并存储到 result 数组中
+void splitDigits(int num, int* result, int* index) {
+    int digits[10];
+    int i = 0;
+    
+    // 提取各个位数并存储到临时数组 digits 中
+    do {
+        digits[i++] = num % 10;
+        num /= 10;
+    } while (num &gt; 0);
+
+    // 将各位数按照正确的顺序存入 result 数组
+    while (i &gt; 0) {
+        result[(*index)++] = digits[--i];
+    }
+}
+
+int* separateDigits(int* nums, int numsSize, int* returnSize) {
+    // 计算分割后的总数位数量
+    int totalDigits = 0;
+    for (int i = 0; i &lt; numsSize; i++) {
+        totalDigits += countDigits(nums[i]);
+    }
+
+    // 分配存储结果的数组
+    int* result = (int*)malloc(totalDigits * sizeof(int));
+    *returnSize = totalDigits;
+
+    int index = 0;
+    for (int i = 0; i &lt; numsSize; i++) {
+        splitDigits(nums[i], result, &amp;index);
+    }
+
+    return result;
+}</code></pre><h3 id="mcetoc_1i5u7i7g9c">解释</h3><ol><li><strong>countDigits</strong> 函数用于计算一个整数的位数。</li><li><strong>splitDigits</strong> 函数将整数的各个数位分割，并按顺序存储到结果数组中。</li><li><strong>separateDigits</strong> 函数是核心函数，它调用 <code>countDigits</code> 计算所有数位的总和以分配结果数组的大小，然后调用 <code>splitDigits</code> 将每个整数分割并按顺序存储。</li></ol></div><footer class="wrapper post__footer"><p class="post__last-updated">This article was updated on 八月 23, 2024</p><ul class="post__tag"><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/li-kou/">力扣</a></li></ul><div class="post__share"></div><div class="post__bio bio"><div><h3 class="bio__name"><a href="https://hxfcoy.github.io/xcll.github.io/authors/fcoy/" rel="author">fcoy</a></h3></div></div></footer></article><nav class="post__nav"><div class="post__nav-inner"><div class="post__nav-prev"><svg width="1.041em" height="0.416em" aria-hidden="true"><use xlink:href="https://hxfcoy.github.io/xcll.github.io/assets/svg/svg-map.svg#arrow-prev"/></svg> <a href="https://hxfcoy.github.io/xcll.github.io/724-xun-zhao-shu-zu-de-zhong-xin-xia-biao.html" class="post__nav-link" rel="prev"><span>Previous</span> 724. 寻找数组的中心下标</a></div></div></nav></main><footer class="footer"><div class="footer__copyright"><p class="align-center">浮云一别后，流水十年间。</p></div><button onclick="backToTopFunction()" id="backToTop" class="footer__bttop" aria-label="Back to top" title="Back to top"><svg><use xlink:href="https://hxfcoy.github.io/xcll.github.io/assets/svg/svg-map.svg#toparrow"/></svg></button></footer></div><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/assets/js/scripts.min.js?v=f47c11534595205f20935f0db2a62a85"></script><script>window.publiiThemeMenuConfig={mobileMenuMode:'sidebar',animationSpeed:300,submenuWidth: 'auto',doubleClickTime:500,mobileMenuExpandableSubmenus:true,relatedContainerForOverlayMenuSelector:'.top'};</script><script>var images = document.querySelectorAll('img[loading]');
+        for (var i = 0; i < images.length; i++) {
+            if (images[i].complete) {
+                images[i].classList.add('is-loaded');
+            } else {
+                images[i].addEventListener('load', function () {
+                    this.classList.add('is-loaded');
+                }, false);
+            }
+        }</script><script src="https://hxfcoy.github.io/xcll.github.io/media/plugins/pageprefetching/quicklink.umd.js"></script><script>window.addEventListener('load', () => {
+					quicklink.listen({
+						prerender: true,
+						el: document.querySelector('body'),
+						delay: 0,
+						limit: Infinity,
+						throttle: Infinity,
+						timeout: 2000
+					});
+				});</script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-line-numbers.min.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/clipboard.min.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-copy-to-clipboard.min.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-show-invisibles.min.js"></script></body></html>
