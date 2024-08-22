@@ -3,12 +3,86 @@
     <title>xcll’s blog</title>
     <link href="https://hxfcoy.github.io/xcll.github.io/feed.xml" rel="self" />
     <link href="https://hxfcoy.github.io/xcll.github.io" />
-    <updated>2024-08-21T07:20:03+08:00</updated>
+    <updated>2024-08-22T18:56:01+08:00</updated>
     <author>
         <name>fcoy</name>
     </author>
     <id>https://hxfcoy.github.io/xcll.github.io</id>
 
+    <entry>
+        <title>724. 寻找数组的中心下标</title>
+        <author>
+            <name>fcoy</name>
+        </author>
+        <link href="https://hxfcoy.github.io/xcll.github.io/724-xun-zhao-shu-zu-de-zhong-xin-xia-biao.html"/>
+        <id>https://hxfcoy.github.io/xcll.github.io/724-xun-zhao-shu-zu-de-zhong-xin-xia-biao.html</id>
+            <category term="力扣"/>
+
+        <updated>2024-08-22T18:56:01+08:00</updated>
+            <summary></summary>
+        <content type="html">
+            <![CDATA[
+                <div class="post__toc">
+<h3>目录</h3>
+<ul>
+<li><a href="#mcetoc_1i5srl6ett">题目</a></li>
+<li><a href="#mcetoc_1i5srl6etu">代码</a></li>
+<li><a href="#mcetoc_1i5srl6etv">解释</a></li>
+</ul>
+</div>
+<h3 id="mcetoc_1i5srl6ett">题目</h3>
+<p>给你一个整数数组 <code>nums</code> ，请计算数组的 <strong>中心下标 </strong>。</p>
+<p>数组<strong> 中心下标</strong><strong> </strong>是数组的一个下标，其左侧所有元素相加的和等于右侧所有元素相加的和。</p>
+<p>如果中心下标位于数组最左端，那么左侧数之和视为 <code>0</code> ，因为在下标的左侧不存在元素。这一点对于中心下标位于数组最右端同样适用。</p>
+<p>如果数组有多个中心下标，应该返回 <strong>最靠近左边</strong> 的那一个。如果数组不存在中心下标，返回 <code>-1</code> 。</p>
+<p> </p>
+<p><strong>示例 1：</strong></p>
+<pre><strong>输入：</strong>nums = [1, 7, 3, 6, 5, 6]
+<strong>输出：</strong>3
+<strong>解释：</strong>
+中心下标是 3 。
+左侧数之和 sum = nums[0] + nums[1] + nums[2] = 1 + 7 + 3 = 11 ，
+右侧数之和 sum = nums[4] + nums[5] = 5 + 6 = 11 ，二者相等。
+</pre>
+<p><strong>示例 2：</strong></p>
+<pre><strong>输入：</strong>nums = [1, 2, 3]
+<strong>输出：</strong>-1
+<strong>解释：</strong>
+数组中不存在满足此条件的中心下标。</pre>
+<p><strong>示例 3：</strong></p>
+<pre><strong>输入：</strong>nums = [2, 1, -1]
+<strong>输出：</strong>0
+<strong>解释：</strong>
+中心下标是 0 。
+左侧数之和 sum = 0 ，（下标 0 左侧不存在元素），
+右侧数之和 sum = nums[1] + nums[2] = 1 + -1 = 0 。</pre>
+<h3 id="mcetoc_1i5srl6etu">代码</h3>
+<pre class="language-c line-numbers"><code>int pivotIndex(int* nums, int numsSize) {
+    int totalSum = 0;
+    for (int i = 0; i &lt; numsSize; i++) {
+        totalSum += nums[i];
+    }
+    
+    int leftSum = 0;
+    for (int i = 0; i &lt; numsSize; i++) {
+        if (leftSum == totalSum - leftSum - nums[i]) {
+            return i;
+        }
+        leftSum += nums[i];
+    }
+    
+    return -1;
+}</code></pre>
+<h3 id="mcetoc_1i5srl6etv">解释</h3>
+<ol>
+<li><strong>总和计算</strong>：首先通过遍历数组来计算 <code>totalSum</code>。</li>
+<li><strong>遍历数组</strong>：我们用 <code>leftSum</code> 来表示当前下标 <code>i</code> 左边所有元素的和。</li>
+<li><strong>中心下标判断</strong>：对于每一个下标 <code>i</code>，判断 <code>leftSum</code> 是否等于右侧元素的和（<code>totalSum - leftSum - nums[i]</code>），如果是，则返回 <code>i</code>。</li>
+<li><strong>继续更新 <code>leftSum</code></strong>：在判断完之后，我们把当前元素加到 <code>leftSum</code> 中，以便下一个下标使用。</li>
+</ol>
+            ]]>
+        </content>
+    </entry>
     <entry>
         <title>2144. 打折购买糖果的最小开销</title>
         <author>
@@ -884,118 +958,6 @@ int perfectMenu(int* materials, int materialsSize, int** cookbooks, int cookbook
 <ul>
 <li>每种料理需要的食材种类不同，无法简单地用一个二维表来表示状态。</li>
 <li>需要对每种料理的组合进行判断，处理多个维度（美味度和饱腹感）的问题。</li>
-</ul>
-            ]]>
-        </content>
-    </entry>
-    <entry>
-        <title>859. 亲密字符串</title>
-        <author>
-            <name>fcoy</name>
-        </author>
-        <link href="https://hxfcoy.github.io/xcll.github.io/859-qin-mi-zi-fu-chuan.html"/>
-        <id>https://hxfcoy.github.io/xcll.github.io/859-qin-mi-zi-fu-chuan.html</id>
-            <category term="力扣"/>
-
-        <updated>2024-08-12T07:53:59+08:00</updated>
-            <summary></summary>
-        <content type="html">
-            <![CDATA[
-                <div class="post__toc">
-<h3>目录</h3>
-<ul>
-<li><a href="#mcetoc_1i51tpgc019">题目</a></li>
-<li><a href="#mcetoc_1i51tpgc01a">代码</a></li>
-<li><a href="#mcetoc_1i51tpgc01b">解释</a></li>
-<li><a href="#mcetoc_1i51tpgc01c">复杂度</a></li>
-</ul>
-</div>
-<h3 id="mcetoc_1i51tpgc019">题目</h3>
-<p>给你两个字符串 <code>s</code> 和 <code>goal</code> ，只要我们可以通过交换 <code>s</code> 中的两个字母得到与 <code>goal</code> 相等的结果，就返回 <code>true</code> ；否则返回 <code>false</code> 。</p>
-<p>交换字母的定义是：取两个下标 <code>i</code> 和 <code>j</code> （下标从 <code>0</code> 开始）且满足 <code>i != j</code> ，接着交换 <code>s[i]</code> 和 <code>s[j]</code> 处的字符。</p>
-<ul>
-<li>例如，在 <code>"abcd"</code> 中交换下标 <code>0</code> 和下标 <code>2</code> 的元素可以生成 <code>"cbad"</code> 。</li>
-</ul>
-<p> </p>
-<p><strong>示例 1：</strong></p>
-<pre><strong>输入：</strong>s = "ab", goal = "ba"
-<strong>输出：</strong>true
-<strong>解释：</strong>你可以交换 s[0] = 'a' 和 s[1] = 'b' 生成 "ba"，此时 s 和 goal 相等。</pre>
-<p><strong>示例 2：</strong></p>
-<pre><strong>输入：</strong>s = "ab", goal = "ab"
-<strong>输出：</strong>false
-<strong>解释：</strong>你只能交换 s[0] = 'a' 和 s[1] = 'b' 生成 "ba"，此时 s 和 goal 不相等。</pre>
-<p><strong>示例 3：</strong></p>
-<pre><strong>输入：</strong>s = "aa", goal = "aa"
-<strong>输出：</strong>true
-<strong>解释：</strong>你可以交换 s[0] = 'a' 和 s[1] = 'a' 生成 "aa"，此时 s 和 goal 相等。</pre>
-<h3 id="mcetoc_1i51tpgc01a">代码</h3>
-<pre class="language-c line-numbers"><code>bool buddyStrings(char * s, char * goal) {
-    int len_s = strlen(s);
-    int len_goal = strlen(goal);
-
-    // 长度不同的情况
-    if (len_s != len_goal) {
-        return false;
-    }
-
-    // 如果字符串相同
-    if (strcmp(s, goal) == 0) {
-        // 检查是否有重复字符
-        int count[26] = {0};
-        for (int i = 0; i &lt; len_s; i++) {
-            count[s[i] - 'a']++;
-            if (count[s[i] - 'a'] &gt; 1) {
-                return true;
-            }
-        }
-        return false; // 没有重复字符，无法通过交换变为相同字符串
-    } else {
-        // 字符串不同的情况
-        int first = -1, second = -1;
-        for (int i = 0; i &lt; len_s; i++) {
-            if (s[i] != goal[i]) {
-                if (first == -1) {
-                    first = i;
-                } else if (second == -1) {
-                    second = i;
-                } else {
-                    return false; // 超过两个字符不同
-                }
-            }
-        }
-
-        // 确保只有两个字符不同且交换后相等
-        return (second != -1 &amp;&amp; s[first] == goal[second] &amp;&amp; s[second] == goal[first]);
-    }
-}</code></pre>
-<h3 id="mcetoc_1i51tpgc01b">解释</h3>
-<ol>
-<li>
-<p><strong>长度检查</strong>：</p>
-<ul>
-<li>如果 <code>s</code> 和 <code>goal</code> 的长度不同，直接返回 <code>false</code>，因为无法通过任何交换使它们相等。</li>
-</ul>
-</li>
-<li>
-<p><strong>相等的字符串</strong>：</p>
-<ul>
-<li>如果 <code>s</code> 和 <code>goal</code> 完全相等，我们检查 <code>s</code> 中是否有重复字符。</li>
-<li>如果存在重复字符，返回 <code>true</code>，否则返回 <code>false</code>。</li>
-</ul>
-</li>
-<li>
-<p><strong>不相等的字符串</strong>：</p>
-<ul>
-<li>我们需要找出 <code>s</code> 和 <code>goal</code> 中不同的两个字符的位置，并检查这两个字符是否可以通过交换使 <code>s</code> 和 <code>goal</code> 相等。</li>
-<li>如果有两个不同的字符且交换后相等，返回 <code>true</code>，否则返回 <code>false</code>。</li>
-</ul>
-</li>
-</ol>
-<h3 id="mcetoc_1i51tpgc01c">复杂度</h3>
-<ul>
-<li><strong>时间复杂度</strong>：<code>O(n)</code>，其中 <code>n</code> 是字符串 <code>s</code> 的长度。我们只需要一次遍历来完成检查。</li>
-<li><strong>空间复杂度</strong>：<code>O(1)</code>，仅使用了几个额外的变量用于计数和索引。</li>
 </ul>
             ]]>
         </content>

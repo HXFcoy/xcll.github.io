@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="zh-cn"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>724. 寻找数组的中心下标 - xcll’s blog</title><meta name="robots" content="noindex,nofollow"><meta name="generator" content="Publii Open-Source CMS for Static Site"><link rel="stylesheet" href="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-beige.css"><link rel="alternate" type="application/atom+xml" href="https://hxfcoy.github.io/xcll.github.io/feed.xml"><link rel="alternate" type="application/json" href="https://hxfcoy.github.io/xcll.github.io/feed.json"><link rel="stylesheet" href="https://hxfcoy.github.io/xcll.github.io/assets/css/style.css?v=48ae57c9831f7efa1e623ac4eb92d438"><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://hxfcoy.github.io/xcll.github.io/724-xun-zhao-shu-zu-de-zhong-xin-xia-biao.html"},"headline":"724. 寻找数组的中心下标","datePublished":"2024-08-22T18:56","dateModified":"2024-08-22T18:56","image":{"@type":"ImageObject","url":"https://hxfcoy.github.io/xcll.github.io/media/website/image-removebg-preview.png","height":167,"width":582},"description":"","author":{"@type":"Person","name":"fcoy","url":"https://hxfcoy.github.io/xcll.github.io/authors/fcoy/"},"publisher":{"@type":"Organization","name":"fcoy","logo":{"@type":"ImageObject","url":"https://hxfcoy.github.io/xcll.github.io/media/website/image-removebg-preview.png","height":167,"width":582}}}</script><noscript><style>img[loading] {
+                    opacity: 1;
+                }</style></noscript></head><body><div class="site-container"><header class="top" id="js-header"><a class="logo" href="https://hxfcoy.github.io/xcll.github.io/"><img src="https://hxfcoy.github.io/xcll.github.io/media/website/image-removebg-preview.png" alt="xcll’s blog" width="582" height="167"></a><nav class="navbar js-navbar"><button class="navbar__toggle js-toggle" aria-label="Menu" aria-haspopup="true" aria-expanded="false"><span class="navbar__toggle-box"><span class="navbar__toggle-inner">Menu</span></span></button><ul class="navbar__menu"><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/li-kou/" target="_self">力扣</a></li><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/you-xi/" target="_self">游戏</a></li><li><a href="https://hxfcoy.github.io/xcll.github.io/ruan-jian.html" target="_self">资源</a></li></ul></nav></header><main><article class="post"><div class="hero"><figure class="hero__image hero__image--overlay"><img src="https://hxfcoy.github.io/xcll.github.io/media/website/BA2.jpg" srcset="https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-xs.jpg 300w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-sm.jpg 480w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-md.jpg 768w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-lg.jpg 1024w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-xl.jpg 1360w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-2xl.jpg 1600w" sizes="100vw" loading="eager" alt=""></figure><header class="hero__content"><div class="wrapper"><div class="post__meta"><time datetime="2024-08-22T18:56">八月 22, 2024</time></div><h1>724. 寻找数组的中心下标</h1><div class="post__meta post__meta--author"><a href="https://hxfcoy.github.io/xcll.github.io/authors/fcoy/" class="feed__author">fcoy</a></div></div></header></div><div class="wrapper post__entry"><div class="post__toc"><h3>目录</h3><ul><li><a href="#mcetoc_1i5srl6ett">题目</a></li><li><a href="#mcetoc_1i5srl6etu">代码</a></li><li><a href="#mcetoc_1i5srl6etv">解释</a></li></ul></div><h3 id="mcetoc_1i5srl6ett">题目</h3><p>给你一个整数数组 <code>nums</code> ，请计算数组的 <strong>中心下标 </strong>。</p><p>数组<strong> 中心下标</strong><strong> </strong>是数组的一个下标，其左侧所有元素相加的和等于右侧所有元素相加的和。</p><p>如果中心下标位于数组最左端，那么左侧数之和视为 <code>0</code> ，因为在下标的左侧不存在元素。这一点对于中心下标位于数组最右端同样适用。</p><p>如果数组有多个中心下标，应该返回 <strong>最靠近左边</strong> 的那一个。如果数组不存在中心下标，返回 <code>-1</code> 。</p><p> </p><p><strong>示例 1：</strong></p><pre><strong>输入：</strong>nums = [1, 7, 3, 6, 5, 6]
+<strong>输出：</strong>3
+<strong>解释：</strong>
+中心下标是 3 。
+左侧数之和 sum = nums[0] + nums[1] + nums[2] = 1 + 7 + 3 = 11 ，
+右侧数之和 sum = nums[4] + nums[5] = 5 + 6 = 11 ，二者相等。
+</pre><p><strong>示例 2：</strong></p><pre><strong>输入：</strong>nums = [1, 2, 3]
+<strong>输出：</strong>-1
+<strong>解释：</strong>
+数组中不存在满足此条件的中心下标。</pre><p><strong>示例 3：</strong></p><pre><strong>输入：</strong>nums = [2, 1, -1]
+<strong>输出：</strong>0
+<strong>解释：</strong>
+中心下标是 0 。
+左侧数之和 sum = 0 ，（下标 0 左侧不存在元素），
+右侧数之和 sum = nums[1] + nums[2] = 1 + -1 = 0 。</pre><h3 id="mcetoc_1i5srl6etu">代码</h3><pre class="language-c line-numbers"><code>int pivotIndex(int* nums, int numsSize) {
+    int totalSum = 0;
+    for (int i = 0; i &lt; numsSize; i++) {
+        totalSum += nums[i];
+    }
+    
+    int leftSum = 0;
+    for (int i = 0; i &lt; numsSize; i++) {
+        if (leftSum == totalSum - leftSum - nums[i]) {
+            return i;
+        }
+        leftSum += nums[i];
+    }
+    
+    return -1;
+}</code></pre><h3 id="mcetoc_1i5srl6etv">解释</h3><ol><li><strong>总和计算</strong>：首先通过遍历数组来计算 <code>totalSum</code>。</li><li><strong>遍历数组</strong>：我们用 <code>leftSum</code> 来表示当前下标 <code>i</code> 左边所有元素的和。</li><li><strong>中心下标判断</strong>：对于每一个下标 <code>i</code>，判断 <code>leftSum</code> 是否等于右侧元素的和（<code>totalSum - leftSum - nums[i]</code>），如果是，则返回 <code>i</code>。</li><li><strong>继续更新 <code>leftSum</code></strong>：在判断完之后，我们把当前元素加到 <code>leftSum</code> 中，以便下一个下标使用。</li></ol></div><footer class="wrapper post__footer"><p class="post__last-updated">This article was updated on 八月 22, 2024</p><ul class="post__tag"><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/li-kou/">力扣</a></li></ul><div class="post__share"></div><div class="post__bio bio"><div><h3 class="bio__name"><a href="https://hxfcoy.github.io/xcll.github.io/authors/fcoy/" rel="author">fcoy</a></h3></div></div></footer></article><nav class="post__nav"><div class="post__nav-inner"><div class="post__nav-prev"><svg width="1.041em" height="0.416em" aria-hidden="true"><use xlink:href="https://hxfcoy.github.io/xcll.github.io/assets/svg/svg-map.svg#arrow-prev"/></svg> <a href="https://hxfcoy.github.io/xcll.github.io/2144-da-zhe-gou-mai-tang-guo-de-zui-xiao-kai-xiao.html" class="post__nav-link" rel="prev"><span>Previous</span> 2144. 打折购买糖果的最小开销</a></div></div></nav></main><footer class="footer"><div class="footer__copyright"><p class="align-center">浮云一别后，流水十年间。</p></div><button onclick="backToTopFunction()" id="backToTop" class="footer__bttop" aria-label="Back to top" title="Back to top"><svg><use xlink:href="https://hxfcoy.github.io/xcll.github.io/assets/svg/svg-map.svg#toparrow"/></svg></button></footer></div><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/assets/js/scripts.min.js?v=f47c11534595205f20935f0db2a62a85"></script><script>window.publiiThemeMenuConfig={mobileMenuMode:'sidebar',animationSpeed:300,submenuWidth: 'auto',doubleClickTime:500,mobileMenuExpandableSubmenus:true,relatedContainerForOverlayMenuSelector:'.top'};</script><script>var images = document.querySelectorAll('img[loading]');
+        for (var i = 0; i < images.length; i++) {
+            if (images[i].complete) {
+                images[i].classList.add('is-loaded');
+            } else {
+                images[i].addEventListener('load', function () {
+                    this.classList.add('is-loaded');
+                }, false);
+            }
+        }</script><script src="https://hxfcoy.github.io/xcll.github.io/media/plugins/pageprefetching/quicklink.umd.js"></script><script>window.addEventListener('load', () => {
+					quicklink.listen({
+						prerender: true,
+						el: document.querySelector('body'),
+						delay: 0,
+						limit: Infinity,
+						throttle: Infinity,
+						timeout: 2000
+					});
+				});</script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-line-numbers.min.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/clipboard.min.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-copy-to-clipboard.min.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-show-invisibles.min.js"></script></body></html>
