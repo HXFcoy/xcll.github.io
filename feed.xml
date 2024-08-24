@@ -3,12 +3,105 @@
     <title>xcll’s blog</title>
     <link href="https://hxfcoy.github.io/xcll.github.io/feed.xml" rel="self" />
     <link href="https://hxfcoy.github.io/xcll.github.io" />
-    <updated>2024-08-24T07:50:33+08:00</updated>
+    <updated>2024-08-25T07:09:46+08:00</updated>
     <author>
         <name>fcoy</name>
     </author>
     <id>https://hxfcoy.github.io/xcll.github.io</id>
 
+    <entry>
+        <title>1185. 一周中的第几天</title>
+        <author>
+            <name>fcoy</name>
+        </author>
+        <link href="https://hxfcoy.github.io/xcll.github.io/1185-yi-zhou-zhong-de-di-ji-tian.html"/>
+        <id>https://hxfcoy.github.io/xcll.github.io/1185-yi-zhou-zhong-de-di-ji-tian.html</id>
+            <category term="力扣"/>
+
+        <updated>2024-08-25T07:09:46+08:00</updated>
+            <summary></summary>
+        <content type="html">
+            <![CDATA[
+                <div class="post__toc">
+<h3>目录</h3>
+<ul>
+<li><a href="#mcetoc_1i63ae54o30">题目</a></li>
+<li><a href="#mcetoc_1i63ae54o31">代码</a></li>
+<li><a href="#mcetoc_1i63ae54o32">蔡勒公式</a></li>
+<li><a href="#mcetoc_1i63ae54o33">解释</a></li>
+</ul>
+</div>
+<h3 id="mcetoc_1i63ae54o30">题目</h3>
+<p>给你一个日期，请你设计一个算法来判断它是对应一周中的哪一天。</p>
+<p>输入为三个整数：<code>day</code>、<code>month</code> 和 <code>year</code>，分别表示日、月、年。</p>
+<p>您返回的结果必须是这几个值中的一个 <code>{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"}</code>。</p>
+<p> </p>
+<p><strong>示例 1：</strong></p>
+<pre><strong>输入：</strong>day = 31, month = 8, year = 2019
+<strong>输出：</strong>"Saturday"
+</pre>
+<p><strong>示例 2：</strong></p>
+<pre><strong>输入：</strong>day = 18, month = 7, year = 1999
+<strong>输出：</strong>"Sunday"
+</pre>
+<p><strong>示例 3：</strong></p>
+<pre><strong>输入：</strong>day = 15, month = 8, year = 1993
+<strong>输出：</strong>"Sunday"</pre>
+<p> </p>
+<h3 id="mcetoc_1i63ae54o31">代码</h3>
+<pre class="language-c line-numbers"><code>char* dayOfTheWeek(int day, int month, int year) {
+    // 如果月份是1月或2月，将月份变为上一年的13月或14月
+    if (month == 1 || month == 2) {
+        month += 12;
+        year -= 1;
+    }
+    
+    int K = year % 100; // 年份的后两位
+    int J = year / 100; // 年份的前两位
+    
+    int h = (day + (13 * (month + 1)) / 5 + K + K / 4 + J / 4 + 5 * J) % 7;
+    
+    // 映射h的值到星期几
+    char* daysOfWeek[] = {"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+    
+    return daysOfWeek[h];
+}</code></pre>
+<h3 id="mcetoc_1i63ae54o32">蔡勒公式</h3>
+<p>公式的具体形式为：</p>
+<p><img loading="lazy" src="file:///C:\Users\22501\AppData\Local\Temp\QQ_1724540941964.png" data-is-external-image="true"></p>
+<p><img src="file:///C:\Users\22501\AppData\Local\Temp\QQ_1724540898673.png" data-is-external-image="true"><img loading="lazy" src="file:///C:\Users\22501\AppData\Local\Temp\QQ_1724540916094.png" data-is-external-image="true"></p>
+<h3 id="mcetoc_1i63ae54o33">解释</h3>
+<ol>
+<li>
+<p><strong>月份调整</strong>：</p>
+<ul>
+<li>如果输入的月份是1月或2月，将其视为上一年的13月或14月（按照蔡勒公式），因此年份需要减1。</li>
+</ul>
+</li>
+<li>
+<p><strong>计算K和J</strong>：</p>
+<ul>
+<li><code>K</code>是年份的后两位数。</li>
+<li><code>J</code>是年份的前两位数。</li>
+</ul>
+</li>
+<li>
+<p><strong>蔡勒公式</strong>：</p>
+<ul>
+<li>使用公式计算出<code>h</code>，即从<code>0</code>到<code>6</code>之间的一个数，代表星期几。结果 <code>h</code> 对应的 <code>daysOfWeek</code> 数组的索引。</li>
+<li>数组 <code>daysOfWeek</code> 按照星期六到星期五的顺序保存了对应的字符串。</li>
+</ul>
+</li>
+<li>
+<p><strong>返回结果</strong>：</p>
+<ul>
+<li>根据计算出的<code>h</code>，返回对应的星期字符串。</li>
+</ul>
+</li>
+</ol>
+            ]]>
+        </content>
+    </entry>
     <entry>
         <title>2578. 最小和分割</title>
         <author>
@@ -862,69 +955,6 @@ char* mostCommonWord(char* paragraph, char** banned, int bannedSize) {
     return count;
 }</code></pre>
 <p> </p>
-            ]]>
-        </content>
-    </entry>
-    <entry>
-        <title>2525. 根据规则将箱子分类</title>
-        <author>
-            <name>fcoy</name>
-        </author>
-        <link href="https://hxfcoy.github.io/xcll.github.io/2525-gen-ju-gui-ze-jiang-xiang-zi-fen-lei.html"/>
-        <id>https://hxfcoy.github.io/xcll.github.io/2525-gen-ju-gui-ze-jiang-xiang-zi-fen-lei.html</id>
-            <category term="力扣"/>
-
-        <updated>2024-08-15T07:43:20+08:00</updated>
-            <summary></summary>
-        <content type="html">
-            <![CDATA[
-                <div class="post__toc">
-<h3>目录</h3>
-<ul>
-<li><a href="#mcetoc_1i59kcaatr">题目</a></li>
-<li><a href="#mcetoc_1i59kcaats">代码</a></li>
-<li><a href="#mcetoc_1i59kcaatt">解释</a></li>
-</ul>
-</div>
-<h3 id="mcetoc_1i59kcaatr">题目</h3>
-<p>给你四个整数 <code>length</code> ，<code>width</code> ，<code>height</code> 和 <code>mass</code> ，分别表示一个箱子的三个维度和质量，请你返回一个表示箱子 <strong>类别</strong> 的字符串。</p>
-<ul>
-<li>如果满足以下条件，那么箱子是 <code>"Bulky"</code> 的：
-<ul>
-<li>箱子 <strong>至少有一个</strong> 维度大于等于 <code>10<sup>4</sup></code> 。</li>
-<li>或者箱子的 <strong>体积</strong> 大于等于 <code>10<sup>9</sup></code> 。</li>
-</ul>
-</li>
-<li>如果箱子的质量大于等于 <code>100</code> ，那么箱子是 <code>"Heavy"</code> 的。</li>
-<li>如果箱子同时是 <code>"Bulky"</code> 和 <code>"Heavy"</code> ，那么返回类别为 <code>"Both"</code> 。</li>
-<li>如果箱子既不是 <code>"Bulky"</code> ，也不是 <code>"Heavy"</code> ，那么返回类别为 <code>"Neither"</code> 。</li>
-<li>如果箱子是 <code>"Bulky"</code> 但不是 <code>"Heavy"</code> ，那么返回类别为 <code>"Bulky"</code> 。</li>
-<li>如果箱子是 <code>"Heavy"</code> 但不是 <code>"Bulky"</code> ，那么返回类别为 <code>"Heavy"</code> 。</li>
-</ul>
-<p><strong>注意</strong>，箱子的体积等于箱子的长度、宽度和高度的乘积。</p>
-<h3 id="mcetoc_1i59kcaats">代码</h3>
-<pre class="language-c line-numbers"><code>char* categorizeBox(int length, int width, int height, int mass) {
-    long long volume = (long long)length * width * height;
-    int isBulky = length &gt;= 10000 || width &gt;= 10000 || height &gt;= 10000 || volume &gt;= 1000000000;
-    int isHeavy = mass &gt;= 100;
-
-    if (isBulky &amp;&amp; isHeavy) {
-        return "Both";
-    } else if (isBulky) {
-        return "Bulky";
-    } else if (isHeavy) {
-        return "Heavy";
-    } else {
-        return "Neither";
-    }
-}</code></pre>
-<h3 id="mcetoc_1i59kcaatt">解释</h3>
-<ol>
-<li>计算体积 <code>volume</code>。</li>
-<li>检查是否为“Bulky”：如果任一维度大于等于 10,000 或者体积大于等于 10^9，则标记为 Bulky。</li>
-<li>检查是否为“Heavy”：如果质量大于等于 100，则标记为 Heavy。</li>
-<li>根据条件返回相应的类别：<code>Both</code>、<code>Bulky</code>、<code>Heavy</code> 或 <code>Neither</code>。</li>
-</ol>
             ]]>
         </content>
     </entry>

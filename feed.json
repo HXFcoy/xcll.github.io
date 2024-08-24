@@ -11,6 +11,20 @@
     },
     "items": [
         {
+            "id": "https://hxfcoy.github.io/xcll.github.io/1185-yi-zhou-zhong-de-di-ji-tian.html",
+            "url": "https://hxfcoy.github.io/xcll.github.io/1185-yi-zhou-zhong-de-di-ji-tian.html",
+            "title": "1185. 一周中的第几天",
+            "content_html": "<div class=\"post__toc\">\n<h3>目录</h3>\n<ul>\n<li><a href=\"#mcetoc_1i63ae54o30\">题目</a></li>\n<li><a href=\"#mcetoc_1i63ae54o31\">代码</a></li>\n<li><a href=\"#mcetoc_1i63ae54o32\">蔡勒公式</a></li>\n<li><a href=\"#mcetoc_1i63ae54o33\">解释</a></li>\n</ul>\n</div>\n<h3 id=\"mcetoc_1i63ae54o30\">题目</h3>\n<p>给你一个日期，请你设计一个算法来判断它是对应一周中的哪一天。</p>\n<p>输入为三个整数：<code>day</code>、<code>month</code> 和 <code>year</code>，分别表示日、月、年。</p>\n<p>您返回的结果必须是这几个值中的一个 <code>{\"Sunday\", \"Monday\", \"Tuesday\", \"Wednesday\", \"Thursday\", \"Friday\", \"Saturday\"}</code>。</p>\n<p> </p>\n<p><strong>示例 1：</strong></p>\n<pre><strong>输入：</strong>day = 31, month = 8, year = 2019\n<strong>输出：</strong>\"Saturday\"\n</pre>\n<p><strong>示例 2：</strong></p>\n<pre><strong>输入：</strong>day = 18, month = 7, year = 1999\n<strong>输出：</strong>\"Sunday\"\n</pre>\n<p><strong>示例 3：</strong></p>\n<pre><strong>输入：</strong>day = 15, month = 8, year = 1993\n<strong>输出：</strong>\"Sunday\"</pre>\n<p> </p>\n<h3 id=\"mcetoc_1i63ae54o31\">代码</h3>\n<pre class=\"language-c line-numbers\"><code>char* dayOfTheWeek(int day, int month, int year) {\n    // 如果月份是1月或2月，将月份变为上一年的13月或14月\n    if (month == 1 || month == 2) {\n        month += 12;\n        year -= 1;\n    }\n    \n    int K = year % 100; // 年份的后两位\n    int J = year / 100; // 年份的前两位\n    \n    int h = (day + (13 * (month + 1)) / 5 + K + K / 4 + J / 4 + 5 * J) % 7;\n    \n    // 映射h的值到星期几\n    char* daysOfWeek[] = {\"Saturday\", \"Sunday\", \"Monday\", \"Tuesday\", \"Wednesday\", \"Thursday\", \"Friday\"};\n    \n    return daysOfWeek[h];\n}</code></pre>\n<h3 id=\"mcetoc_1i63ae54o32\">蔡勒公式</h3>\n<p>公式的具体形式为：</p>\n<p><img loading=\"lazy\" src=\"file:///C:\\Users\\22501\\AppData\\Local\\Temp\\QQ_1724540941964.png\" data-is-external-image=\"true\"></p>\n<p><img src=\"file:///C:\\Users\\22501\\AppData\\Local\\Temp\\QQ_1724540898673.png\" data-is-external-image=\"true\"><img loading=\"lazy\" src=\"file:///C:\\Users\\22501\\AppData\\Local\\Temp\\QQ_1724540916094.png\" data-is-external-image=\"true\"></p>\n<h3 id=\"mcetoc_1i63ae54o33\">解释</h3>\n<ol>\n<li>\n<p><strong>月份调整</strong>：</p>\n<ul>\n<li>如果输入的月份是1月或2月，将其视为上一年的13月或14月（按照蔡勒公式），因此年份需要减1。</li>\n</ul>\n</li>\n<li>\n<p><strong>计算K和J</strong>：</p>\n<ul>\n<li><code>K</code>是年份的后两位数。</li>\n<li><code>J</code>是年份的前两位数。</li>\n</ul>\n</li>\n<li>\n<p><strong>蔡勒公式</strong>：</p>\n<ul>\n<li>使用公式计算出<code>h</code>，即从<code>0</code>到<code>6</code>之间的一个数，代表星期几。结果 <code>h</code> 对应的 <code>daysOfWeek</code> 数组的索引。</li>\n<li>数组 <code>daysOfWeek</code> 按照星期六到星期五的顺序保存了对应的字符串。</li>\n</ul>\n</li>\n<li>\n<p><strong>返回结果</strong>：</p>\n<ul>\n<li>根据计算出的<code>h</code>，返回对应的星期字符串。</li>\n</ul>\n</li>\n</ol>",
+            "author": {
+                "name": "fcoy"
+            },
+            "tags": [
+                   "力扣"
+            ],
+            "date_published": "2024-08-25T07:09:46+08:00",
+            "date_modified": "2024-08-25T07:09:46+08:00"
+        },
+        {
             "id": "https://hxfcoy.github.io/xcll.github.io/2578-zui-xiao-he-fen-ge.html",
             "url": "https://hxfcoy.github.io/xcll.github.io/2578-zui-xiao-he-fen-ge.html",
             "title": "2578. 最小和分割",
@@ -135,20 +149,6 @@
             ],
             "date_published": "2024-08-16T07:54:58+08:00",
             "date_modified": "2024-08-16T07:54:58+08:00"
-        },
-        {
-            "id": "https://hxfcoy.github.io/xcll.github.io/2525-gen-ju-gui-ze-jiang-xiang-zi-fen-lei.html",
-            "url": "https://hxfcoy.github.io/xcll.github.io/2525-gen-ju-gui-ze-jiang-xiang-zi-fen-lei.html",
-            "title": "2525. 根据规则将箱子分类",
-            "content_html": "<div class=\"post__toc\">\n<h3>目录</h3>\n<ul>\n<li><a href=\"#mcetoc_1i59kcaatr\">题目</a></li>\n<li><a href=\"#mcetoc_1i59kcaats\">代码</a></li>\n<li><a href=\"#mcetoc_1i59kcaatt\">解释</a></li>\n</ul>\n</div>\n<h3 id=\"mcetoc_1i59kcaatr\">题目</h3>\n<p>给你四个整数 <code>length</code> ，<code>width</code> ，<code>height</code> 和 <code>mass</code> ，分别表示一个箱子的三个维度和质量，请你返回一个表示箱子 <strong>类别</strong> 的字符串。</p>\n<ul>\n<li>如果满足以下条件，那么箱子是 <code>\"Bulky\"</code> 的：\n<ul>\n<li>箱子 <strong>至少有一个</strong> 维度大于等于 <code>10<sup>4</sup></code> 。</li>\n<li>或者箱子的 <strong>体积</strong> 大于等于 <code>10<sup>9</sup></code> 。</li>\n</ul>\n</li>\n<li>如果箱子的质量大于等于 <code>100</code> ，那么箱子是 <code>\"Heavy\"</code> 的。</li>\n<li>如果箱子同时是 <code>\"Bulky\"</code> 和 <code>\"Heavy\"</code> ，那么返回类别为 <code>\"Both\"</code> 。</li>\n<li>如果箱子既不是 <code>\"Bulky\"</code> ，也不是 <code>\"Heavy\"</code> ，那么返回类别为 <code>\"Neither\"</code> 。</li>\n<li>如果箱子是 <code>\"Bulky\"</code> 但不是 <code>\"Heavy\"</code> ，那么返回类别为 <code>\"Bulky\"</code> 。</li>\n<li>如果箱子是 <code>\"Heavy\"</code> 但不是 <code>\"Bulky\"</code> ，那么返回类别为 <code>\"Heavy\"</code> 。</li>\n</ul>\n<p><strong>注意</strong>，箱子的体积等于箱子的长度、宽度和高度的乘积。</p>\n<h3 id=\"mcetoc_1i59kcaats\">代码</h3>\n<pre class=\"language-c line-numbers\"><code>char* categorizeBox(int length, int width, int height, int mass) {\n    long long volume = (long long)length * width * height;\n    int isBulky = length &gt;= 10000 || width &gt;= 10000 || height &gt;= 10000 || volume &gt;= 1000000000;\n    int isHeavy = mass &gt;= 100;\n\n    if (isBulky &amp;&amp; isHeavy) {\n        return \"Both\";\n    } else if (isBulky) {\n        return \"Bulky\";\n    } else if (isHeavy) {\n        return \"Heavy\";\n    } else {\n        return \"Neither\";\n    }\n}</code></pre>\n<h3 id=\"mcetoc_1i59kcaatt\">解释</h3>\n<ol>\n<li>计算体积 <code>volume</code>。</li>\n<li>检查是否为“Bulky”：如果任一维度大于等于 10,000 或者体积大于等于 10^9，则标记为 Bulky。</li>\n<li>检查是否为“Heavy”：如果质量大于等于 100，则标记为 Heavy。</li>\n<li>根据条件返回相应的类别：<code>Both</code>、<code>Bulky</code>、<code>Heavy</code> 或 <code>Neither</code>。</li>\n</ol>",
-            "author": {
-                "name": "fcoy"
-            },
-            "tags": [
-                   "力扣"
-            ],
-            "date_published": "2024-08-15T07:43:20+08:00",
-            "date_modified": "2024-08-15T07:43:20+08:00"
         }
     ]
 }
