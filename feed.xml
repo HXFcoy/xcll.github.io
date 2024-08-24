@@ -3,7 +3,7 @@
     <title>xcll’s blog</title>
     <link href="https://hxfcoy.github.io/xcll.github.io/feed.xml" rel="self" />
     <link href="https://hxfcoy.github.io/xcll.github.io" />
-    <updated>2024-08-25T07:09:46+08:00</updated>
+    <updated>2024-08-25T07:12:49+08:00</updated>
     <author>
         <name>fcoy</name>
     </author>
@@ -67,9 +67,7 @@
     return daysOfWeek[h];
 }</code></pre>
 <h3 id="mcetoc_1i63ae54o32">蔡勒公式</h3>
-<p>公式的具体形式为：</p>
-<p><img loading="lazy" src="file:///C:\Users\22501\AppData\Local\Temp\QQ_1724540941964.png" data-is-external-image="true"></p>
-<p><img src="file:///C:\Users\22501\AppData\Local\Temp\QQ_1724540898673.png" data-is-external-image="true"><img loading="lazy" src="file:///C:\Users\22501\AppData\Local\Temp\QQ_1724540916094.png" data-is-external-image="true"></p>
+<p>公式的具体形式为：<figure class="post__image"><img loading="lazy"  src="https://hxfcoy.github.io/xcll.github.io/media/posts/32/1.png" alt="" width="921" height="634" sizes="100vw" srcset="https://hxfcoy.github.io/xcll.github.io/media/posts/32/responsive/1-xs.png 300w ,https://hxfcoy.github.io/xcll.github.io/media/posts/32/responsive/1-sm.png 480w ,https://hxfcoy.github.io/xcll.github.io/media/posts/32/responsive/1-md.png 768w ,https://hxfcoy.github.io/xcll.github.io/media/posts/32/responsive/1-lg.png 1024w ,https://hxfcoy.github.io/xcll.github.io/media/posts/32/responsive/1-xl.png 1360w ,https://hxfcoy.github.io/xcll.github.io/media/posts/32/responsive/1-2xl.png 1600w"></figure>
 <h3 id="mcetoc_1i63ae54o33">解释</h3>
 <ol>
 <li>
