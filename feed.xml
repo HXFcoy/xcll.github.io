@@ -3,12 +3,134 @@
     <title>xcll’s blog</title>
     <link href="https://hxfcoy.github.io/xcll.github.io/feed.xml" rel="self" />
     <link href="https://hxfcoy.github.io/xcll.github.io" />
-    <updated>2024-08-27T07:25:59+08:00</updated>
+    <updated>2024-08-28T21:30:59+08:00</updated>
     <author>
         <name>fcoy</name>
     </author>
     <id>https://hxfcoy.github.io/xcll.github.io</id>
 
+    <entry>
+        <title>225. 用队列实现栈</title>
+        <author>
+            <name>fcoy</name>
+        </author>
+        <link href="https://hxfcoy.github.io/xcll.github.io/225-yong-dui-lie-shi-xian-zhan.html"/>
+        <id>https://hxfcoy.github.io/xcll.github.io/225-yong-dui-lie-shi-xian-zhan.html</id>
+            <category term="力扣"/>
+
+        <updated>2024-08-28T21:30:59+08:00</updated>
+            <summary></summary>
+        <content type="html">
+            <![CDATA[
+                <div class="post__toc">
+<h3>目录</h3>
+<ul>
+<li><a href="#mcetoc_1i6cit80c7">题目</a></li>
+<li><a href="#mcetoc_1i6cit80c8">代码</a></li>
+</ul>
+</div>
+<h3 id="mcetoc_1i6cit80c7">题目</h3>
+<p>请你仅使用两个队列实现一个后入先出（LIFO）的栈，并支持普通栈的全部四种操作（<code>push</code>、<code>top</code>、<code>pop</code> 和 <code>empty</code>）。</p>
+<p>实现 <code>MyStack</code> 类：</p>
+<ul>
+<li><code>void push(int x)</code> 将元素 x 压入栈顶。</li>
+<li><code>int pop()</code> 移除并返回栈顶元素。</li>
+<li><code>int top()</code> 返回栈顶元素。</li>
+<li><code>boolean empty()</code> 如果栈是空的，返回 <code>true</code> ；否则，返回 <code>false</code> 。</li>
+</ul>
+<p> </p>
+<p><strong>注意：</strong></p>
+<ul>
+<li>你只能使用队列的标准操作 —— 也就是 <code>push to back</code>、<code>peek/pop from front</code>、<code>size</code> 和 <code>is empty</code> 这些操作。</li>
+<li>你所使用的语言也许不支持队列。 你可以使用 list （列表）或者 deque（双端队列）来模拟一个队列 , 只要是标准的队列操作即可。</li>
+</ul>
+<p> </p>
+<p><strong>示例：</strong></p>
+<pre><strong>输入：</strong>
+["MyStack", "push", "push", "top", "pop", "empty"]
+[[], [1], [2], [], [], []]
+<strong>输出：</strong>
+[null, null, null, 2, 2, false]
+
+<strong>解释：</strong>
+MyStack myStack = new MyStack();
+myStack.push(1);
+myStack.push(2);
+myStack.top(); // 返回 2
+myStack.pop(); // 返回 2
+myStack.empty(); // 返回 False
+</pre>
+<h3 id="mcetoc_1i6cit80c8">代码</h3>
+<pre class="language-c line-numbers"><code>typedef struct {
+    int data[100]; // 假设栈最大存储100个元素
+    int front;
+    int rear;
+} Queue;
+
+typedef struct {
+    Queue* queue1;
+    Queue* queue2;
+} MyStack;
+
+// 创建一个队列
+Queue* createQueue() {
+    Queue* queue = (Queue*)malloc(sizeof(Queue));
+    queue-&gt;front = 0;
+    queue-&gt;rear = 0;
+    return queue;
+}
+
+// 判断队列是否为空
+bool isEmpty(Queue* queue) { return queue-&gt;front == queue-&gt;rear; }
+
+// 队列的入队操作
+void enqueue(Queue* queue, int x) { queue-&gt;data[queue-&gt;rear++] = x; }
+
+// 队列的出队操作
+int dequeue(Queue* queue) { return queue-&gt;data[queue-&gt;front++]; }
+
+// 获取队列的队头元素
+int front(Queue* queue) { return queue-&gt;data[queue-&gt;front]; }
+
+// 创建栈
+MyStack* myStackCreate() {
+    MyStack* stack = (MyStack*)malloc(sizeof(MyStack));
+    stack-&gt;queue1 = createQueue();
+    stack-&gt;queue2 = createQueue();
+    return stack;
+}
+
+// 压入栈操作
+void myStackPush(MyStack* obj, int x) {
+    enqueue(obj-&gt;queue2, x);
+    while (!isEmpty(obj-&gt;queue1)) {
+        enqueue(obj-&gt;queue2, dequeue(obj-&gt;queue1));
+    }
+    // 交换queue1和queue2
+    Queue* temp = obj-&gt;queue1;
+    obj-&gt;queue1 = obj-&gt;queue2;
+    obj-&gt;queue2 = temp;
+}
+
+// 弹出栈顶元素
+int myStackPop(MyStack* obj) { return dequeue(obj-&gt;queue1); }
+
+// 获取栈顶元素
+int myStackTop(MyStack* obj) { return front(obj-&gt;queue1); }
+
+// 判断栈是否为空
+bool myStackEmpty(MyStack* obj) { return isEmpty(obj-&gt;queue1); }
+
+// 释放栈资源
+void myStackFree(MyStack* obj) {
+    free(obj-&gt;queue1);
+    free(obj-&gt;queue2);
+    free(obj);
+}</code></pre>
+<p> </p>
+            ]]>
+        </content>
+    </entry>
     <entry>
         <title>598. 区间加法 II</title>
         <author>
@@ -830,149 +952,6 @@ int minimumCost(int* cost, int costSize) {
 <li><code>indicesSize</code>：<code>indices</code> 数组的行数（即索引对的数量）。</li>
 <li><code>indicesColSize</code>：每一行索引数组的列数（始终为 2）。</li>
 </ul>
-            ]]>
-        </content>
-    </entry>
-    <entry>
-        <title>819. 最常见的单词</title>
-        <author>
-            <name>fcoy</name>
-        </author>
-        <link href="https://hxfcoy.github.io/xcll.github.io/819-zui-chang-jian-de-dan-ci.html"/>
-        <id>https://hxfcoy.github.io/xcll.github.io/819-zui-chang-jian-de-dan-ci.html</id>
-            <category term="力扣"/>
-
-        <updated>2024-08-17T07:28:34+08:00</updated>
-            <summary></summary>
-        <content type="html">
-            <![CDATA[
-                <div class="post__toc">
-<h3>目录</h3>
-<ul>
-<li><a href="#mcetoc_1i5eoag1i11">题目</a></li>
-<li><a href="#mcetoc_1i5eoag1i12">代码</a></li>
-<li><a href="#mcetoc_1i5eoag1i13">解释</a></li>
-</ul>
-</div>
-<h3 id="mcetoc_1i5eoag1i11">题目</h3>
-<p>给你一个字符串 <code>paragraph</code> 和一个表示禁用词的字符串数组 <code>banned</code> ，返回出现频率最高的非禁用词。题目数据 <strong>保证 </strong>至少存在一个非禁用词，且答案<strong> 唯一 </strong>。</p>
-<p><code>paragraph</code> 中的单词 <strong>不区分大小写</strong> ，答案应以 <strong>小写 </strong>形式返回。</p>
-<p> </p>
-<p><strong class="example">示例 1：</strong></p>
-<pre><strong>输入：</strong>paragraph = "Bob hit a ball, the hit BALL flew far after it was hit.", banned = ["hit"]
-<strong>输出：</strong>"ball"
-<strong>解释：</strong>
-"hit" 出现了 3 次，但它是禁用词。
-"ball" 出现了两次（没有其他单词出现这么多次），因此它是段落中出现频率最高的非禁用词。
-请注意，段落中的单词不区分大小写，
-标点符号会被忽略（即使它们紧挨着单词，如 "ball,"），
-并且尽管 "hit" 出现的次数更多，但它不能作为答案，因为它是禁用词。
-</pre>
-<p><strong class="example">示例 2：</strong></p>
-<pre><strong>输入：</strong>paragraph = "a.", banned = []
-<strong>输出：</strong>"a"</pre>
-<h3 id="mcetoc_1i5eoag1i12">代码</h3>
-<pre class="language-c line-numbers"><code>#define MAX_WORD_LEN 100
-#define MAX_PARA_LEN 10000
-
-// 函数用于比较哈希表中存储的单词
-typedef struct {
-    char word[MAX_WORD_LEN];
-    int count;
-} HashTableEntry;
-
-// 将字符串转换为小写
-void toLowerCase(char* str) {
-    while (*str) {
-        *str = tolower(*str);
-        str++;
-    }
-}
-
-// 检查单词是否在禁用词列表中
-int isBanned(char* word, char** banned, int bannedSize) {
-    for (int i = 0; i &lt; bannedSize; i++) {
-        if (strcmp(word, banned[i]) == 0) {
-            return 1;
-        }
-    }
-    return 0;
-}
-
-// 从段落中提取下一个单词
-char* nextWord(char* paragraph, int* index) {
-    static char word[MAX_WORD_LEN];
-    int i = 0;
-
-    while (paragraph[*index]) {
-        char c = paragraph[*index];
-        if (isalpha(c)) {
-            word[i++] = tolower(c);
-        } else if (i &gt; 0) {
-            break;
-        }
-        (*index)++;
-    }
-
-    word[i] = '\0';
-    while (paragraph[*index] &amp;&amp; !isalpha(paragraph[*index])) {
-        (*index)++;
-    }
-
-    return word[0] ? word : NULL;
-}
-
-char* mostCommonWord(char* paragraph, char** banned, int bannedSize) {
-    HashTableEntry hashTable[MAX_PARA_LEN] = {0};
-    int index = 0;
-    int maxCount = 0;
-    char* mostCommon = NULL;
-
-    while (paragraph[index]) {
-        char* word = nextWord(paragraph, &amp;index);
-        if (!word || isBanned(word, banned, bannedSize)) {
-            continue;
-        }
-
-        int found = 0;
-        for (int i = 0; i &lt; MAX_PARA_LEN &amp;&amp; hashTable[i].word[0]; i++) {
-            if (strcmp(hashTable[i].word, word) == 0) {
-                hashTable[i].count++;
-                found = 1;
-                if (hashTable[i].count &gt; maxCount) {
-                    maxCount = hashTable[i].count;
-                    mostCommon = hashTable[i].word;
-                }
-                break;
-            }
-        }
-
-        if (!found) {
-            for (int i = 0; i &lt; MAX_PARA_LEN; i++) {
-                if (hashTable[i].word[0] == '\0') {
-                    strcpy(hashTable[i].word, word);
-                    hashTable[i].count = 1;
-                    if (hashTable[i].count &gt; maxCount) {
-                        maxCount = 1;
-                        mostCommon = hashTable[i].word;
-                    }
-                    break;
-                }
-            }
-        }
-    }
-
-    return mostCommon;
-}</code></pre>
-<h3 id="mcetoc_1i5eoag1i13">解释</h3>
-<ol>
-<li><strong>字符串转换为小写</strong>：在处理段落时，所有单词都会被转换为小写，以确保比较时不区分大小写。</li>
-<li><strong>提取单词</strong>：使用 <code>nextWord</code> 函数从段落中依次提取单词，并跳过标点符号和空格。</li>
-<li><strong>检查禁用词</strong>：每个提取的单词都会与禁用词列表进行比较，如果是禁用词则跳过。</li>
-<li><strong>计数与哈希表</strong>：通过哈希表存储每个单词及其出现次数，并更新频率最高的非禁用词。</li>
-<li><strong>返回结果</strong>：最终返回频率最高的非禁用词。</li>
-</ol>
-<p> </p>
             ]]>
         </content>
     </entry>

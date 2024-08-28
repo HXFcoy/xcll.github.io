@@ -1,0 +1,99 @@
+<!DOCTYPE html><html lang="zh-cn"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>225. 用队列实现栈 - xcll’s blog</title><meta name="robots" content="noindex,nofollow"><meta name="generator" content="Publii Open-Source CMS for Static Site"><link rel="stylesheet" href="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-beige.css"><link rel="alternate" type="application/atom+xml" href="https://hxfcoy.github.io/xcll.github.io/feed.xml"><link rel="alternate" type="application/json" href="https://hxfcoy.github.io/xcll.github.io/feed.json"><link rel="stylesheet" href="https://hxfcoy.github.io/xcll.github.io/assets/css/style.css?v=48ae57c9831f7efa1e623ac4eb92d438"><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://hxfcoy.github.io/xcll.github.io/225-yong-dui-lie-shi-xian-zhan.html"},"headline":"225. 用队列实现栈","datePublished":"2024-08-28T21:30","dateModified":"2024-08-28T21:30","image":{"@type":"ImageObject","url":"https://hxfcoy.github.io/xcll.github.io/media/website/image-removebg-preview.png","height":167,"width":582},"description":"","author":{"@type":"Person","name":"fcoy","url":"https://hxfcoy.github.io/xcll.github.io/authors/fcoy/"},"publisher":{"@type":"Organization","name":"fcoy","logo":{"@type":"ImageObject","url":"https://hxfcoy.github.io/xcll.github.io/media/website/image-removebg-preview.png","height":167,"width":582}}}</script><noscript><style>img[loading] {
+                    opacity: 1;
+                }</style></noscript></head><body><div class="site-container"><header class="top" id="js-header"><a class="logo" href="https://hxfcoy.github.io/xcll.github.io/"><img src="https://hxfcoy.github.io/xcll.github.io/media/website/image-removebg-preview.png" alt="xcll’s blog" width="582" height="167"></a><nav class="navbar js-navbar"><button class="navbar__toggle js-toggle" aria-label="Menu" aria-haspopup="true" aria-expanded="false"><span class="navbar__toggle-box"><span class="navbar__toggle-inner">Menu</span></span></button><ul class="navbar__menu"><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/li-kou/" target="_self">力扣</a></li><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/you-xi/" target="_self">游戏</a></li><li><a href="https://hxfcoy.github.io/xcll.github.io/ruan-jian.html" target="_self">资源</a></li></ul></nav></header><main><article class="post"><div class="hero"><figure class="hero__image hero__image--overlay"><img src="https://hxfcoy.github.io/xcll.github.io/media/website/BA2.jpg" srcset="https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-xs.jpg 300w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-sm.jpg 480w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-md.jpg 768w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-lg.jpg 1024w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-xl.jpg 1360w, https://hxfcoy.github.io/xcll.github.io/media/website/responsive/BA2-2xl.jpg 1600w" sizes="100vw" loading="eager" alt=""></figure><header class="hero__content"><div class="wrapper"><div class="post__meta"><time datetime="2024-08-28T21:30">八月 28, 2024</time></div><h1>225. 用队列实现栈</h1><div class="post__meta post__meta--author"><a href="https://hxfcoy.github.io/xcll.github.io/authors/fcoy/" class="feed__author">fcoy</a></div></div></header></div><div class="wrapper post__entry"><div class="post__toc"><h3>目录</h3><ul><li><a href="#mcetoc_1i6cit80c7">题目</a></li><li><a href="#mcetoc_1i6cit80c8">代码</a></li></ul></div><h3 id="mcetoc_1i6cit80c7">题目</h3><p>请你仅使用两个队列实现一个后入先出（LIFO）的栈，并支持普通栈的全部四种操作（<code>push</code>、<code>top</code>、<code>pop</code> 和 <code>empty</code>）。</p><p>实现 <code>MyStack</code> 类：</p><ul><li><code>void push(int x)</code> 将元素 x 压入栈顶。</li><li><code>int pop()</code> 移除并返回栈顶元素。</li><li><code>int top()</code> 返回栈顶元素。</li><li><code>boolean empty()</code> 如果栈是空的，返回 <code>true</code> ；否则，返回 <code>false</code> 。</li></ul><p> </p><p><strong>注意：</strong></p><ul><li>你只能使用队列的标准操作 —— 也就是 <code>push to back</code>、<code>peek/pop from front</code>、<code>size</code> 和 <code>is empty</code> 这些操作。</li><li>你所使用的语言也许不支持队列。 你可以使用 list （列表）或者 deque（双端队列）来模拟一个队列 , 只要是标准的队列操作即可。</li></ul><p> </p><p><strong>示例：</strong></p><pre><strong>输入：</strong>
+["MyStack", "push", "push", "top", "pop", "empty"]
+[[], [1], [2], [], [], []]
+<strong>输出：</strong>
+[null, null, null, 2, 2, false]
+
+<strong>解释：</strong>
+MyStack myStack = new MyStack();
+myStack.push(1);
+myStack.push(2);
+myStack.top(); // 返回 2
+myStack.pop(); // 返回 2
+myStack.empty(); // 返回 False
+</pre><h3 id="mcetoc_1i6cit80c8">代码</h3><pre class="language-c line-numbers"><code>typedef struct {
+    int data[100]; // 假设栈最大存储100个元素
+    int front;
+    int rear;
+} Queue;
+
+typedef struct {
+    Queue* queue1;
+    Queue* queue2;
+} MyStack;
+
+// 创建一个队列
+Queue* createQueue() {
+    Queue* queue = (Queue*)malloc(sizeof(Queue));
+    queue-&gt;front = 0;
+    queue-&gt;rear = 0;
+    return queue;
+}
+
+// 判断队列是否为空
+bool isEmpty(Queue* queue) { return queue-&gt;front == queue-&gt;rear; }
+
+// 队列的入队操作
+void enqueue(Queue* queue, int x) { queue-&gt;data[queue-&gt;rear++] = x; }
+
+// 队列的出队操作
+int dequeue(Queue* queue) { return queue-&gt;data[queue-&gt;front++]; }
+
+// 获取队列的队头元素
+int front(Queue* queue) { return queue-&gt;data[queue-&gt;front]; }
+
+// 创建栈
+MyStack* myStackCreate() {
+    MyStack* stack = (MyStack*)malloc(sizeof(MyStack));
+    stack-&gt;queue1 = createQueue();
+    stack-&gt;queue2 = createQueue();
+    return stack;
+}
+
+// 压入栈操作
+void myStackPush(MyStack* obj, int x) {
+    enqueue(obj-&gt;queue2, x);
+    while (!isEmpty(obj-&gt;queue1)) {
+        enqueue(obj-&gt;queue2, dequeue(obj-&gt;queue1));
+    }
+    // 交换queue1和queue2
+    Queue* temp = obj-&gt;queue1;
+    obj-&gt;queue1 = obj-&gt;queue2;
+    obj-&gt;queue2 = temp;
+}
+
+// 弹出栈顶元素
+int myStackPop(MyStack* obj) { return dequeue(obj-&gt;queue1); }
+
+// 获取栈顶元素
+int myStackTop(MyStack* obj) { return front(obj-&gt;queue1); }
+
+// 判断栈是否为空
+bool myStackEmpty(MyStack* obj) { return isEmpty(obj-&gt;queue1); }
+
+// 释放栈资源
+void myStackFree(MyStack* obj) {
+    free(obj-&gt;queue1);
+    free(obj-&gt;queue2);
+    free(obj);
+}</code></pre><p> </p></div><footer class="wrapper post__footer"><p class="post__last-updated">This article was updated on 八月 28, 2024</p><ul class="post__tag"><li><a href="https://hxfcoy.github.io/xcll.github.io/tags/li-kou/">力扣</a></li></ul><div class="post__share"></div><div class="post__bio bio"><div><h3 class="bio__name"><a href="https://hxfcoy.github.io/xcll.github.io/authors/fcoy/" rel="author">fcoy</a></h3></div></div></footer></article><nav class="post__nav"><div class="post__nav-inner"><div class="post__nav-prev"><svg width="1.041em" height="0.416em" aria-hidden="true"><use xlink:href="https://hxfcoy.github.io/xcll.github.io/assets/svg/svg-map.svg#arrow-prev"/></svg> <a href="https://hxfcoy.github.io/xcll.github.io/598-qu-jian-jia-fa-ii.html" class="post__nav-link" rel="prev"><span>Previous</span> 598. 区间加法 II</a></div></div></nav></main><footer class="footer"><div class="footer__copyright"><p class="align-center">浮云一别后，流水十年间。</p></div><button onclick="backToTopFunction()" id="backToTop" class="footer__bttop" aria-label="Back to top" title="Back to top"><svg><use xlink:href="https://hxfcoy.github.io/xcll.github.io/assets/svg/svg-map.svg#toparrow"/></svg></button></footer></div><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/assets/js/scripts.min.js?v=f47c11534595205f20935f0db2a62a85"></script><script>window.publiiThemeMenuConfig={mobileMenuMode:'sidebar',animationSpeed:300,submenuWidth: 'auto',doubleClickTime:500,mobileMenuExpandableSubmenus:true,relatedContainerForOverlayMenuSelector:'.top'};</script><script>var images = document.querySelectorAll('img[loading]');
+        for (var i = 0; i < images.length; i++) {
+            if (images[i].complete) {
+                images[i].classList.add('is-loaded');
+            } else {
+                images[i].addEventListener('load', function () {
+                    this.classList.add('is-loaded');
+                }, false);
+            }
+        }</script><script src="https://hxfcoy.github.io/xcll.github.io/media/plugins/pageprefetching/quicklink.umd.js"></script><script>window.addEventListener('load', () => {
+					quicklink.listen({
+						prerender: true,
+						el: document.querySelector('body'),
+						delay: 0,
+						limit: Infinity,
+						throttle: Infinity,
+						timeout: 2000
+					});
+				});</script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-line-numbers.min.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/clipboard.min.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-copy-to-clipboard.min.js"></script><script defer="defer" src="https://hxfcoy.github.io/xcll.github.io/media/plugins/syntaxHighlighter/prism-show-invisibles.min.js"></script></body></html>
