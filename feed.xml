@@ -3,12 +3,59 @@
     <title>xcll’s blog</title>
     <link href="https://hxfcoy.github.io/xcll.github.io/feed.xml" rel="self" />
     <link href="https://hxfcoy.github.io/xcll.github.io" />
-    <updated>2024-08-30T07:25:00+08:00</updated>
+    <updated>2024-09-02T07:44:38+08:00</updated>
     <author>
         <name>fcoy</name>
     </author>
     <id>https://hxfcoy.github.io/xcll.github.io</id>
 
+    <entry>
+        <title>389. 找不同</title>
+        <author>
+            <name>fcoy</name>
+        </author>
+        <link href="https://hxfcoy.github.io/xcll.github.io/389-zhao-bu-tong.html"/>
+        <id>https://hxfcoy.github.io/xcll.github.io/389-zhao-bu-tong.html</id>
+            <category term="力扣"/>
+
+        <updated>2024-09-02T07:44:38+08:00</updated>
+            <summary></summary>
+        <content type="html">
+            <![CDATA[
+                <p>给定两个字符串 <code>s</code> 和 <code>t</code> ，它们只包含小写字母。</p>
+<p>字符串 <code>t</code> 由字符串 <code>s</code> 随机重排，然后在随机位置添加一个字母。</p>
+<p>请找出在 <code>t</code> 中被添加的字母。</p>
+<p> </p>
+<p><strong>示例 1：</strong></p>
+<pre><strong>输入：</strong>s = "abcd", t = "abcde"
+<strong>输出：</strong>"e"
+<strong>解释：</strong>'e' 是那个被添加的字母。
+</pre>
+<p><strong>示例 2：</strong></p>
+<pre><strong>输入：</strong>s = "", t = "y"
+<strong>输出：</strong>"y"</pre>
+<pre class="language-c line-numbers"><code>char findTheDifference(char* s, char* t) {
+    int sum_s = 0, sum_t = 0;
+
+    // 计算字符串 s 的 ASCII 码总和
+    while (*s) {
+        sum_s += *s;
+        s++;
+    }
+
+    // 计算字符串 t 的 ASCII 码总和
+    while (*t) {
+        sum_t += *t;
+        t++;
+    }
+
+    // 返回两者之差，即被添加的字符
+    return sum_t - sum_s;
+}
+</code></pre>
+            ]]>
+        </content>
+    </entry>
     <entry>
         <title>LCR 144. 翻转二叉树</title>
         <author>
@@ -765,96 +812,6 @@ int minimumCost(int* cost, int costSize) {
 <li><strong>遍历</strong>：在循环中，通过 <code>i % 3 != 2</code> 来判断是否是每组中的第三个糖果，若是，则跳过它（因为它是免费的）。</li>
 <li><strong>累加价格</strong>：每组前两个糖果的价格累加到 <code>totalCost</code> 中。</li>
 </ol>
-            ]]>
-        </content>
-    </entry>
-    <entry>
-        <title>989. 数组形式的整数加法</title>
-        <author>
-            <name>fcoy</name>
-        </author>
-        <link href="https://hxfcoy.github.io/xcll.github.io/989-shu-zu-xing-shi-de-zheng-shu-jia-fa.html"/>
-        <id>https://hxfcoy.github.io/xcll.github.io/989-shu-zu-xing-shi-de-zheng-shu-jia-fa.html</id>
-            <category term="力扣"/>
-
-        <updated>2024-08-20T07:25:10+08:00</updated>
-            <summary></summary>
-        <content type="html">
-            <![CDATA[
-                <div class="post__toc">
-<h3>目录</h3>
-<ul>
-<li><a href="#mcetoc_1i5mfanpl15">题目</a></li>
-<li><a href="#mcetoc_1i5mfanpl16">代码</a></li>
-<li><a href="#mcetoc_1i5mfanpl17">解释</a></li>
-</ul>
-</div>
-<h3 id="mcetoc_1i5mfanpl15">题目</h3>
-<p>整数的 <strong>数组形式</strong>  <code>num</code> 是按照从左到右的顺序表示其数字的数组。</p>
-<ul>
-<li>例如，对于 <code>num = 1321</code> ，数组形式是 <code>[1,3,2,1]</code> 。</li>
-</ul>
-<p>给定 <code>num</code> ，整数的 <strong>数组形式</strong> ，和整数 <code>k</code> ，返回 <em>整数 <code>num + k</code> 的 <strong>数组形式</strong></em> 。</p>
-<p> </p>
-<p><strong>示例 1：</strong></p>
-<pre><strong>输入：</strong>num = [1,2,0,0], k = 34
-<strong>输出：</strong>[1,2,3,4]
-<strong>解释：</strong>1200 + 34 = 1234
-</pre>
-<p><strong>示例 2：</strong></p>
-<pre><strong>输入：</strong>num = [2,7,4], k = 181
-<strong>输出：</strong>[4,5,5]
-<strong>解释：</strong>274 + 181 = 455
-</pre>
-<p><strong>示例 3：</strong></p>
-<pre><strong>输入：</strong>num = [2,1,5], k = 806
-<strong>输出：</strong>[1,0,2,1]
-<strong>解释：</strong>215 + 806 = 1021</pre>
-<h3 id="mcetoc_1i5mfanpl16">代码</h3>
-<pre class="language-c line-numbers"><code>int* addToArrayForm(int* num, int numSize, int k, int* returnSize) {
-    // 分配足够大的空间存储结果数组
-    int* result = (int*)malloc(sizeof(int) * (numSize + 10)); // 预留足够的空间处理进位
-    int currentIndex = 0; // 用于存放结果数组的当前索引
-    int carry = k; // 初始进位为 k
-    int i;
-
-    // 从 num 数组的末尾向前遍历
-    for (i = numSize - 1; i &gt;= 0 || carry &gt; 0; i--) {
-        if (i &gt;= 0) {
-            carry += num[i]; // 将当前位的数字与进位相加
-        }
-        result[currentIndex++] = carry % 10; // 取个位作为当前结果位
-        carry /= 10; // 更新进位
-    }
-
-    // 结果数组是逆序存储的，需要翻转
-    for (i = 0; i &lt; currentIndex / 2; i++) {
-        int temp = result[i];
-        result[i] = result[currentIndex - i - 1];
-        result[currentIndex - i - 1] = temp;
-    }
-
-    *returnSize = currentIndex; // 更新结果数组的大小
-    return result; // 返回结果数组的指针
-}</code></pre>
-<h3 id="mcetoc_1i5mfanpl17">解释</h3>
-<ul>
-<li>
-<p><strong>分配足够大的空间</strong>：由于进位的原因，结果数组可能比 <code>num</code> 长，因此分配 <code>numSize + 10</code> 的空间来容纳可能的额外位数。</p>
-</li>
-<li>
-<p><strong>逐位相加</strong>：从 <code>num</code> 的最低位（数组末尾）开始，逐位将 <code>num</code> 的对应位与 <code>k</code> 的当前位相加，并处理进位。</p>
-</li>
-<li>
-<p><strong>处理剩余的进位</strong>：在 <code>num</code> 数组遍历完后，如果还有进位，继续将进位加到结果中。</p>
-</li>
-<li>
-<p><strong>翻转结果</strong>：由于结果是从最低位开始存储的，因此最后需要翻转数组才能得到正确的顺序。</p>
-</li>
-<li>
-<p><strong>返回结果</strong>：返回计算得到的结果数组以及其大小。</p>
-</li>
-</ul>
             ]]>
         </content>
     </entry>
